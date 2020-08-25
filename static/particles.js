@@ -1,5 +1,5 @@
 const MAX_SPEED = 3;
-const MAX_LIFESPAN = 12;
+const MAX_LIFESPAN = 20;
 const DELAY = 5;
 
 const randRange = (range) => Math.floor(Math.random() * range);
@@ -35,20 +35,20 @@ const moveParticles = () => {
 
     let newX = x + velX;
     let newY = y + velY;
-    if (newX > window.innerWidth) newX = 0;
-    if (newX < 0) newX = window.innerWidth;
-    if (newY > window.innerHeight) newY = 0;
-    if (newY < 0) newY = window.innerHeight;
+    if (newX > window.innerWidth || newX < 0) part.dataset.velX = -1 * velX;
+    if (newY > window.innerHeight || newY < 0) part.dataset.velY = -1 * velY;
     part.style.left = newX + 'px';
     part.style.bottom = newY + 'px';
   });
 };
 
-document.querySelector('.title').addEventListener('click', (evt) => {
+document.querySelector('.action-button').addEventListener('click', (evt) => {
   evt.target.blur();
 });
 
 document.addEventListener('click', (evt) => {
+  addParticle(evt.clientX, window.innerHeight - evt.clientY);
+  addParticle(evt.clientX, window.innerHeight - evt.clientY);
   addParticle(evt.clientX, window.innerHeight - evt.clientY);
 });
 

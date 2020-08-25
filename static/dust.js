@@ -41,7 +41,7 @@ const moveParticles = () => {
   });
 };
 
-document.querySelector('.title').addEventListener('click', (evt) => {
+document.querySelector('.action-button').addEventListener('click', (evt) => {
   evt.target.blur();
 });
 

@@ -134,7 +134,7 @@ const draw = () => {
   });
 };
 
-document.querySelector('.title').addEventListener('click', (evt) => {
+document.querySelector('.action-button').addEventListener('click', (evt) => {
   const pats = Object.values(PATTERNS);
   const idx = randRange(pats.length);
   spawnPattern(pats[idx]);
