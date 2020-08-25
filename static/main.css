@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 
-.full-center {
+.center-both {
   display: flex;
   height: 100vh;
   align-items: center;
@@ -10,17 +10,71 @@ body {
 }
 
 .title {
-  padding: 1px 15px;
-  font-family: Roboto, sans-serif;
-  text-align: right;
-  background-color: #000;
+  position: relative;
+  padding: 0px 15px;
+
   color: #fff;
+  background-color: #000;
+  box-shadow: 6px 6px 0 0 #444;
+
+  font-family: 'Oswald', sans-serif;
+  text-align: right;
+
   cursor: pointer;
-  box-shadow: 10px 10px 0 -3px #333;
   transition: 0.2s all ease;
+  user-select: none;
 }
 
-.title:hover {
+.title:hover,
+.title:focus {
   background-color: #555;
-  box-shadow: -10px -10px 0 -3px #000;
+  box-shadow: -6px -6px 0 0 #000;
+  outline: none;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10vh;
+  left: 50px;
+}
+
+.nav a {
+  padding: 1px 5px;
+  margin: 5px;
+
+  color: #fff;
+  background-color: #000;
+  box-shadow: -15px 3px 0 0 #444;
+
+  font-family: 'Oswald', sans-serif;
+  text-decoration: none;
+
+  text-align: right;
+  transition: 0.2s all ease;
+  user-select: none;
+}
+
+.nav a:hover,
+.nav a:focus {
+  background-color: #555;
+  box-shadow: 15px 3px 0 0 #000;
+  outline: none;
+}
+
+.container {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #000;
 }
