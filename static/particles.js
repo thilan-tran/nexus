@@ -1,21 +1,27 @@
-const MAX_SPEED = 3;
-const MAX_LIFESPAN = 20;
-const DELAY = 5;
+const MAX_SPEED = 15;
+const MAX_LIFESPAN = 10;
+const DELAY = 10;
+
+let MOUSE_DOWN = false,
+  X,
+  Y;
 
 const randRange = (range) => Math.floor(Math.random() * range);
 const getRandSpeed = () =>
   (Math.random() > 0.5 ? 1 : -1) * (randRange(MAX_SPEED) + 1);
 const getRandLife = () => randRange((MAX_LIFESPAN * 1000) / DELAY) + 1;
 
-const addParticle = (x, y) => {
-  const part = document.createElement('div');
-  part.classList.add('particle');
-  part.style.left = x + 'px';
-  part.style.bottom = y + 'px';
-  part.dataset.velX = getRandSpeed();
-  part.dataset.velY = getRandSpeed();
-  part.dataset.lifetime = getRandLife();
-  document.querySelector('.container').appendChild(part);
+const addParticle = (x, y, num = 1) => {
+  for (let i = 0; i < num; i++) {
+    const part = document.createElement('div');
+    part.classList.add('particle');
+    part.style.left = x + 'px';
+    part.style.bottom = y + 'px';
+    part.dataset.velX = getRandSpeed();
+    part.dataset.velY = getRandSpeed();
+    part.dataset.lifetime = getRandLife();
+    document.querySelector('.container').appendChild(part);
+  }
 };
 
 const moveParticles = () => {
@@ -43,21 +49,26 @@ const moveParticles = () => {
 };
 
 document.querySelector('.action-button').addEventListener('click', (evt) => {
+  addParticle(evt.clientX, window.innerHeight - evt.clientY, 5);
   evt.target.blur();
 });
 
-document.addEventListener('click', (evt) => {
-  addParticle(evt.clientX, window.innerHeight - evt.clientY);
-  addParticle(evt.clientX, window.innerHeight - evt.clientY);
-  addParticle(evt.clientX, window.innerHeight - evt.clientY);
+document.addEventListener('mousedown', () => (MOUSE_DOWN = true));
+document.addEventListener('mouseup', () => (MOUSE_DOWN = false));
+document.addEventListener('mousemove', (evt) => {
+  X = evt.clientX;
+  Y = window.innerHeight - evt.clientY;
 });
 
-// document.querySelector('.title').addEventListener('mousedown', () => {
+// document.querySelector('.action-button').addEventListener('mousedown', () => {
 //   const x = randRange(window.innerWidth);
 //   const y = randRange(window.innerHeight);
 //   addParticle(x, y);
 // });
 
 setInterval(() => {
+  if (MOUSE_DOWN) {
+    addParticle(X, Y, 1);
+  }
   moveParticles();
 }, DELAY);

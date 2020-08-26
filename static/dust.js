@@ -1,7 +1,9 @@
 const RESOLUTION = 10;
 const DELAY = 1;
+const SPEED = 2;
+
 const MAP = {};
-let DOWN = false,
+let MOUSE_DOWN = false,
   X,
   Y;
 
@@ -33,7 +35,7 @@ const moveParticles = () => {
     }
 
     if (y > stacked) {
-      part.style.bottom = y - 1 + 'px';
+      part.style.bottom = y - SPEED + 'px';
     } else {
       part.classList.remove('falling');
       MAP[key] = stacked + 1;
@@ -45,15 +47,15 @@ document.querySelector('.action-button').addEventListener('click', (evt) => {
   evt.target.blur();
 });
 
-document.addEventListener('mousedown', () => (DOWN = true));
-document.addEventListener('mouseup', () => (DOWN = false));
+document.addEventListener('mousedown', () => (MOUSE_DOWN = true));
+document.addEventListener('mouseup', () => (MOUSE_DOWN = false));
 document.addEventListener('mousemove', (evt) => {
   X = evt.clientX;
   Y = window.innerHeight - evt.clientY;
 });
 
 setInterval(() => {
-  if (DOWN) {
+  if (MOUSE_DOWN) {
     addParticle(X, Y);
   }
   moveParticles();

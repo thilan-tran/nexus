@@ -22,9 +22,9 @@ const moveElem = (el) => {
   el.style.top = newY + 'px';
   const rect = el.getBoundingClientRect();
 
-  if (rect.left > window.innerWidth - 230 || rect.left < 10)
+  if (rect.left > window.innerWidth - 220 || rect.left < 10)
     el.dataset.velX = -1 * velX;
-  if (rect.top > window.innerHeight - 120 || rect.top < 10)
+  if (rect.top > window.innerHeight - 110 || rect.top < 10)
     el.dataset.velY = -1 * velY;
 };
 

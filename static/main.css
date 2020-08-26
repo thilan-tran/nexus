@@ -103,12 +103,76 @@ body {
 }
 
 .tag {
-  width: 110px;
+  display: flex;
   margin-right: 25px;
   margin-bottom: 50px;
-  padding: 0 30px;
+  padding: 0 10px;
+  width: 130px;
+  justify-content: space-between;
+
   background-color: #ddd;
+  border: 2px solid transparent;
+
   font-family: 'Oswald', sans-serif;
   float: right;
   user-select: none;
+  transition: 0.2s all ease;
+}
+
+.tag:hover {
+  border: 2px solid #000;
+}
+
+.dropdown .content {
+  width: 130px;
+  position: absolute;
+  display: none;
+  opacity: 0;
+  transform: translate(-12px, -100%);
+  transition: 5s all ease;
+}
+
+.dropdown:hover .content {
+  display: block;
+  opacity: 1;
+}
+
+.options-box {
+  padding: 3px 10px;
+  border: 2px solid #000;
+  background-color: #fff;
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+}
+
+.options-box div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 3px 0;
+}
+
+.options-box button {
+  width: 100%;
+  padding: 3px 0;
+
+  color: #000;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  transition: 0.2s all ease;
+}
+
+.options-box button:hover {
+  background-color: #eee;
+}
+
+.fade {
+  transition: 3s opacity ease;
 }
