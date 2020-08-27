@@ -142,7 +142,7 @@ body {
   border: 2px solid #000;
   background-color: #fff;
   font-family: Roboto, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .options-box div {
@@ -152,7 +152,7 @@ body {
   margin: 3px 0;
 }
 
-.options-box button {
+.options-box .button {
   width: 100%;
   padding: 3px 0;
 
@@ -165,11 +165,13 @@ body {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
+  text-decoration: none;
+  text-align: center;
   cursor: pointer;
   transition: 0.2s all ease;
 }
 
-.options-box button:hover {
+.options-box .button:hover {
   background-color: #eee;
 }
 
