@@ -5,11 +5,11 @@ const RESOLUTION = 10;
 const LIFESPAN = 1;
 // how long dead cells (traces of paths of live cells) last in sec and
 // how dead cell color changes w/ gradient (lower => shorter traces, more performant)
-const DEATHSPAN = 2;
+const DEATHSPAN = 3;
 
 const NUM_COLORS = 8; // number of colors in gradient (lower => more performant)
-// const DELAY = 40; // delay between draw cycles in msec (higher => more performant)
-const DELAY = 1000 / 60; // 60 FPS with window.requestAnimationFrame
+let DELAY = 50; // delay between draw cycles in msec (higher => more performant)
+// up to 60 FPS with window.requestAnimationFrame
 
 const MAX_CELLS_PERCENT = 0.4; // max percentage of grid to fill with cells
 const TRIM_THRESHOLD_PERCENT = 0.05; // percentage to start trimming early
@@ -124,10 +124,10 @@ const DEAD_CELL_COLORS = [
 const GREYSCALE_CELL_COLORS = [
   [
     [0, 0, 0],
-    [72, 72, 72]
+    [60, 60, 60]
   ],
   [
-    [90, 90, 90],
+    [72, 72, 72],
     [200, 200, 200]
   ]
 ];
@@ -352,7 +352,7 @@ const draw = () => {
 
     lastCnts = [totalCnt - dedCnt, dedCnt];
     trimPercentage = rampTrimPercentage(totalCnt);
-    if (randRange(100) < 1) {
+    if (randRange(100) < 2) {
       console.log(
         `${trimPercentage.toFixed(4)} age cutoff, ${
           oldestDeadCells.length
@@ -478,6 +478,7 @@ const feed1DSelector = document.querySelector('input[name="feed1D"]');
 const greySelector = document.querySelector('input[id="greyscale"]');
 const colorSelector = document.querySelector('input[id="colorful"]');
 const resetButton = document.querySelector('button[id="reset"]');
+const delaySlider = document.querySelector('input[name="delay"]');
 
 const onSelector = () => {
   if (pathSelector.checked) {
@@ -520,5 +521,10 @@ pathSelector.addEventListener('click', onSelector);
 greySelector.addEventListener('click', onSelector);
 colorSelector.addEventListener('click', onSelector);
 resetButton.addEventListener('click', reset);
+delaySlider.addEventListener('change', (evt) => {
+  const fps = evt.target.value;
+  console.log('Set animation FPS to', fps);
+  DELAY = fps;
+});
 
 draw();
