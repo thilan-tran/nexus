@@ -2,7 +2,8 @@
 const BASE_LIFESPAN = 20;
 // how long traces of live cell paths last in frames and
 // how trace cell color changes w/ gradient (lower => shorter traces, more performant)
-const BASE_TRACESPAN = 60;
+// const BASE_TRACESPAN = 60;
+let BASE_TRACESPAN = 50;
 
 const RESOLUTION = 10;
 const NUM_COLORS = 8; // number of colors in gradient (lower => more performant)
@@ -16,6 +17,7 @@ let TRACESPAN = BASE_TRACESPAN;
 let ONEDIM_INPUT = false;
 let DELAY = 30; // delay between draw cycles in msec (higher => more performant)
 // up to 60 FPS (~20 msec delay) with window.requestAnimationFrame
+let USING_GREYSCALE = false;
 
 const PATTERNS = {
   glider: [
@@ -124,7 +126,7 @@ let LIVE_COLOR_MAP = [];
 let TRACE_COLOR_MAP = [];
 let initColors = (max, colors) => {
   const map = new Array(parseInt(max + 1) || 1).fill('');
-  bucketSize = parseInt(max / NUM_COLORS || 1);
+  const bucketSize = parseInt(max / NUM_COLORS || 1);
   for (let i = 0; i < NUM_COLORS + 1; i++) {
     const color = getGradient((i / NUM_COLORS) * max, max, colors);
     map.fill(color, i * bucketSize, (i + 1) * bucketSize);
@@ -133,8 +135,14 @@ let initColors = (max, colors) => {
   map.fill(finalColor, NUM_COLORS * bucketSize);
   return map;
 };
-LIVE_COLOR_MAP = initColors(LIFESPAN, LIVE_CELL_COLORS);
-TRACE_COLOR_MAP = initColors(TRACESPAN, TRACE_CELL_COLORS);
+LIVE_COLOR_MAP = initColors(
+  LIFESPAN,
+  USING_GREYSCALE ? GREYSCALE_CELL_COLORS.live : LIVE_CELL_COLORS
+);
+TRACE_COLOR_MAP = initColors(
+  TRACESPAN,
+  USING_GREYSCALE ? GREYSCALE_CELL_COLORS.trace : TRACE_CELL_COLORS
+);
 
 const spawnPattern = (pattern) => {
   const [randI, randJ] = [randRange(ROWS), randRange(COLS)];
@@ -237,7 +245,10 @@ const reColorCells = () => {
 let timestamp = new Date();
 const draw = () => {
   const now = new Date();
-  if (now - timestamp < DELAY) {
+  if (
+    canvas.classList.contains('container-disable') ||
+    now - timestamp < DELAY
+  ) {
     window.requestAnimationFrame(draw);
     return;
   }
@@ -354,10 +365,10 @@ const reset = () => {
   });
 };
 
-document.querySelector('.action-button').addEventListener('click', (evt) => {
-  evt.target.blur();
+const spawn = () => {
   if (ONEDIM_INPUT) {
-    console.log('Using onedim cell. automata rule 30 as input');
+    reset();
+    console.log('Using one dimensional cellular automata as input:', 'rule 30');
     startOnedimInput();
     return;
   }
@@ -365,52 +376,52 @@ document.querySelector('.action-button').addEventListener('click', (evt) => {
   const idx = randRange(pats.length);
   console.log('Spawning', pats[idx][0]);
   spawnPattern(pats[idx][1]);
-});
+};
 
-const delaySlider = document.querySelector('input[name="delay"]');
-delaySlider.addEventListener('change', (evt) => {
-  const ms = evt.target.value;
-  console.log('Set animation delay to', ms);
-  DELAY = ms;
-});
+const options = {
+  greyscale: 0,
+  delay: 1,
+  trace: 2,
+  traceLength: 3,
+  oneDimIput: 4
+};
 
-const greySelector = document.querySelector('input[id="greyscale"]');
-const colorSelector = document.querySelector('input[id="colorful"]');
-const traceSelector = document.querySelector('input[name="trace"]');
-const onSelector = () => {
-  if (!traceSelector.checked) {
-    TRACESPAN = 0;
-  } else {
-    TRACESPAN = BASE_TRACESPAN;
+const setOption = (type, value) => {
+  switch (type) {
+    case options.delay:
+      console.log('Set animation delay to', value);
+      DELAY = value;
+      return;
+    case options.oneDimIput:
+      if (ONEDIM_INPUT && !value) {
+        reset();
+        ONEDIM_INPUT = false;
+      } else if (!ONEDIM_INPUT && value) {
+        reset();
+        ONEDIM_INPUT = true;
+      }
+      return;
+    case options.greyscale:
+      USING_GREYSCALE = value;
+      break;
+    case options.trace:
+      TRACESPAN = value ? BASE_TRACESPAN : 0;
+      break;
+    case options.traceLength:
+      BASE_TRACESPAN = value;
+      TRACESPAN = value;
+      break;
   }
-  const greyScale = greySelector.checked;
+
   LIVE_COLOR_MAP = initColors(
     LIFESPAN,
-    greyScale ? GREYSCALE_CELL_COLORS.live : LIVE_CELL_COLORS
+    USING_GREYSCALE ? GREYSCALE_CELL_COLORS.live : LIVE_CELL_COLORS
   );
   TRACE_COLOR_MAP = initColors(
     TRACESPAN,
-    greyScale ? GREYSCALE_CELL_COLORS.trace : TRACE_CELL_COLORS
+    USING_GREYSCALE ? GREYSCALE_CELL_COLORS.trace : TRACE_CELL_COLORS
   );
   reColorCells();
 };
-greySelector.addEventListener('click', onSelector);
-colorSelector.addEventListener('click', onSelector);
-traceSelector.addEventListener('click', onSelector);
 
-const feed1DSelector = document.querySelector('input[name="feed1D"]');
-const on1DSelector = () => {
-  if (ONEDIM_INPUT && !feed1DSelector.checked) {
-    reset();
-    ONEDIM_INPUT = false;
-  } else if (!ONEDIM_INPUT && feed1DSelector.checked) {
-    reset();
-    ONEDIM_INPUT = true;
-  }
-};
-feed1DSelector.addEventListener('click', on1DSelector);
-
-const resetButton = document.querySelector('button[id="reset"]');
-resetButton.addEventListener('click', reset);
-
-draw();
+export default { draw, reset, spawn, options, setOption };

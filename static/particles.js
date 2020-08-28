@@ -1,9 +1,9 @@
-const MAX_SPEED = 13;
+const MAX_SPEED = 20;
 const MIN_SPEED = 2;
 const MAX_LIFESPAN = 8;
 const DELAY = 10;
 
-const GRAVITY_ACCEL = -0.03 / (DELAY / 1000);
+const GRAVITY_ACCEL = -0.05 / (DELAY / 1000);
 
 let GRAV = false;
 let MOUSE_DOWN = false,
@@ -40,6 +40,7 @@ const getGradientColor = (bias) => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
+const container = document.querySelector('.particles');
 const addParticle = (x, y, num = 1) => {
   for (let i = 0; i < num; i++) {
     const part = document.createElement('div');
@@ -50,12 +51,12 @@ const addParticle = (x, y, num = 1) => {
     part.dataset.velX = getRandSpeed();
     part.dataset.velY = getRandSpeed();
     part.dataset.lifetime = getRandLife();
-    document.querySelector('.container').appendChild(part);
+    container.appendChild(part);
   }
 };
 
 const moveParticles = () => {
-  document.querySelectorAll('.particle').forEach((part) => {
+  container.querySelectorAll('.particle').forEach((part) => {
     const life = Number(part.dataset.lifetime);
     const x = parseInt(part.style.left);
     const y = parseInt(part.style.bottom);
@@ -98,6 +99,10 @@ const moveParticles = () => {
   });
 };
 
+const spawn = (evt) => {
+  addParticle(evt.clientX, window.innerHeight - evt.clientY, 5);
+};
+
 document.querySelector('.action-button').addEventListener('click', (evt) => {
   addParticle(evt.clientX, window.innerHeight - evt.clientY, 5);
   evt.target.blur();
@@ -116,22 +121,51 @@ document.addEventListener('mousemove', (evt) => {
 //   addParticle(x, y);
 // });
 
-const greySelector = document.querySelector('input[id="greyscale"]');
-const colorSelector = document.querySelector('input[id="colorful"]');
-const gravSelector = document.querySelector('input[name="gravity"]');
+// const greySelector = document.querySelector('input[id="greyscale"]');
+// const colorSelector = document.querySelector('input[id="colorful"]');
+// const gravSelector = document.querySelector('input[name="gravity"]');
 
-const onSelector = () => {
-  GRAV = gravSelector.checked;
-  COLOR_RANGE = greySelector.checked ? GREYSCALE_RANGE : COLORFUL_RANGE;
+const options = {
+  greyscale: 0,
+  gravity: 1
 };
 
-colorSelector.addEventListener('click', onSelector);
-greySelector.addEventListener('click', onSelector);
-gravSelector.addEventListener('click', onSelector);
+const setOption = (type, value) => {
+  switch (type) {
+    case options.greyscale:
+      COLOR_RANGE = value ? GREYSCALE_RANGE : COLORFUL_RANGE;
+      break;
+    case options.gravity:
+      GRAV = value;
+      break;
+  }
+};
 
-setInterval(() => {
+// const onSelector = () => {
+//   GRAV = gravSelector.checked;
+//   COLOR_RANGE = greySelector.checked ? GREYSCALE_RANGE : COLORFUL_RANGE;
+// };
+
+// colorSelector.addEventListener('click', onSelector);
+// greySelector.addEventListener('click', onSelector);
+// gravSelector.addEventListener('click', onSelector);
+
+const reset = () => {
+  container
+    .querySelectorAll('.particle')
+    .forEach((part) => part.parentNode.removeChild(part));
+};
+
+const draw = () => {
+  if (container.classList.contains('container-disable')) {
+    window.requestAnimationFrame(draw);
+    return;
+  }
   if (MOUSE_DOWN) {
     addParticle(X, Y, 1);
   }
   moveParticles();
-}, DELAY);
+  window.requestAnimationFrame(draw);
+};
+
+export default { draw, reset, spawn, options, setOption };
