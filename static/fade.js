@@ -8,7 +8,11 @@ const FADE_DELAY = 3;
   let timer;
   const makeTimer = () =>
     setTimeout(() => {
-      if (!content || content.childElementCount > 0) {
+      if (
+        !content ||
+        content.classList.contains('enable-fade') ||
+        content.childElementCount > 0
+      ) {
         fadeMe.style.transition = trans;
         fadeMe.style.opacity = 0;
       } else {
