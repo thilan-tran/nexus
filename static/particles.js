@@ -41,7 +41,7 @@
     return `rgb(${r}, ${g}, ${b})`;
   };
 
-  const container = document.querySelector('.particle-container');
+  const container = document.querySelector('.particles');
   const addParticle = (x, y, num = 1) => {
     for (let i = 0; i < num; i++) {
       const part = document.createElement('div');

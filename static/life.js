@@ -125,7 +125,7 @@ let LIVE_COLOR_MAP = [];
 let TRACE_COLOR_MAP = [];
 let initColors = (max, colors) => {
   const map = new Array(parseInt(max + 1) || 1).fill('');
-  bucketSize = parseInt(max / NUM_COLORS || 1);
+  const bucketSize = parseInt(max / NUM_COLORS || 1);
   for (let i = 0; i < NUM_COLORS + 1; i++) {
     const color = getGradient((i / NUM_COLORS) * max, max, colors);
     map.fill(color, i * bucketSize, (i + 1) * bucketSize);
@@ -345,7 +345,7 @@ export const draw = () => {
   window.requestAnimationFrame(draw);
 };
 
-const reset = () => {
+export const reset = () => {
   GRID.forEach((row, i) => {
     row.forEach((cell, j) => {
       if (cell.status !== UNINIT) {

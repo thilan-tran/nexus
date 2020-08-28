@@ -1,3 +1,5 @@
+import { draw as drawGoL, reset as resetGoL } from 'life.js';
+
 const drop = document.querySelector('.dropdown');
 const content = document.querySelector('.dropdown .content');
 drop.addEventListener(
@@ -21,9 +23,14 @@ const swap = document.querySelector('.shuffle');
 const carousel = document.querySelector('.carousel');
 swap.addEventListener('click', () => {
   for (const child of carousel.children) {
+    if (child.classList.contains('game-of-life')) {
+      resetGoL();
+    }
     child.classList.toggle('container-disable');
   }
 });
+
+drawGoL();
 
 //const modal = document.querySelector('.modal');
 //document
