@@ -2,7 +2,8 @@
 const BASE_LIFESPAN = 20;
 // how long traces of live cell paths last in frames and
 // how trace cell color changes w/ gradient (lower => shorter traces, more performant)
-const BASE_TRACESPAN = 60;
+// const BASE_TRACESPAN = 60;
+let BASE_TRACESPAN = 50;
 
 const RESOLUTION = 10;
 const NUM_COLORS = 8; // number of colors in gradient (lower => more performant)
@@ -235,9 +236,12 @@ const reColorCells = () => {
 };
 
 let timestamp = new Date();
-const draw = () => {
+export const draw = () => {
   const now = new Date();
-  if (now - timestamp < DELAY) {
+  if (
+    canvas.classList.contains('container-disable') ||
+    now - timestamp < DELAY
+  ) {
     window.requestAnimationFrame(draw);
     return;
   }
@@ -357,7 +361,8 @@ const reset = () => {
 document.querySelector('.action-button').addEventListener('click', (evt) => {
   evt.target.blur();
   if (ONEDIM_INPUT) {
-    console.log('Using onedim cell. automata rule 30 as input');
+    reset();
+    console.log('Using one dimensional cellular automata as input:', 'rule 30');
     startOnedimInput();
     return;
   }
@@ -377,6 +382,7 @@ delaySlider.addEventListener('change', (evt) => {
 const greySelector = document.querySelector('input[id="greyscale"]');
 const colorSelector = document.querySelector('input[id="colorful"]');
 const traceSelector = document.querySelector('input[name="trace"]');
+const traceSlider = document.querySelector('input[name="trace-length"]');
 const onSelector = () => {
   if (!traceSelector.checked) {
     TRACESPAN = 0;
@@ -397,6 +403,13 @@ const onSelector = () => {
 greySelector.addEventListener('click', onSelector);
 colorSelector.addEventListener('click', onSelector);
 traceSelector.addEventListener('click', onSelector);
+traceSlider.addEventListener('change', (evt) => {
+  const length = evt.target.value;
+  console.log('Set trace length to', length);
+  BASE_TRACESPAN = length;
+  TRACESPAN = length;
+  onSelector();
+});
 
 const feed1DSelector = document.querySelector('input[name="feed1D"]');
 const on1DSelector = () => {
@@ -413,4 +426,4 @@ feed1DSelector.addEventListener('click', on1DSelector);
 const resetButton = document.querySelector('button[id="reset"]');
 resetButton.addEventListener('click', reset);
 
-draw();
+// draw();
