@@ -131,7 +131,7 @@ body {
 }
 
 .dropdown .content {
-  width: 200px;
+  max-width: 200px;
   position: absolute;
   opacity: 0;
   transform: translate(calc(-100% + 37px), calc(-100% - 39px));
@@ -154,7 +154,11 @@ body {
   cursor: default;
 }
 
-.options-box div {
+.options-box .disable {
+  display: none;
+}
+
+.options-box .option {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -212,7 +216,7 @@ body {
   box-shadow: 7px 3px 0 0 #000;
 }
 
-.icon:hover .shuffle {
+.shuffle.clicked {
   transform: scaleY(-1);
 }
 
@@ -269,6 +273,7 @@ body {
   font-size: 25px;
   text-align: right;
   text-decoration: none;
+  user-select: none;
   cursor: pointer;
   transition: 0.2s all ease;
 }

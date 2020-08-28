@@ -12,8 +12,14 @@
   </head>
   <body>
     <div class="carousel">
-      <canvas class="container game-of-life"></canvas>
-      <div class="container particles container-disable"></div>
+      <canvas
+        class="container game-of-life"
+        data-descrip="PLAY CONWAY'S GAME OF LIFE."
+      ></canvas>
+      <div
+        class="container particles container-disable"
+        data-descrip="SPAWN SOME PARTICLES."
+      ></div>
     </div>
 
     <div class="container-overlay">
@@ -88,55 +94,71 @@
             style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
           />
           <div class="content options-box">
-            <div>
-              <label for="greyscale">Greyscale</label>
-              <input type="radio" name="color" id="greyscale" />
+            <div class="particle-options disable" style="width:120px;">
+              <div class="option">
+                <label for="greyscale">Greyscale</label>
+                <input type="radio" name="color" id="greyscale" />
+              </div>
+              <div class="option">
+                <label for="colorful">Colorful</label>
+                <input type="radio" name="color" id="colorful" checked />
+              </div>
+              <div class="option">
+                <label for="gravity">Gravity</label>
+                <input type="checkbox" name="gravity" />
+              </div>
             </div>
-            <div>
-              <label for="colorful">Colorful</label>
-              <input type="radio" name="color" id="colorful" checked />
-            </div>
-            <div>
-              <label for="trace">Trace cell path</label>
-              <input type="checkbox" name="trace" checked />
-            </div>
-            <div>
-              <label for="trace-length">Trace path length</label>
-              <input
-                type="range"
-                name="trace-length"
-                style="width:55px;"
-                value="50"
-                min="20"
-                max="200"
-              />
-            </div>
-            <div>
-              <label for="feed1D">Feed in 1D cell. automata</label>
-              <input type="checkbox" name="feed1D" />
-            </div>
-            <div>
-              <label for="delay">Animation delay</label>
-              <input
-                type="range"
-                name="delay"
-                style="width:55px;"
-                value="30"
-                min="20"
-                max="100"
-              />
-            </div>
-            <div>
-              <button class="button" id="reset">Reset</button>
-            </div>
-            <div>
-              <a
-                class="button"
-                href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
-                target="_blank"
-              >
-                About
-              </a>
+            <div class="life-options" style="width:200px;">
+              <div class="option">
+                <label for="greyscale">Greyscale</label>
+                <input type="radio" name="color" id="greyscale" />
+              </div>
+              <div class="option">
+                <label for="colorful">Colorful</label>
+                <input type="radio" name="color" id="colorful" checked />
+              </div>
+              <div class="option">
+                <label for="trace">Trace cell path</label>
+                <input type="checkbox" name="trace" checked />
+              </div>
+              <div class="option">
+                <label for="trace-length">Trace path length</label>
+                <input
+                  type="range"
+                  name="trace-length"
+                  style="width:55px;"
+                  value="50"
+                  min="20"
+                  max="200"
+                />
+              </div>
+              <div class="option">
+                <label for="feed1D">Feed in 1D cell. automata</label>
+                <input type="checkbox" name="feed1D" />
+              </div>
+              <div class="option">
+                <label for="delay">Animation delay</label>
+                <input
+                  type="range"
+                  name="delay"
+                  style="width:55px;"
+                  value="30"
+                  min="20"
+                  max="100"
+                />
+              </div>
+              <div class="option">
+                <button class="button" id="reset">Reset</button>
+              </div>
+              <div class="option">
+                <a
+                  class="button"
+                  href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
+                  target="_blank"
+                >
+                  About
+                </a>
+              </div>
             </div>
           </div>
         </svg>
@@ -194,8 +216,6 @@
         <p>Coming soon.</p>
       </div>
     </div>
-    <script type="module" src="life.js"></script>
-    <script src="particles.js"></script>
     <script src="fade.js"></script>
     <script type="module" src="main.js"></script>
   </body>
