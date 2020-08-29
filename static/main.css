@@ -674,7 +674,7 @@ a {
   }
 
   .caret.point-up svg path {
-    fill: #fff !important;
+    fill: none !important;
   }
 
   #thing1 {
