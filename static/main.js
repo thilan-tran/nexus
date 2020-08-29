@@ -86,6 +86,11 @@ const registerModalEvents = (clickElem, modalElem) => {
     (evt) =>
       !modalBody.contains(evt.target) && modalElem.classList.remove('show')
   );
+  document.addEventListener(
+    'touchstart',
+    (evt) =>
+      !modalBody.contains(evt.target) && modalElem.classList.remove('show')
+  );
 };
 const modal = document.querySelector('.modal');
 registerModalEvents(document.querySelector('.card'), modal);
