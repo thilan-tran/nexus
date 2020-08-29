@@ -1,5 +1,10 @@
+@font-face {
+  font-family: 'CircularStd';
+  src: url('static/CircularStd-Book.otf') format('opentype');
+}
+
 body {
-  letter-spacing: -1px;
+  -webkit-font-smoothing: antialiased;
   height: 100%;
   margin: 0;
 }
@@ -21,7 +26,8 @@ body {
   color: #fff;
   background-color: #000;
 
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: -2px;
   text-align: right;
 
   cursor: pointer;
@@ -69,7 +75,7 @@ body {
   background-color: #000;
   box-shadow: -15px 3px 0 0 #444;
 
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   text-decoration: none;
 
   text-align: right;
@@ -117,7 +123,7 @@ body {
   background-color: #ddd;
   border: 2px solid transparent;
 
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   float: right;
   user-select: none;
   transition: 0.2s all ease;
@@ -149,7 +155,8 @@ body {
   padding: 3px 10px;
   border: 2px solid #000;
   background-color: #fff;
-  font-family: "Roboto Thin", sans-serif;
+  font-family: 'CircularStd', sans-serif;
+  font-weight: 300;
   font-size: 16px;
   cursor: default;
 }
@@ -277,7 +284,7 @@ body {
   background-color: #fff;
 
   line-height: 40px;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-weight: bold;
   font-size: 25px;
   text-align: right;
@@ -320,7 +327,7 @@ body {
 .card h2,
 .modal h2,
 .separator h2 {
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-weight: bold;
   font-size: 40px;
   width: 100%;
@@ -344,15 +351,14 @@ body {
 
 .card p,
 .modal p {
-  font-family: "Roboto Light", sans-serif;
-  font-weight: bold;
+  font-family: 'CircularStd';
+  font-weight: 400;
   font-size: 20px;
   line-height: 35px;
 }
 
 .modal-description {
   height: 35%;
-  overflow-y: auto;
 }
 
 .modal-description div {
@@ -384,6 +390,7 @@ body {
 .modal-body {
   position: relative;
   max-width: 1200px;
+  overflow-y: auto;
   height: 100%;
   background-color: #fff;
   margin: 0 auto;
@@ -508,7 +515,7 @@ a {
   position: absolute;
   top: 25px;
   left: 25px;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   color: #fff;
   opacity: 0;
   z-index: 1;
@@ -531,7 +538,7 @@ a {
 
 .modal-description b {
   float: right;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 15px;
   line-height: 37px;
   font-weight: normal;
