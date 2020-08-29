@@ -737,7 +737,8 @@ a {
     margin-top: calc(30px + 1em);
   }
 
-  .carousel canvas {
+  .carousel .showcase {
     margin-top: 44px;
+    height: calc(100vh - 44px);
   }
 }

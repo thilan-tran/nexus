@@ -231,10 +231,7 @@ const testFade = () => {
   }
   const pointingUp = caret.classList.contains('point-up');
   const fade =
-    !pointingUp &&
-    showcase &&
-    (showcase.childElementCount > 0 ||
-      showcase.classList.contains('fade-enable'));
+    !pointingUp && showcase && showcase.classList.contains('fade-enable');
   const nextDelay = pointingUp ? 0.5 : 2;
   return [fade, nextDelay];
 };

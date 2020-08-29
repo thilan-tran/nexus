@@ -1,4 +1,4 @@
-const MAX_SPEED = 20;
+const MAX_SPEED = 15;
 const MAX_LIFESPAN = 8;
 const DELAY = 10;
 
@@ -41,8 +41,8 @@ const getGradientColor = (bias) => {
 };
 
 const canvas = document.querySelector('#particles');
-const WIDTH = window.innerWidth;
-const HEIGHT = window.innerHeight;
+const WIDTH = window.innerWidth - 50;
+const HEIGHT = window.innerHeight - 50;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 const ctx = canvas.getContext('2d');
@@ -70,17 +70,19 @@ const moveParticles = () => {
     canvas.classList.add('fade-enable');
   }
 
-  ctx.fillStyle = '#fff';
-  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+  // ctx.fillStyle = '#fff';
+  // ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
   for (let i = 0; i < BOX.length; i++) {
     const part = BOX[i];
     let { life, x, y, velX, velY } = part;
 
-    if (life === 0) {
+    if (life <= 0) {
       BOX.splice(i--, 1);
       continue;
     } else {
+      // console.log(i, life);
       part.life--;
     }
 
@@ -89,24 +91,27 @@ const moveParticles = () => {
     part.x = newX;
     part.y = newY;
 
-    if (newX > 0 && newY > 0) {
-      ctx.fillStyle = getGradientColor(
-        2 * MAX_SPEED - (Math.abs(velX) + Math.abs(velY))
-      );
-      ctx.fillRect(newX, newY, 10, 10);
-    }
+    let drawX = newX < 0 ? -1 * newX : newX;
+    let drawY = newY < 0 ? -1 * newY : newY;
+    drawX = drawX + 10 > WIDTH ? 2 * WIDTH - drawX : drawX;
+    drawY = drawY + 10 > HEIGHT ? 2 * HEIGHT - drawY : drawY;
+    // ctx.fillStyle = getGradientColor(
+    //   2 * MAX_SPEED - (Math.abs(velX) + Math.abs(velY))
+    // );
+    ctx.fillStyle = '#000';
+    ctx.fillRect(drawX, drawY, 10, 10);
 
     if (newX > WIDTH || newX < 0) {
-      velX *= -0.9;
+      velX *= -1;
     }
     if (newY > HEIGHT || newY < 0) {
-      velY *= -0.9;
+      velY *= GRAV ? -0.9 : -1;
     }
 
     if (GRAV) {
       if (newY < HEIGHT) {
         velY += GRAVITY_ACCEL;
-      } else if (Math.abs(velY) < 25) {
+        // } else if (Math.abs(velY) < 25) {
         // velY = 0;
       }
     }
