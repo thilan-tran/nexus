@@ -618,7 +618,7 @@ a {
   }
 
   .modal {
-    top: 10vh;
+    bottom: 10vh;
     height: 80vh;
   }
 
