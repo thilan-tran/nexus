@@ -555,7 +555,7 @@ a {
 
 @media (max-width: 640px) {
   body {
-    letter-spacing: -2px;
+    letter-spacing: -3px;
   }
 
   .showcase-overlay {
@@ -672,5 +672,10 @@ a {
     float: none;
     display: block;
     font-size: 18px;
+    letter-spacing: 0;
+  }
+
+  .title {
+    letter-spacing: 0;
   }
 }
