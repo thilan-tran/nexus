@@ -8,8 +8,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   /* height: 100%; */
-  height: auto;
-  min-height: -webkit-fill-available;
+  /* height: auto; */
+  height: calc(100vh - calc(100vh - 100%));
   margin: 0;
 }
 
@@ -216,9 +216,11 @@ body {
   transition: 0.2s transform ease;
 }
 
-.icon:hover {
-  background-color: #eee;
-  box-shadow: 7px 3px 0 0 #000;
+@media (hover: hover) {
+  .icon:hover {
+    background-color: #eee;
+    box-shadow: 7px 3px 0 0 #000;
+  }
 }
 
 .expand.icon {
@@ -562,7 +564,7 @@ a {
 }
 
 .sticky {
-  height: 40px;
+  height: 30px;
 }
 
 @media (max-width: 1200px) {
@@ -629,8 +631,11 @@ a {
 
   .modal {
     top: 5vh;
-    bottom: calc(5vh + env(safe-area-inset-bottom));
-    height: calc(90vh - env(safe-area-inset-bottom));
+    height: 90vh;
+    /* height: calc(-webkit-fill-available); */
+    /* top: 5vh; */
+    /* bottom: calc(5vh + env(safe-area-inset-bottom)); */
+    /* height: calc(90vh - env(safe-area-inset-bottom)); */
   }
 
   .modal img {
@@ -670,7 +675,7 @@ a {
   .caret.point-up {
     animation: none;
     right: 10px;
-    top: 0;
+    top: -2px;
   }
 
   #thing1 {
@@ -710,8 +715,8 @@ a {
   }
 
   .sticky.up svg {
-    height: 30px;
-    margin: 0 5px;
+    height: 25px;
+    margin: 2.5px 7px;
   }
 
   .sticky.up + p {
