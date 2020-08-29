@@ -8,8 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   /* height: 100%; */
-  /* height: auto; */
-  height: calc(100vh - calc(100vh - 100%));
+  height: auto;
   margin: 0;
 }
 
@@ -633,6 +632,7 @@ a {
     top: 5vh;
     height: 90vh;
     /* height: calc(-webkit-fill-available); */
+    height: calc(100vh - calc(100vh - 100%));
     /* top: 5vh; */
     /* bottom: calc(5vh + env(safe-area-inset-bottom)); */
     /* height: calc(90vh - env(safe-area-inset-bottom)); */
