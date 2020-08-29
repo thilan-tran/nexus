@@ -236,5 +236,5 @@ const testFade = () => {
 Fade.init(testFade);
 
 GoL.draw();
-Particles.init(optionsDrop);
+Particles.init(optionsDrop, window.innerWidth <= 640);
 Particles.draw();
