@@ -125,7 +125,7 @@ for (const item of document.querySelector('.grid').children) {
   const modal = document.querySelector(
     `.modal[data-project="${item.dataset.project}"]`
   );
-  modal.style.height = `${window.innerHeight * 0.8}px`;
+  modal.style.height = `${window.innerHeight * 0.9}px`;
   modal && registerModalEvents(item, modal);
 }
 
