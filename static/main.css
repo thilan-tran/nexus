@@ -1,5 +1,14 @@
+@font-face {
+  font-family: 'CircularStd';
+  src: url('static/CircularStd-Book.otf') format('opentype');
+}
+
 body {
-  height: 100%;
+  font-family: 'Oswald', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  /* height: 100%; */
+  height: auto;
   margin: 0;
 }
 
@@ -20,7 +29,6 @@ body {
   color: #fff;
   background-color: #000;
 
-  font-family: 'Oswald', sans-serif;
   text-align: right;
 
   cursor: pointer;
@@ -40,16 +48,18 @@ body {
   transition: 0.2s all ease;
 }
 
-.action-button:hover,
-.action-button:focus {
-  background-color: #555;
-  box-shadow: -6px -6px 0 0 #000;
-  outline: none;
-}
+@media (hover: hover) {
+  .action-button:hover,
+  .action-button:focus {
+    background-color: #555;
+    box-shadow: -6px -6px 0 0 #000;
+    outline: none;
+  }
 
-.action-button:hover::after,
-.action-button:focus::after {
-  opacity: 0;
+  .action-button:hover::after,
+  .action-button:focus::after {
+    opacity: 0;
+  }
 }
 
 .nav {
@@ -68,7 +78,6 @@ body {
   background-color: #000;
   box-shadow: -15px 3px 0 0 #444;
 
-  font-family: 'Oswald', sans-serif;
   text-decoration: none;
 
   text-align: right;
@@ -116,7 +125,6 @@ body {
   background-color: #ddd;
   border: 2px solid transparent;
 
-  font-family: 'Oswald', sans-serif;
   float: right;
   user-select: none;
   transition: 0.2s all ease;
@@ -148,7 +156,8 @@ body {
   padding: 3px 10px;
   border: 2px solid #000;
   background-color: #fff;
-  font-family: 'Roboto Thin', sans-serif;
+  font-family: 'CircularStd', sans-serif;
+  font-weight: 300;
   font-size: 16px;
   cursor: default;
 }
@@ -206,9 +215,11 @@ body {
   transition: 0.2s transform ease;
 }
 
-.icon:hover {
-  background-color: #eee;
-  box-shadow: 7px 3px 0 0 #000;
+@media (hover: hover) {
+  .icon:hover {
+    background-color: #eee;
+    box-shadow: 7px 3px 0 0 #000;
+  }
 }
 
 .expand.icon {
@@ -241,6 +252,7 @@ body {
 }
 
 .caret.point-up {
+  transition: bottom 0s;
   bottom: calc(100% - 90px);
 }
 
@@ -269,6 +281,7 @@ body {
   height: 40px;
   margin: 50px;
   padding: 0 5px;
+  top: 0px;
 
   border: 2px solid #000;
   box-shadow: -7px 3px 0 0 #000;
@@ -276,7 +289,6 @@ body {
   background-color: #fff;
 
   line-height: 40px;
-  font-family: 'Oswald', sans-serif;
   font-weight: bold;
   font-size: 25px;
   text-align: right;
@@ -298,7 +310,8 @@ body {
   justify-content: space-around;
   min-height: 100vh;
   max-width: 1200px;
-  margin: auto;
+  width: 100%;
+  margin: 0 calc((100vw - 1200px) / 2);
 }
 
 .card {
@@ -319,7 +332,6 @@ body {
 .card h2,
 .modal h2,
 .separator h2 {
-  font-family: 'Oswald', sans-serif;
   font-weight: bold;
   font-size: 40px;
   width: 100%;
@@ -343,15 +355,14 @@ body {
 
 .card p,
 .modal p {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
+  font-family: 'CircularStd';
+  font-weight: 400;
   font-size: 20px;
   line-height: 35px;
 }
 
 .modal-description {
   height: 35%;
-  overflow-y: auto;
 }
 
 .modal-description div {
@@ -383,6 +394,7 @@ body {
 .modal-body {
   position: relative;
   max-width: 1200px;
+  overflow-y: auto;
   height: 100%;
   background-color: #fff;
   margin: 0 auto;
@@ -415,7 +427,7 @@ body {
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 2;
 }
 
 .header {
@@ -507,7 +519,6 @@ a {
   position: absolute;
   top: 25px;
   left: 25px;
-  font-family: 'Oswald', sans-serif;
   color: #fff;
   opacity: 0;
   z-index: 1;
@@ -530,7 +541,6 @@ a {
 
 .modal-description b {
   float: right;
-  font-family: 'Oswald', sans-serif;
   font-size: 15px;
   line-height: 37px;
   font-weight: normal;
@@ -552,7 +562,21 @@ a {
   width: 200px;
 }
 
+.sticky {
+  height: 30px;
+}
+
+@media (max-width: 1200px) {
+  .content {
+    margin: 0 0;
+  }
+}
+
 @media (max-width: 640px) {
+  body {
+    letter-spacing: -3px;
+  }
+
   .showcase-overlay {
     width: 100%;
   }
@@ -565,20 +589,21 @@ a {
     width: calc(100vw - 24px);
     box-shadow: none !important;
     text-align: left;
+    z-index: 2;
   }
 
   .swap {
     top: 0;
     right: 42px;
     box-shadow: none !important;
-    z-index: 1;
+    z-index: 2;
   }
 
   .dropdown {
     top: 0;
     right: 0;
     box-shadow: none !important;
-    z-index: 1;
+    z-index: 2;
   }
 
   .dropdown .dropdown-content {
@@ -590,7 +615,7 @@ a {
   /* } */
 
   .caret {
-    z-index: 2;
+    z-index: 3;
   }
 
   .card {
@@ -616,10 +641,6 @@ a {
     line-height: 25px;
   }
 
-  .modal h2 {
-    margin: 0;
-  }
-
   .modal-description div {
     padding: 15px 20px;
   }
@@ -636,12 +657,24 @@ a {
   }
 
   .modal .double-img {
-    height: 60% !important;
+    height: 50% !important;
+  }
+
+  .modal-top {
+    height: 60%;
+  }
+  .modal-description {
+    height: 40%;
   }
 
   .caret.point-up {
+    animation: none;
     right: 10px;
-    top: 0;
+    top: -2px;
+  }
+
+  .caret.point-up svg path {
+    fill: none !important;
   }
 
   #thing1 {
@@ -650,5 +683,42 @@ a {
 
   #thing2 {
     height: 30% !important;
+  }
+
+  .options-box,
+  .card p,
+  .modal p {
+    letter-spacing: 0;
+  }
+
+  .modal-description b {
+    float: none;
+    display: block;
+    font-size: 18px;
+    letter-spacing: 0;
+  }
+
+  .title {
+    letter-spacing: 0;
+  }
+
+  .title b {
+    letter-spacing: -3px;
+  }
+
+  .sticky.up {
+    position: fixed;
+    top: 7px;
+    right: 50px;
+    z-index: 2;
+  }
+
+  .sticky.up svg {
+    height: 25px;
+    margin: 2.5px 7px;
+  }
+
+  .sticky.up + p {
+    margin-top: calc(30px + 1em);
   }
 }

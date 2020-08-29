@@ -2,6 +2,8 @@ import Fade from './fade.js';
 import GoL from './life.js';
 import Particles from './particles.js';
 
+const IS_MOBILE = window.innerWidth <= 640;
+
 const carousel = document.querySelector('.carousel');
 
 const optionsDrop = document.querySelector('.dropdown');
@@ -13,6 +15,11 @@ optionsDrop.addEventListener(
 );
 document.addEventListener(
   'click',
+  (evt) =>
+    !optionsDrop.contains(evt.target) && optionsDrop.classList.remove('expand')
+);
+document.addEventListener(
+  'touchend',
   (evt) =>
     !optionsDrop.contains(evt.target) && optionsDrop.classList.remove('expand')
 );
@@ -39,20 +46,26 @@ caret.addEventListener('click', () => {
 if (content.getBoundingClientRect().top < window.innerHeight / 2) {
   caret.classList.add('point-up');
 }
+const sticky = document.querySelector('.sticky');
 document.addEventListener('scroll', () => {
   const rect = content.getBoundingClientRect();
+  const pastSticky = document.querySelector('#about p').getBoundingClientRect();
   if (rect.top < window.innerHeight / 2) {
     caret.classList.add('point-up');
   } else {
     caret.classList.remove('point-up');
   }
-
+  if (pastSticky.top <= 0) {
+    sticky.classList.add('up');
+  } else {
+    sticky.classList.remove('up');
+  }
   optionsDrop.classList.remove('expand');
 });
 
 document.addEventListener('mousemove', (evt) => {
   if (
-    window.innerWidth > 640 &&
+    !IS_MOBILE &&
     caret.classList.contains('point-up') &&
     evt.screenY > window.innerHeight / 5
   ) {
@@ -64,7 +77,7 @@ document.addEventListener('mousemove', (evt) => {
 
 if (window.innerWidth <= 640) {
   document.querySelector('.fade').classList.remove('fade');
-  document.querySelector('.action-button').classList.add('fade');
+  document.querySelector('.center-both').classList.add('fade');
 }
 
 const links = document.querySelectorAll('a');
@@ -72,27 +85,54 @@ links.forEach((link) =>
   link.addEventListener('click', (evt) => evt.stopPropagation())
 );
 
+const wrapper = document.querySelector('.body-wrapper');
+const openModal = (elem) => {
+  if (!elem.classList.contains('show')) {
+    wrapper.style.top = `-${window.scrollY}px`;
+    wrapper.style.position = 'fixed';
+    elem.classList.add('show');
+  }
+};
+const closeModal = (elem) => {
+  if (elem.classList.contains('show')) {
+    const top = wrapper.style.top;
+    wrapper.style.position = '';
+    wrapper.style.top = '';
+    window.scrollTo(0, parseInt(top || '0') * -1);
+    elem.classList.remove('show');
+  }
+};
+
 const registerModalEvents = (clickElem, modalElem) => {
   const modalBody = modalElem.querySelector('.modal-body');
   clickElem.addEventListener('click', (evt) => {
-    modalElem.classList.toggle('show');
+    openModal(modalElem);
     evt.stopPropagation();
   });
   modalElem
     .querySelector('.close')
-    .addEventListener('click', () => modalElem.classList.remove('show'));
-  document.addEventListener(
-    'click',
-    (evt) =>
-      !modalBody.contains(evt.target) && modalElem.classList.remove('show')
-  );
+    .addEventListener('click', () => closeModal(modalElem));
+  document.addEventListener('click', (evt) => {
+    !modalBody.contains(evt.target) && closeModal(modalElem);
+    evt.stopPropagation();
+  });
+  document.addEventListener('touchend', (evt) => {
+    !modalBody.contains(evt.target) && closeModal(modalElem);
+    evt.stopPropagation();
+  });
 };
-const modal = document.querySelector('.modal');
-registerModalEvents(document.querySelector('.card'), modal);
+const firstModal = document.querySelector('.modal');
+if (IS_MOBILE) {
+  firstModal.style.height = `${window.innerHeight * 0.9}px`;
+}
+registerModalEvents(document.querySelector('.card'), firstModal);
 for (const item of document.querySelector('.grid').children) {
   const modal = document.querySelector(
     `.modal[data-project="${item.dataset.project}"]`
   );
+  if (IS_MOBILE) {
+    modal.style.height = `${window.innerHeight * 0.9}px`;
+  }
   modal && registerModalEvents(item, modal);
 }
 
@@ -195,11 +235,11 @@ const testFade = () => {
     showcase &&
     (showcase.childElementCount > 0 ||
       showcase.classList.contains('fade-enable'));
-  const nextDelay = pointingUp ? 0.1 : 2;
+  const nextDelay = pointingUp ? 0.5 : 2;
   return [fade, nextDelay];
 };
 
-Fade.init(testFade);
+Fade.init(testFade, IS_MOBILE);
 
 GoL.draw();
 Particles.init(optionsDrop);
