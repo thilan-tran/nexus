@@ -16,6 +16,11 @@ document.addEventListener(
   (evt) =>
     !optionsDrop.contains(evt.target) && optionsDrop.classList.remove('expand')
 );
+document.addEventListener(
+  'touchend',
+  (evt) =>
+    !optionsDrop.contains(evt.target) && optionsDrop.classList.remove('expand')
+);
 
 const content = document.querySelector('.content');
 
@@ -75,18 +80,18 @@ links.forEach((link) =>
 const wrapper = document.querySelector('.body-wrapper');
 const openModal = (elem) => {
   if (!elem.classList.contains('show')) {
-    wrapper.style.top = `-${window.scrollY}px`;
-    wrapper.style.position = 'fixed';
+    // wrapper.style.top = `-${window.scrollY}px`;
+    // wrapper.style.position = 'fixed';
     elem.classList.add('show');
   }
 };
 const closeModal = (elem) => {
   if (elem.classList.contains('show')) {
-    const top = wrapper.style.top;
-    console.log(top);
-    wrapper.style.position = '';
-    wrapper.style.top = '';
-    window.scrollTo(0, parseInt(top || '0') * -1);
+    // const top = wrapper.style.top;
+    // console.log(top);
+    // wrapper.style.position = '';
+    // wrapper.style.top = '';
+    // window.scrollTo(0, parseInt(top || '0') * -1);
     elem.classList.remove('show');
   }
 };
