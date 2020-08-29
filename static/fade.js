@@ -4,10 +4,12 @@ const init = (updateFn, mobileTouchStart) => {
   const fadeMe = document.querySelector('.fade');
   const trans = fadeMe.style.transition;
 
-  let timer;
+  let timer,
+    nextDelay = FADE_DELAY,
+    fade;
   const makeTimer = () => {
-    const [fade, nextDelay] = updateFn();
     return setTimeout(() => {
+      [fade, nextDelay] = updateFn();
       if (fade) {
         fadeMe.style.transition = trans;
         fadeMe.style.opacity = 0;

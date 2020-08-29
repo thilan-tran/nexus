@@ -673,6 +673,10 @@ a {
     top: -2px;
   }
 
+  .caret.point-up svg path {
+    fill: #fff !important;
+  }
+
   #thing1 {
     height: 40% !important;
   }

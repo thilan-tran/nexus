@@ -2,6 +2,8 @@ import Fade from './fade.js';
 import GoL from './life.js';
 import Particles from './particles.js';
 
+const IS_MOBILE = window.innerWidth <= 640;
+
 const carousel = document.querySelector('.carousel');
 
 const optionsDrop = document.querySelector('.dropdown');
@@ -63,7 +65,7 @@ document.addEventListener('scroll', () => {
 
 document.addEventListener('mousemove', (evt) => {
   if (
-    window.innerWidth > 640 &&
+    !IS_MOBILE &&
     caret.classList.contains('point-up') &&
     evt.screenY > window.innerHeight / 5
   ) {
@@ -120,13 +122,17 @@ const registerModalEvents = (clickElem, modalElem) => {
   });
 };
 const firstModal = document.querySelector('.modal');
-firstModal.style.height = `${window.innerHeight * 0.9}px`;
+if (IS_MOBILE) {
+  firstModal.style.height = `${window.innerHeight * 0.9}px`;
+}
 registerModalEvents(document.querySelector('.card'), firstModal);
 for (const item of document.querySelector('.grid').children) {
   const modal = document.querySelector(
     `.modal[data-project="${item.dataset.project}"]`
   );
-  modal.style.height = `${window.innerHeight * 0.9}px`;
+  if (IS_MOBILE) {
+    modal.style.height = `${window.innerHeight * 0.9}px`;
+  }
   modal && registerModalEvents(item, modal);
 }
 
@@ -229,12 +235,12 @@ const testFade = () => {
     showcase &&
     (showcase.childElementCount > 0 ||
       showcase.classList.contains('fade-enable'));
-  const nextDelay = pointingUp ? 0.1 : 2;
+  const nextDelay = pointingUp ? 0.5 : 2;
   return [fade, nextDelay];
 };
 
-Fade.init(testFade);
+Fade.init(testFade, IS_MOBILE);
 
 GoL.draw();
-Particles.init(optionsDrop, window.innerWidth <= 640);
+Particles.init(optionsDrop);
 Particles.draw();
