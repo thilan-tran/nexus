@@ -8,6 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   /* height: 100%; */
+  height: auto;
   margin: 0;
 }
 
@@ -47,16 +48,18 @@ body {
   transition: 0.2s all ease;
 }
 
-.action-button:hover,
-.action-button:focus {
-  background-color: #555;
-  box-shadow: -6px -6px 0 0 #000;
-  outline: none;
-}
+/* @media (hover: hover) { */
+  .action-button:hover,
+  .action-button:focus {
+    background-color: #555;
+    box-shadow: -6px -6px 0 0 #000;
+    outline: none;
+  }
 
-.action-button:hover::after,
-.action-button:focus::after {
-  opacity: 0;
+  .action-button:hover::after,
+  .action-button:focus::after {
+    opacity: 0;
+  }
 }
 
 .nav {
@@ -247,6 +250,7 @@ body {
 }
 
 .caret.point-up {
+  transition: bottom 0s;
   bottom: calc(100% - 90px);
 }
 
@@ -620,7 +624,8 @@ a {
 
   .modal {
     top: 5vh;
-    height: 80vh;
+    bottom: calc(5vh + env(safe-area-inset-bottom));
+    height: calc(90vh - env(safe-area-inset-bottom));
   }
 
   .modal img {
@@ -690,5 +695,17 @@ a {
 
   .title b {
     letter-spacing: -3px;
+  }
+
+  .sticky.up {
+    position: fixed;
+    top: 7px;
+    right: 50px;
+    z-index: 2;
+  }
+
+  .sticky.up svg {
+    height: 30px;
+    margin: 0 5px;
   }
 }

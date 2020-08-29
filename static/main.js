@@ -44,14 +44,20 @@ caret.addEventListener('click', () => {
 if (content.getBoundingClientRect().top < window.innerHeight / 2) {
   caret.classList.add('point-up');
 }
+const sticky = document.querySelector('.sticky');
 document.addEventListener('scroll', () => {
   const rect = content.getBoundingClientRect();
+  const pastSticky = document.querySelector('#about p').getBoundingClientRect();
   if (rect.top < window.innerHeight / 2) {
     caret.classList.add('point-up');
   } else {
     caret.classList.remove('point-up');
   }
-
+  if (pastSticky.top < 50) {
+    sticky.classList.add('up');
+  } else {
+    sticky.classList.remove('up');
+  }
   optionsDrop.classList.remove('expand');
 });
 
@@ -69,7 +75,7 @@ document.addEventListener('mousemove', (evt) => {
 
 if (window.innerWidth <= 640) {
   document.querySelector('.fade').classList.remove('fade');
-  document.querySelector('.action-button').classList.add('fade');
+  document.querySelector('.center-both').classList.add('fade');
 }
 
 const links = document.querySelectorAll('a');

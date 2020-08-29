@@ -20,7 +20,7 @@ const init = (updateFn) => {
 
   document.addEventListener('mousemove', () => {
     clearTimeout(timer);
-    fadeMe.style.transition = '0s opacity';
+    fadeMe.style.transition += ', 0s opacity';
     fadeMe.style.opacity = 1;
     timer = makeTimer();
   });
