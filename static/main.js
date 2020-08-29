@@ -72,20 +72,40 @@ links.forEach((link) =>
   link.addEventListener('click', (evt) => evt.stopPropagation())
 );
 
+const wrapper = document.querySelector('.body-wrapper');
+const openModal = (elem) => {
+  if (!elem.classList.contains('show')) {
+    wrapper.style.top = `-${window.scrollY}px`;
+    wrapper.style.position = 'fixed';
+    elem.classList.add('show');
+  }
+};
+const closeModal = (elem) => {
+  if (elem.classList.contains('show')) {
+    const top = wrapper.style.top;
+    console.log(top);
+    wrapper.style.position = '';
+    wrapper.style.top = '';
+    window.scrollTo(0, parseInt(top || '0') * -1);
+    elem.classList.remove('show');
+  }
+};
+
 const registerModalEvents = (clickElem, modalElem) => {
   const modalBody = modalElem.querySelector('.modal-body');
   clickElem.addEventListener('click', (evt) => {
-    modalElem.classList.toggle('show');
+    openModal(modalElem);
     evt.stopPropagation();
   });
   modalElem
     .querySelector('.close')
-    .addEventListener('click', () => modalElem.classList.remove('show'));
+    .addEventListener('click', () => closeModal(modalElem));
   document.addEventListener('click', (evt) => {
-    !modalBody.contains(evt.target) && modalElem.classList.remove('show');
+    !modalBody.contains(evt.target) && closeModal(modalElem);
+    evt.stopPropagation();
   });
   document.addEventListener('touchend', (evt) => {
-    !modalBody.contains(evt.target) && modalElem.classList.remove('show');
+    !modalBody.contains(evt.target) && closeModal(modalElem);
     evt.stopPropagation();
   });
 };
