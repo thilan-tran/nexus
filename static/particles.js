@@ -1,4 +1,4 @@
-const MAX_SPEED = 10;
+const MAX_SPEED = 20;
 const MAX_LIFESPAN = 8;
 const DELAY = 10;
 
@@ -43,12 +43,9 @@ const getGradientColor = (bias) => {
 const canvas = document.querySelector('#particles');
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
-const ROWS = parseInt(WIDTH / 10);
-const COLS = parseInt(HEIGHT / 10);
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 const ctx = canvas.getContext('2d');
-console.log(ROWS, COLS);
 
 let BOX = [];
 
@@ -66,6 +63,13 @@ const addParticle = (x, y, num = 1) => {
 };
 
 const moveParticles = () => {
+  if (!BOX.length) {
+    canvas.classList.remove('fade-enable');
+    return;
+  } else {
+    canvas.classList.add('fade-enable');
+  }
+
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
@@ -122,7 +126,10 @@ document.querySelector('.action-button').addEventListener('click', (evt) => {
 });
 
 document.addEventListener('mousedown', (evt) => {
-  if (!OPTIONS_ELEM || !OPTIONS_ELEM.contains(evt.target)) {
+  if (
+    evt.pageY <= HEIGHT &&
+    (!OPTIONS_ELEM || !OPTIONS_ELEM.contains(evt.target))
+  ) {
     MOUSE_DOWN = true;
   }
 });
@@ -156,11 +163,17 @@ const reset = () => {
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 };
 
+let timestamp = new Date();
 const draw = () => {
-  if (canvas.classList.contains('showcase-disable')) {
+  const now = new Date();
+  if (
+    canvas.classList.contains('showcase-disable') ||
+    now - timestamp < DELAY
+  ) {
     window.requestAnimationFrame(draw);
     return;
   }
+  timestamp = now;
   if (MOUSE_DOWN) {
     addParticle(X, Y, 1);
   }
