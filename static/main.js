@@ -241,6 +241,8 @@ const testFade = () => {
 
 Fade.init(testFade, IS_MOBILE);
 
+GoL.init(IS_MOBILE ? 8 : 10);
 GoL.draw();
+
 Particles.init(optionsDrop);
 Particles.draw();

@@ -5,11 +5,9 @@ const BASE_LIFESPAN = 20;
 // const BASE_TRACESPAN = 60;
 let BASE_TRACESPAN = 50;
 
-const RESOLUTION = 10;
+const BASE_RESOLUTION = 10;
 const NUM_COLORS = 8; // number of colors in gradient (lower => more performant)
 const ONEDIM_PREVIEW = 10; // number of rows to preview 1D cellular automata input
-const ROWS = parseInt(window.innerHeight / RESOLUTION);
-const COLS = parseInt(window.innerWidth / RESOLUTION);
 
 // Changed by options:
 let LIFESPAN = BASE_LIFESPAN;
@@ -62,8 +60,6 @@ const PATTERNS = {
 const randRange = (range) => Math.floor(Math.random() * range);
 
 const canvas = document.querySelector('#game-of-life');
-canvas.width = RESOLUTION * COLS;
-canvas.height = RESOLUTION * ROWS;
 const ctx = canvas.getContext('2d');
 
 const UNINIT = -1;
@@ -73,16 +69,30 @@ const TRACE = 2;
 
 let GRID = [];
 let GRID_CPY = [];
-for (let i = 0; i < ROWS; i++) {
-  const row = [];
-  const row2 = [];
-  for (let j = 0; j < COLS; j++) {
-    row.push({ status: UNINIT, lifespan: 0 });
-    row2.push(false);
+let ROWS = 0;
+let COLS = 0;
+let RESOLUTION = BASE_RESOLUTION;
+
+const init = (resolution = RESOLUTION) => {
+  ROWS = parseInt(window.innerHeight / resolution);
+  COLS = parseInt(window.innerWidth / resolution);
+  canvas.width = resolution * COLS;
+  canvas.height = resolution * ROWS;
+  RESOLUTION = resolution;
+  GRID = [];
+  GRID_CPY = [];
+
+  for (let i = 0; i < ROWS; i++) {
+    const row = [];
+    const row2 = [];
+    for (let j = 0; j < COLS; j++) {
+      row.push({ status: UNINIT, lifespan: 0 });
+      row2.push(false);
+    }
+    GRID.push(row);
+    GRID_CPY.push(row2);
   }
-  GRID.push(row);
-  GRID_CPY.push(row2);
-}
+};
 
 const LIVE_CELL_COLORS = [
   [18, 223, 153],
@@ -424,4 +434,4 @@ const setOption = (type, value) => {
   reColorCells();
 };
 
-export default { draw, reset, spawn, options, setOption };
+export default { init, draw, reset, spawn, options, setOption };

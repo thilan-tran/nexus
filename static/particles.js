@@ -1,9 +1,8 @@
-const MAX_SPEED = 20;
-const MIN_SPEED = 2;
+const MAX_SPEED = 10;
 const MAX_LIFESPAN = 8;
 const DELAY = 10;
 
-const GRAVITY_ACCEL = -0.05 / (DELAY / 1000);
+const GRAVITY_ACCEL = +0.05 / (DELAY / 1000);
 
 let OPTIONS_ELEM = null;
 let GRAV = false;
@@ -41,71 +40,84 @@ const getGradientColor = (bias) => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-const container = document.querySelector('#particles');
+const canvas = document.querySelector('#particles');
+const WIDTH = window.innerWidth;
+const HEIGHT = window.innerHeight;
+const ROWS = parseInt(WIDTH / 10);
+const COLS = parseInt(HEIGHT / 10);
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+const ctx = canvas.getContext('2d');
+console.log(ROWS, COLS);
+
+let BOX = [];
+
 const addParticle = (x, y, num = 1) => {
   for (let i = 0; i < num; i++) {
-    const part = document.createElement('div');
-    part.classList.add('particle');
-    part.style.left = x + 'px';
-    part.style.bottom = y + 'px';
-    part.style.backgroundColor = getGradientColor(0);
-    part.dataset.velX = getRandSpeed();
-    part.dataset.velY = getRandSpeed();
-    part.dataset.lifetime = getRandLife();
-    container.appendChild(part);
+    const part = {
+      x,
+      y,
+      velX: getRandSpeed(),
+      velY: getRandSpeed(),
+      life: getRandLife()
+    };
+    BOX.push(part);
   }
 };
 
 const moveParticles = () => {
-  container.querySelectorAll('.particle').forEach((part) => {
-    const life = Number(part.dataset.lifetime);
-    const x = parseInt(part.style.left);
-    const y = parseInt(part.style.bottom);
-    let velX = Number(part.dataset.velX);
-    let velY = Number(part.dataset.velY);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
-    if (part.dataset.lifetime === '0') {
-      part.parentNode.removeChild(part);
-      return;
+  for (let i = 0; i < BOX.length; i++) {
+    const part = BOX[i];
+    let { life, x, y, velX, velY } = part;
+
+    if (life === 0) {
+      BOX.splice(i--, 1);
+      continue;
     } else {
-      part.dataset.lifetime = life - 1;
+      part.life--;
     }
-
-    part.style.backgroundColor = getGradientColor(
-      2 * MAX_SPEED - (Math.abs(velX) + Math.abs(velY))
-    );
 
     let newX = x + velX;
     let newY = y + velY;
-    part.style.left = newX + 'px';
-    part.style.bottom = (newY >= 0 ? newY : 0) + 'px';
+    part.x = newX;
+    part.y = newY;
 
-    if (newX > window.innerWidth || newX < 0) {
+    if (newX > 0 && newY > 0) {
+      ctx.fillStyle = getGradientColor(
+        2 * MAX_SPEED - (Math.abs(velX) + Math.abs(velY))
+      );
+      ctx.fillRect(newX, newY, 10, 10);
+    }
+
+    if (newX > WIDTH || newX < 0) {
       velX *= -0.9;
     }
-    if (newY > window.innerHeight || newY < 0) {
+    if (newY > HEIGHT || newY < 0) {
       velY *= -0.9;
     }
 
     if (GRAV) {
-      if (newY > 0) {
+      if (newY < HEIGHT) {
         velY += GRAVITY_ACCEL;
       } else if (Math.abs(velY) < 25) {
-        velY = 0;
+        // velY = 0;
       }
     }
 
-    part.dataset.velX = velX;
-    part.dataset.velY = velY;
-  });
+    part.velX = velX;
+    part.velY = velY;
+  }
 };
 
 const spawn = (evt) => {
-  addParticle(evt.clientX, window.innerHeight - evt.clientY, 5);
+  addParticle(evt.clientX, evt.clientY, 5);
 };
 
 document.querySelector('.action-button').addEventListener('click', (evt) => {
-  addParticle(evt.clientX, window.innerHeight - evt.clientY, 5);
+  addParticle(evt.clientX, evt.clientY, 5);
   evt.target.blur();
 });
 
@@ -117,18 +129,8 @@ document.addEventListener('mousedown', (evt) => {
 document.addEventListener('mouseup', () => (MOUSE_DOWN = false));
 document.addEventListener('mousemove', (evt) => {
   X = evt.clientX;
-  Y = window.innerHeight - evt.clientY;
+  Y = evt.clientY;
 });
-
-// document.querySelector('.action-button').addEventListener('mousedown', () => {
-//   const x = randRange(window.innerWidth);
-//   const y = randRange(window.innerHeight);
-//   addParticle(x, y);
-// });
-
-// const greySelector = document.querySelector('input[id="greyscale"]');
-// const colorSelector = document.querySelector('input[id="colorful"]');
-// const gravSelector = document.querySelector('input[name="gravity"]');
 
 const options = {
   greyscale: 0,
@@ -146,23 +148,16 @@ const setOption = (type, value) => {
   }
 };
 
-// const onSelector = () => {
-//   GRAV = gravSelector.checked;
-//   COLOR_RANGE = greySelector.checked ? GREYSCALE_RANGE : COLORFUL_RANGE;
-// };
-
-// colorSelector.addEventListener('click', onSelector);
-// greySelector.addEventListener('click', onSelector);
-// gravSelector.addEventListener('click', onSelector);
-
 const reset = () => {
-  container
-    .querySelectorAll('.particle')
-    .forEach((part) => part.parentNode.removeChild(part));
+  while (BOX.length) {
+    BOX.splice(0, 1);
+  }
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
 };
 
 const draw = () => {
-  if (container.classList.contains('showcase-disable')) {
+  if (canvas.classList.contains('showcase-disable')) {
     window.requestAnimationFrame(draw);
     return;
   }
