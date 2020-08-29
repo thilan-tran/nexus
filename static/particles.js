@@ -5,6 +5,7 @@ const DELAY = 10;
 
 const GRAVITY_ACCEL = -0.05 / (DELAY / 1000);
 
+let OPTIONS_ELEM = null;
 let GRAV = false;
 let MOUSE_DOWN = false,
   X,
@@ -40,7 +41,7 @@ const getGradientColor = (bias) => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-const container = document.querySelector('.particles');
+const container = document.querySelector('#particles');
 const addParticle = (x, y, num = 1) => {
   for (let i = 0; i < num; i++) {
     const part = document.createElement('div');
@@ -108,7 +109,11 @@ document.querySelector('.action-button').addEventListener('click', (evt) => {
   evt.target.blur();
 });
 
-document.addEventListener('mousedown', () => (MOUSE_DOWN = true));
+document.addEventListener('mousedown', (evt) => {
+  if (!OPTIONS_ELEM || !OPTIONS_ELEM.contains(evt.target)) {
+    MOUSE_DOWN = true;
+  }
+});
 document.addEventListener('mouseup', () => (MOUSE_DOWN = false));
 document.addEventListener('mousemove', (evt) => {
   X = evt.clientX;
@@ -157,7 +162,7 @@ const reset = () => {
 };
 
 const draw = () => {
-  if (container.classList.contains('container-disable')) {
+  if (container.classList.contains('showcase-disable')) {
     window.requestAnimationFrame(draw);
     return;
   }
@@ -168,4 +173,6 @@ const draw = () => {
   window.requestAnimationFrame(draw);
 };
 
-export default { draw, reset, spawn, options, setOption };
+const init = (elem) => (OPTIONS_ELEM = elem);
+
+export default { init, draw, reset, spawn, options, setOption };
