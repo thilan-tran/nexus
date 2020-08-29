@@ -239,7 +239,7 @@ body {
   height: 40px;
   width: 40px;
   bottom: 50px;
-  right: calc(50% - 25px);
+  right: calc(50% - 20px);
 
   cursor: pointer;
   animation: pulse 1.5s infinite;
@@ -247,8 +247,15 @@ body {
   z-index: 1;
 }
 
-.caret:hover {
-  padding-bottom: 10px;
+.caret svg path {
+  transition: all 0.2s ease;
+}
+
+@media (hover: hover) {
+  .caret:hover svg path {
+    /* padding-bottom: 5px; */
+    fill: transparent !important;
+  }
 }
 
 .caret.point-up {
@@ -299,9 +306,11 @@ body {
   z-index: 1;
 }
 
-.name-card:hover {
-  background-color: #eee;
-  box-shadow: 7px 3px 0 0 #000;
+@media (hover: hover) {
+  .name-card:hover {
+    background-color: #eee;
+    box-shadow: 7px 3px 0 0 #000;
+  }
 }
 
 .content {
@@ -674,7 +683,7 @@ a {
   }
 
   .caret.point-up svg path {
-    fill: none !important;
+    fill: transparent !important;
   }
 
   #thing1 {
