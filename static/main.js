@@ -81,16 +81,13 @@ const registerModalEvents = (clickElem, modalElem) => {
   modalElem
     .querySelector('.close')
     .addEventListener('click', () => modalElem.classList.remove('show'));
-  document.addEventListener(
-    'click',
-    (evt) =>
-      !modalBody.contains(evt.target) && modalElem.classList.remove('show')
-  );
-  document.addEventListener(
-    'touchstart',
-    (evt) =>
-      !modalBody.contains(evt.target) && modalElem.classList.remove('show')
-  );
+  document.addEventListener('click', (evt) => {
+    !modalBody.contains(evt.target) && modalElem.classList.remove('show');
+  });
+  document.addEventListener('touchend', (evt) => {
+    !modalBody.contains(evt.target) && modalElem.classList.remove('show');
+    evt.stopPropagation();
+  });
 };
 const modal = document.querySelector('.modal');
 registerModalEvents(document.querySelector('.card'), modal);
