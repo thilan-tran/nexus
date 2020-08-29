@@ -61,7 +61,7 @@ const PATTERNS = {
 
 const randRange = (range) => Math.floor(Math.random() * range);
 
-const canvas = document.querySelector('.container');
+const canvas = document.querySelector('#game-of-life');
 canvas.width = RESOLUTION * COLS;
 canvas.height = RESOLUTION * ROWS;
 const ctx = canvas.getContext('2d');
@@ -333,9 +333,9 @@ const draw = () => {
   }
 
   if (cellCount[0] + cellCount[1] > 0) {
-    canvas.classList.add('enable-fade');
+    canvas.classList.add('fade-enable');
   } else {
-    canvas.classList.remove('enable-fade');
+    canvas.classList.remove('fade-enable');
   }
 
   while (changeList.length) {

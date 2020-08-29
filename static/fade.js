@@ -1,24 +1,21 @@
-const FADE_DELAY = 3;
+const FADE_DELAY = 2;
 
-(() => {
+const init = (updateFn) => {
   const fadeMe = document.querySelector('.fade');
   const trans = fadeMe.style.transition;
-  const content = document.querySelector('.container');
 
   let timer;
-  const makeTimer = () =>
-    setTimeout(() => {
-      if (
-        !content ||
-        content.classList.contains('enable-fade') ||
-        content.childElementCount > 0
-      ) {
+  const makeTimer = () => {
+    const [fade, nextDelay] = updateFn();
+    return setTimeout(() => {
+      if (fade) {
         fadeMe.style.transition = trans;
         fadeMe.style.opacity = 0;
       } else {
         timer = makeTimer();
       }
-    }, FADE_DELAY * 1000);
+    }, (nextDelay || FADE_DELAY) * 1000);
+  };
   timer = makeTimer();
 
   document.addEventListener('mousemove', () => {
@@ -27,4 +24,6 @@ const FADE_DELAY = 3;
     fadeMe.style.opacity = 1;
     timer = makeTimer();
   });
-})();
+};
+
+export default { init };

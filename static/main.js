@@ -1,37 +1,118 @@
+import Fade from './fade.js';
 import GoL from './life.js';
 import Particles from './particles.js';
 
-const drop = document.querySelector('.dropdown');
-const content = document.querySelector('.dropdown .content');
-drop.addEventListener(
+const carousel = document.querySelector('.carousel');
+
+const optionsDrop = document.querySelector('.dropdown');
+const dropContent = document.querySelector('.dropdown .dropdown-content');
+optionsDrop.addEventListener(
   'click',
-  (evt) => !content.contains(evt.target) && drop.classList.toggle('expand')
+  (evt) =>
+    !dropContent.contains(evt.target) && optionsDrop.classList.toggle('expand')
 );
-document.addEventListener('click', (evt) => {
-  !drop.contains(evt.target) && drop.classList.remove('expand');
+document.addEventListener(
+  'click',
+  (evt) =>
+    !optionsDrop.contains(evt.target) && optionsDrop.classList.remove('expand')
+);
+
+const content = document.querySelector('.content');
+
+const caret = document.querySelector('.caret');
+caret.addEventListener('click', () => {
+  if (caret.classList.contains('point-up')) {
+    carousel.scrollIntoView({
+      block: 'start',
+      behavior: 'smooth',
+      inline: 'nearest'
+    });
+  } else {
+    content.scrollIntoView({
+      block: 'start',
+      behavior: 'smooth',
+      inline: 'nearest'
+    });
+  }
 });
 
-const custom = document.querySelector('.custom-content');
-document.querySelector('.caret').addEventListener('click', () =>
-  custom.scrollIntoView({
-    block: 'start',
-    behavior: 'smooth',
-    inline: 'nearest'
-  })
+if (content.getBoundingClientRect().top < window.innerHeight / 2) {
+  caret.classList.add('point-up');
+}
+document.addEventListener('scroll', () => {
+  const rect = content.getBoundingClientRect();
+  if (rect.top < window.innerHeight / 2) {
+    caret.classList.add('point-up');
+  } else {
+    caret.classList.remove('point-up');
+  }
+
+  optionsDrop.classList.remove('expand');
+});
+
+document.addEventListener('mousemove', (evt) => {
+  if (
+    window.innerWidth > 640 &&
+    caret.classList.contains('point-up') &&
+    evt.screenY > window.innerHeight / 5
+  ) {
+    caret.style.display = 'none';
+  } else {
+    caret.style.display = 'block';
+  }
+});
+
+if (window.innerWidth <= 640) {
+  document.querySelector('.fade').classList.remove('fade');
+  document.querySelector('.action-button').classList.add('fade');
+}
+
+const links = document.querySelectorAll('a');
+links.forEach((link) =>
+  link.addEventListener('click', (evt) => evt.stopPropagation())
 );
 
-//const modal = document.querySelector('.modal');
-//document
-//.querySelector('#about')
-//.addEventListener('click', () => modal.classList.toggle('show'));
-//modal.addEventListener('click', () => modal.classList.toggle('show'));
+const registerModalEvents = (clickElem, modalElem) => {
+  const modalBody = modalElem.querySelector('.modal-body');
+  clickElem.addEventListener('click', (evt) => {
+    modalElem.classList.toggle('show');
+    evt.stopPropagation();
+  });
+  modalElem
+    .querySelector('.close')
+    .addEventListener('click', () => modalElem.classList.remove('show'));
+  document.addEventListener(
+    'click',
+    (evt) =>
+      !modalBody.contains(evt.target) && modalElem.classList.remove('show')
+  );
+};
+const modal = document.querySelector('.modal');
+registerModalEvents(document.querySelector('.card'), modal);
+for (const item of document.querySelector('.grid').children) {
+  const modal = document.querySelector(
+    `.modal[data-project="${item.dataset.project}"]`
+  );
+  modal && registerModalEvents(item, modal);
+}
+
+// document.querySelector('.card').addEventListener('click', (evt) => {
+//   modal.classList.toggle('show');
+//   evt.stopPropagation();
+// });
+// modal
+//   .querySelector('.close')
+//   .addEventListener('click', () => modal.classList.remove('show'));
+// document.addEventListener(
+//   'click',
+//   (evt) => !modal.contains(evt.target) && modal.classList.remove('show')
+// );
 
 let CAROUSEL_STATE = 0;
-const PLAYGROUND_ARR = [GoL, Particles];
+const SHOWCASES = [GoL, Particles];
 
-const swap = document.querySelector('.shuffle');
+const swap = document.querySelector('.swap');
 const actionButton = document.querySelector('.action-button');
-const carousel = document.querySelector('.carousel');
 
 const lifeOptions = document.querySelector('.life-options');
 const particleOptions = document.querySelector('.particle-options');
@@ -40,9 +121,9 @@ const OPTIONS_ARR = [lifeOptions, particleOptions];
 swap.addEventListener('click', () => {
   const nextState = (CAROUSEL_STATE + 1) % carousel.children.length;
   for (let i = 0; i < carousel.children.length; i++) {
-    PLAYGROUND_ARR[i].reset();
+    SHOWCASES[i].reset();
     OPTIONS_ARR[i].classList.toggle('disable');
-    carousel.children[i].classList.toggle('container-disable');
+    carousel.children[i].classList.toggle('showcase-disable');
   }
   actionButton.textContent = carousel.children[nextState].dataset.descrip;
   CAROUSEL_STATE = nextState;
@@ -51,20 +132,18 @@ swap.addEventListener('click', () => {
 
 actionButton.addEventListener('click', (evt) => {
   evt.target.blur();
-  PLAYGROUND_ARR[CAROUSEL_STATE].spawn(evt);
+  SHOWCASES[CAROUSEL_STATE].spawn(evt);
 });
-const resetButton = document.querySelector('button[id="reset"]');
-resetButton.addEventListener('click', PLAYGROUND_ARR[CAROUSEL_STATE].reset);
-
-const greySelector = document.querySelector(
-  '.life-options input[id="greyscale"]'
+const resetButtons = document.querySelectorAll('.reset');
+resetButtons.forEach((button) =>
+  button.addEventListener('click', () => SHOWCASES[CAROUSEL_STATE].reset())
 );
+
+const greySelector = document.querySelector('input[id="life-greyscale"]');
 greySelector.addEventListener('click', () =>
   GoL.setOption(GoL.options.greyscale, greySelector.checked)
 );
-const colorSelector = document.querySelector(
-  '.life-options input[id="colorful"]'
-);
+const colorSelector = document.querySelector('input[id="life-colorful"]');
 colorSelector.addEventListener('click', () =>
   GoL.setOption(GoL.options.greyscale, greySelector.checked)
 );
@@ -87,13 +166,13 @@ traceSlider.addEventListener('change', () =>
 );
 
 const partGreySelector = document.querySelector(
-  '.particle-options input[id="greyscale"]'
+  'input[id="particle-greyscale"]'
 );
 partGreySelector.addEventListener('click', () =>
   Particles.setOption(Particles.options.greyscale, partGreySelector.checked)
 );
 const partColorSelector = document.querySelector(
-  '.particle-options input[id="colorful"]'
+  'input[id="particle-colorful"]'
 );
 partColorSelector.addEventListener('click', () =>
   Particles.setOption(Particles.options.greyscale, partGreySelector.checked)
@@ -103,5 +182,25 @@ gravSelector.addEventListener('click', () =>
   Particles.setOption(Particles.options.gravity, gravSelector.checked)
 );
 
+const testFade = () => {
+  let showcase = null;
+  for (let i = 0; i < carousel.children.length; i++) {
+    if (!carousel.children[i].classList.contains('showcase-disable')) {
+      showcase = carousel.children[i];
+    }
+  }
+  const pointingUp = caret.classList.contains('point-up');
+  const fade =
+    !pointingUp &&
+    showcase &&
+    (showcase.childElementCount > 0 ||
+      showcase.classList.contains('fade-enable'));
+  const nextDelay = pointingUp ? 0.1 : 2;
+  return [fade, nextDelay];
+};
+
+Fade.init(testFade);
+
 GoL.draw();
+Particles.init(optionsDrop);
 Particles.draw();
