@@ -53,7 +53,7 @@ document.addEventListener('scroll', () => {
   } else {
     caret.classList.remove('point-up');
   }
-  if (pastSticky.top < 50) {
+  if (pastSticky.top <= 0) {
     sticky.classList.add('up');
   } else {
     sticky.classList.remove('up');
