@@ -121,7 +121,7 @@ const registerModalEvents = (clickElem, modalElem) => {
 };
 const firstModal = document.querySelector('.modal');
 firstModal.style.height = `${window.innerHeight * 0.9}px`;
-registerModalEvents(document.querySelector('.card'), modal);
+registerModalEvents(document.querySelector('.card'), firstModal);
 for (const item of document.querySelector('.grid').children) {
   const modal = document.querySelector(
     `.modal[data-project="${item.dataset.project}"]`
