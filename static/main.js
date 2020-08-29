@@ -119,7 +119,8 @@ const registerModalEvents = (clickElem, modalElem) => {
     evt.stopPropagation();
   });
 };
-const modal = document.querySelector('.modal');
+const firstModal = document.querySelector('.modal');
+firstModal.style = height = `${window.innerHeight * 0.9}px`;
 registerModalEvents(document.querySelector('.card'), modal);
 for (const item of document.querySelector('.grid').children) {
   const modal = document.querySelector(
