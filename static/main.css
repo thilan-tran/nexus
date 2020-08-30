@@ -765,6 +765,6 @@ a {
   }
 
   .caret.point-up svg path {
-    fill: #fff !important;
+    fill: transparent !important;
   }
 }
