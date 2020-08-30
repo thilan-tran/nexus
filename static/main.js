@@ -47,13 +47,16 @@ if (content.getBoundingClientRect().top < window.innerHeight / 2) {
   caret.classList.add('point-up');
 }
 const sticky = document.querySelector('.sticky');
+const toolbar = document.querySelector('.toolbar');
 document.addEventListener('scroll', () => {
   const rect = content.getBoundingClientRect();
   const pastSticky = document.querySelector('#about p').getBoundingClientRect();
   if (rect.top < window.innerHeight / 2) {
     caret.classList.add('point-up');
+    toolbar.classList.add('hide-me');
   } else {
     caret.classList.remove('point-up');
+    toolbar.classList.remove('hide-me');
   }
   if (pastSticky.top <= 0) {
     sticky.classList.add('up');
@@ -69,9 +72,9 @@ document.addEventListener('mousemove', (evt) => {
     caret.classList.contains('point-up') &&
     evt.screenY > window.innerHeight / 5
   ) {
-    caret.style.display = 'none';
+    caret.style.visibility = 'hidden';
   } else {
-    caret.style.display = 'block';
+    caret.style.visibility = 'visible';
   }
 });
 
@@ -231,16 +234,15 @@ const testFade = () => {
   }
   const pointingUp = caret.classList.contains('point-up');
   const fade =
-    !pointingUp &&
-    showcase &&
-    (showcase.childElementCount > 0 ||
-      showcase.classList.contains('fade-enable'));
+    !pointingUp && showcase && showcase.classList.contains('fade-enable');
   const nextDelay = pointingUp ? 0.5 : 2;
   return [fade, nextDelay];
 };
 
 Fade.init(testFade, IS_MOBILE);
 
+GoL.init(IS_MOBILE ? 8 : 10);
 GoL.draw();
+
 Particles.init(optionsDrop);
 Particles.draw();

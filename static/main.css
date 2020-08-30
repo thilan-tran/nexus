@@ -3,11 +3,17 @@
   src: url('static/CircularStd-Book.otf') format('opentype');
 }
 
+/* @font-face { */
+/*   font-family: 'DIN'; */
+/*   src: url('static/DIN medium.ttf') format('truetype'); */
+/* } */
+
 body {
   font-family: 'Oswald', sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   /* height: 100%; */
+  letter-spacing: 0px;
   height: auto;
   margin: 0;
 }
@@ -243,7 +249,7 @@ body {
 
   cursor: pointer;
   animation: pulse 1.5s infinite;
-  transition: 0.2s all ease;
+  /* transition: 0.2 fill ease; */
   z-index: 1;
 }
 
@@ -259,7 +265,6 @@ body {
 }
 
 .caret.point-up {
-  transition: bottom 0s;
   bottom: calc(100% - 90px);
 }
 
@@ -590,33 +595,51 @@ a {
     width: 100%;
   }
 
+  .content {
+    padding-top: 30px;
+  }
+
   .name-card {
     /* margin: 10px; */
     /* padding: 0 10px; */
+    height: 60px;
+    line-height: 60px;
+    border: 2px solid transparent;
+    border-bottom: 0px solid #000;
     margin: 0;
     padding: 0px 10px;
     width: calc(100vw - 24px);
-    box-shadow: none !important;
+    box-shadow: 0px 2px 0 0 #000 !important;
     text-align: left;
     z-index: 2;
   }
 
+  .toolbar.hide-me {
+    visibility: hidden;
+  }
+
   .swap {
-    top: 0;
+    position: fixed;
+    top: 12px;
     right: 42px;
+    background-color: transparent;
     box-shadow: none !important;
+    border: none;
     z-index: 2;
   }
 
   .dropdown {
-    top: 0;
-    right: 0;
+    position: fixed;
+    background-color: transparent;
+    border: none;
+    top: 12px;
+    right: 2px;
     box-shadow: none !important;
     z-index: 2;
   }
 
   .dropdown .dropdown-content {
-    transform: translate(calc(-100% + 37px), calc(0px));
+    transform: translate(calc(-100% + 37px), calc(10px));
   }
 
   /* .life-options { */
@@ -679,7 +702,11 @@ a {
   .caret.point-up {
     animation: none;
     right: 10px;
-    top: -2px;
+    top: 8px;
+  }
+
+  .caret svg path {
+    transition: none;
   }
 
   .caret.point-up svg path {
@@ -717,7 +744,7 @@ a {
 
   .sticky.up {
     position: fixed;
-    top: 7px;
+    top: 17px;
     right: 50px;
     z-index: 2;
   }
@@ -729,5 +756,10 @@ a {
 
   .sticky.up + p {
     margin-top: calc(30px + 1em);
+  }
+
+  .carousel .showcase {
+    margin-top: 64px;
+    height: calc(100vh - 64px);
   }
 }
