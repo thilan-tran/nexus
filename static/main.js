@@ -117,21 +117,12 @@ const registerModalEvents = (clickElem, modalElem) => {
     openModal(modalElem);
     evt.stopPropagation();
   });
-  // if (IS_MOBILE) {
-  //   document.addEventListener('touchend', (evt) => {
-  //     if (!modalBody.contains(evt.target)) {
-  //       closeModal(modalElem);
-  //       evt.stopPropagation();
-  //     }
-  //   });
-  // } else {
   document.addEventListener('click', (evt) => {
     if (!modalBody.contains(evt.target)) {
       closeModal(modalElem);
       evt.stopPropagation();
     }
   });
-  // }
 };
 
 const firstModal = document.querySelector('.modal');
