@@ -111,11 +111,11 @@ const registerModalEvents = (clickElem, modalElem) => {
   modalElem
     .querySelector('.close')
     .addEventListener('click', () => closeModal(modalElem));
-  const triggerEvent = IS_MOBILE ? 'touchend' : 'click';
-  clickElem.addEventListener(triggerEvent, (evt) => {
+  clickElem.addEventListener('click', (evt) => {
     openModal(modalElem);
     evt.stopPropagation();
   });
+  const triggerEvent = IS_MOBILE ? 'mousedown' : 'click';
   document.addEventListener(triggerEvent, (evt) => {
     !modalBody.contains(evt.target) && closeModal(modalElem);
     evt.stopPropagation();
