@@ -72,6 +72,8 @@ let GRID_CPY = [];
 let ROWS = 0;
 let COLS = 0;
 let RESOLUTION = BASE_RESOLUTION;
+let ONEDIM_SPAWN = 0;
+let PREVIEW_START = 0;
 
 const init = (resolution = RESOLUTION) => {
   ROWS = parseInt(window.innerHeight / resolution);
@@ -81,6 +83,8 @@ const init = (resolution = RESOLUTION) => {
   RESOLUTION = resolution;
   GRID = [];
   GRID_CPY = [];
+  ONEDIM_SPAWN = ROWS - 1;
+  PREVIEW_START = ROWS - ONEDIM_PREVIEW;
 
   for (let i = 0; i < ROWS; i++) {
     const row = [];
@@ -169,9 +173,6 @@ const spawnPattern = (pattern) => {
     });
   });
 };
-
-const ONEDIM_SPAWN = ROWS - 1;
-const PREVIEW_START = ROWS - ONEDIM_PREVIEW;
 
 const startOnedimInput = () => {
   const randJ = randRange(COLS);
@@ -385,7 +386,8 @@ const spawn = () => {
   const pats = Object.entries(PATTERNS);
   const idx = randRange(pats.length);
   console.log('Spawning', pats[idx][0]);
-  spawnPattern(pats[idx][1]);
+  // spawnPattern(pats[idx][1]);
+  spawnPattern(PATTERNS.glider);
 };
 
 const options = {

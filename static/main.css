@@ -598,6 +598,8 @@ a {
   .name-card {
     /* margin: 10px; */
     /* padding: 0 10px; */
+    height: 60px;
+    line-height: 60px;
     border: 2px solid transparent;
     border-bottom: 2px solid #000;
     margin: 0;
@@ -614,7 +616,7 @@ a {
 
   .swap {
     position: fixed;
-    top: 2px;
+    top: 12px;
     right: 42px;
     background-color: transparent;
     box-shadow: none !important;
@@ -626,14 +628,14 @@ a {
     position: fixed;
     background-color: transparent;
     border: none;
-    top: 2px;
+    top: 12px;
     right: 2px;
     box-shadow: none !important;
     z-index: 2;
   }
 
   .dropdown .dropdown-content {
-    transform: translate(calc(-100% + 37px), calc(0px));
+    transform: translate(calc(-100% + 37px), calc(10px));
   }
 
   /* .life-options { */
@@ -696,7 +698,7 @@ a {
   .caret.point-up {
     animation: none;
     right: 10px;
-    top: -2px;
+    top: 8px;
   }
 
   .caret svg path {
@@ -738,7 +740,7 @@ a {
 
   .sticky.up {
     position: fixed;
-    top: 7px;
+    top: 17px;
     right: 50px;
     z-index: 2;
   }
