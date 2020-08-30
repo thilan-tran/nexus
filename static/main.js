@@ -47,13 +47,16 @@ if (content.getBoundingClientRect().top < window.innerHeight / 2) {
   caret.classList.add('point-up');
 }
 const sticky = document.querySelector('.sticky');
-document.addEventListener('scroll', (evt) => {
+const toolbar = document.querySelector('.toolbar');
+document.addEventListener('scroll', () => {
   const rect = content.getBoundingClientRect();
   const pastSticky = document.querySelector('#about p').getBoundingClientRect();
   if (rect.top < window.innerHeight / 2) {
     caret.classList.add('point-up');
+    toolbar.classList.add('hide-me');
   } else {
     caret.classList.remove('point-up');
+    toolbar.classList.remove('hide-me');
   }
   if (pastSticky.top <= 0) {
     sticky.classList.add('up');

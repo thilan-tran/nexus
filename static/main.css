@@ -607,7 +607,12 @@ a {
     z-index: 2;
   }
 
+  .toolbar.hide-me {
+    visibility: hidden;
+  }
+
   .swap {
+    position: fixed;
     top: 2px;
     right: 42px;
     background-color: transparent;
@@ -617,6 +622,7 @@ a {
   }
 
   .dropdown {
+    position: fixed;
     background-color: transparent;
     border: none;
     top: 2px;
