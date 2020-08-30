@@ -14,7 +14,7 @@ let PRETTY_RULES_ONLY = true;
 let LIFESPAN = BASE_LIFESPAN;
 let TRACESPAN = BASE_TRACESPAN;
 let ONEDIM_INPUT = false;
-let DELAY = 0; // delay between draw cycles in msec (higher => more performant)
+let DELAY = 10; // delay between draw cycles in msec (higher => more performant)
 // up to 60 FPS (~20 msec delay) with window.requestAnimationFrame
 let USING_GREYSCALE = false;
 
@@ -23,26 +23,17 @@ const randRange = (range) => Math.floor(Math.random() * range);
 const canvas = document.querySelector('#automata');
 const ctx = canvas.getContext('2d');
 
-const PRETTY_RULES = [
-  18,
-  30,
+const PRETTY_RULES = [18, 30, 60, 86, 110, 124, 150];
+const CLUTTERED_RULES = [
   45,
-  60,
   73,
   75,
-  86,
   89,
-  102,
   105,
   109,
-  110,
-  121,
-  124,
   129,
   135,
   137,
-  150,
-  153,
   169,
   193,
   195

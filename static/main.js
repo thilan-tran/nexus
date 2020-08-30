@@ -44,9 +44,9 @@ caret.addEventListener('click', () => {
   }
 });
 
-if (content.getBoundingClientRect().top < window.innerHeight / 2) {
-  caret.classList.add('point-up');
-}
+// if (content.getBoundingClientRect().top < window.innerHeight / 2) {
+//   caret.classList.add('point-up');
+// }
 const sticky = document.querySelector('.sticky');
 const toolbar = document.querySelector('.toolbar');
 document.addEventListener('scroll', () => {
@@ -89,7 +89,7 @@ links.forEach((link) =>
   link.addEventListener('click', (evt) => evt.stopPropagation())
 );
 
-const wrapper = document.querySelector('.body-wrapper');
+const wrapper = document.querySelector('body');
 const openModal = (elem) => {
   if (!elem.classList.contains('show')) {
     wrapper.style.top = `-${window.scrollY}px`;
