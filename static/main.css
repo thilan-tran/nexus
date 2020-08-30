@@ -22,17 +22,17 @@ body {
   margin: 0;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 10px;
   background-color: #fff;
 }
 
-body::-webkit-scrollbar-thumb {
-  background-color: #eee;
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
 }
 
-body::-webkit-scrollbar-thumb:hover {
-  background-color: #ddd;
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ccc;
 }
 
 .body-wrapper {

@@ -3,6 +3,16 @@ import GoL from './life.js';
 import Particles from './particles.js';
 import Automata from './automata.js';
 
+const measureScrollbarWidth = () => {
+  let scrollbox = document.createElement('div');
+  scrollbox.style.overflow = 'scroll';
+  document.body.appendChild(scrollbox);
+  let scrollBarWidth = scrollbox.offsetWidth - scrollbox.clientWidth;
+  document.body.removeChild(scrollbox);
+  return scrollBarWidth;
+};
+const SCROLL_WIDTH = measureScrollbarWidth();
+
 const IS_MOBILE = window.innerWidth <= 640;
 
 const carousel = document.querySelector('.carousel');
@@ -94,7 +104,7 @@ const openModal = (elem) => {
   if (!elem.classList.contains('show')) {
     wrapper.style.top = `-${window.scrollY}px`;
     wrapper.style.position = 'fixed';
-    wrapper.style.width = 'calc(100% - 10px)';
+    wrapper.style.width = `calc(100% - ${SCROLL_WIDTH}px)`;
     // document.body.style.overflowY = 'scroll';
     elem.classList.add('show');
   }
