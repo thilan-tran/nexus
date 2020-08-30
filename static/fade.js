@@ -11,6 +11,7 @@ const init = (updateFn, mobileTouchStart) => {
     return setTimeout(() => {
       [fade, nextDelay] = updateFn();
       if (fade) {
+        fadeMe.style.pointerEvents = 'none';
         fadeMe.style.transition = trans;
         fadeMe.style.opacity = 0;
       } else {
@@ -24,6 +25,7 @@ const init = (updateFn, mobileTouchStart) => {
     mobileTouchStart ? 'touchstart' : 'mousemove',
     () => {
       clearTimeout(timer);
+      fadeMe.style.pointerEvents = 'auto';
       fadeMe.style.transition += ', 0s opacity';
       fadeMe.style.opacity = 1;
       timer = makeTimer();
