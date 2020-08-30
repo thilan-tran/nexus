@@ -386,8 +386,7 @@ const spawn = () => {
   const pats = Object.entries(PATTERNS);
   const idx = randRange(pats.length);
   console.log('Spawning', pats[idx][0]);
-  // spawnPattern(pats[idx][1]);
-  spawnPattern(PATTERNS.glider);
+  spawnPattern(pats[idx][1]);
 };
 
 const options = {

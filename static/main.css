@@ -601,11 +601,11 @@ a {
     height: 60px;
     line-height: 60px;
     border: 2px solid transparent;
-    border-bottom: 2px solid #000;
+    border-bottom: 0px solid #000;
     margin: 0;
     padding: 0px 10px;
     width: calc(100vw - 24px);
-    box-shadow: none !important;
+    box-shadow: 0px 2px 0 0 #000 !important;
     text-align: left;
     z-index: 2;
   }
@@ -755,7 +755,7 @@ a {
   }
 
   .carousel .showcase {
-    margin-top: 44px;
-    height: calc(100vh - 44px);
+    margin-top: 64px;
+    height: calc(100vh - 64px);
   }
 }
