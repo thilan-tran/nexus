@@ -18,17 +18,17 @@ let DELAY = 30; // delay between draw cycles in msec (higher => more performant)
 let USING_GREYSCALE = false;
 
 const PATTERNS = {
-  glider: [
-    [0, 1, 0],
-    [0, 0, 1],
-    [1, 1, 1]
-  ],
-  LWSS: [
-    [0, 1, 0, 0, 1],
-    [1, 0, 0, 0, 0],
-    [1, 0, 0, 0, 1],
-    [1, 1, 1, 1, 0]
-  ],
+  // glider: [
+  //   [0, 1, 0],
+  //   [0, 0, 1],
+  //   [1, 1, 1]
+  // ],
+  // LWSS: [
+  //   [0, 1, 0, 0, 1],
+  //   [1, 0, 0, 0, 0],
+  //   [1, 0, 0, 0, 1],
+  //   [1, 1, 1, 1, 0]
+  // ],
   bunnies: [
     [1, 0, 0, 0, 0, 0, 1, 0],
     [0, 0, 1, 0, 0, 0, 1, 0],
