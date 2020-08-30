@@ -276,3 +276,19 @@ Particles.draw();
 
 Automata.init();
 Automata.draw();
+
+const iOS = () =>
+  [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ].includes(navigator.platform) ||
+  // iPad on iOS 13 detection
+  (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
+
+if (iOS) {
+  body.style.letterSpacing = '-3px';
+}

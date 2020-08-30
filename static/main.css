@@ -746,7 +746,7 @@ a {
   .sticky.up {
     position: fixed;
     top: 17px;
-    right: 50px;
+    right: 55px;
     z-index: 2;
   }
 
