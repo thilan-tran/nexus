@@ -276,3 +276,18 @@ Particles.draw();
 
 Automata.init();
 Automata.draw();
+
+const iOS = () =>
+  [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ].includes(navigator.platform) ||
+  (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
+
+if (true) {
+  document.body.classList.add('ios-font-spacing');
+}
