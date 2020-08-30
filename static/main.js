@@ -89,11 +89,13 @@ links.forEach((link) =>
   link.addEventListener('click', (evt) => evt.stopPropagation())
 );
 
-const wrapper = document.querySelector('body');
+const wrapper = document.querySelector('.body-wrapper');
 const openModal = (elem) => {
   if (!elem.classList.contains('show')) {
     wrapper.style.top = `-${window.scrollY}px`;
     wrapper.style.position = 'fixed';
+    wrapper.style.width = 'calc(100% - 10px)';
+    // document.body.style.overflowY = 'scroll';
     elem.classList.add('show');
   }
 };
@@ -102,6 +104,8 @@ const closeModal = (elem) => {
     const top = wrapper.style.top;
     wrapper.style.position = '';
     wrapper.style.top = '';
+    wrapper.style.width = 'auto';
+    // document.body.style.overflowY = 'auto';
     window.scrollTo(0, parseInt(top || '0') * -1);
     elem.classList.remove('show');
   }
