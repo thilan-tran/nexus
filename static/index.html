@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" type="text/css" href="main.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Oswald&family=Roboto:wght@300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
       rel="stylesheet"
     />
     <script type="module" src="fade.js"></script>
@@ -20,743 +20,740 @@
     <script type="module" src="main.js"></script>
   </head>
   <body>
-    <div class="body-wrapper">
-      <div class="carousel">
-        <canvas
-          id="game-of-life"
-          class="showcase"
-          data-descrip="PLAY CONWAY'S GAME OF LIFE."
-        ></canvas>
-        <canvas
-          id="particles"
-          class="showcase showcase-disable"
-          data-descrip="SPAWN SOME PARTICLES."
-        ></canvas>
-        <canvas
-          id="automata"
-          class="showcase showcase-disable"
-          data-descrip="SPAWN CELLULAR AUTOMATON."
-        ></canvas>
-      </div>
+    <div class="carousel">
+      <canvas
+        id="game-of-life"
+        class="showcase"
+        data-descrip="PLAY CONWAY'S GAME OF LIFE."
+      ></canvas>
+      <canvas
+        id="particles"
+        class="showcase showcase-disable"
+        data-descrip="SPAWN SOME PARTICLES."
+      ></canvas>
+      <canvas
+        id="automata"
+        class="showcase showcase-disable"
+        data-descrip="SPAWN CELLULAR AUTOMATON."
+      ></canvas>
+    </div>
 
-      <div class="showcase-overlay">
-        <div class="fade">
-          <div class="center-both">
-            <h1 class="action-button" style="width:220px;" tabindex="0">
-              PLAY CONWAY'S GAME OF LIFE.
-            </h1>
-          </div>
-          <div class="caret">
-            <div class="caret-rotate">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path
-                  d="M98,190.06,237.78,353.18a24,24,0,0,0,36.44,0L414,190.06c13.34-15.57,2.28-39.62-18.22-39.62H116.18C95.68,150.44,84.62,174.49,98,190.06Z"
-                  fill="#000"
-                  stroke="#000"
-                  stroke-width="25"
-                />
-              </svg>
-            </div>
-          </div>
+    <div class="showcase-overlay">
+      <div class="fade">
+        <div class="center-both">
+          <h1 class="action-button" style="width:220px;" tabindex="0">
+            PLAY CONWAY'S GAME OF LIFE.
+          </h1>
         </div>
-        <a class="name-card" href="">THILAN TRAN</a>
-
-        <div class="toolbar">
-          <div class="icon swap">
-            <svg
-              class="shuffle"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-            >
-              <polyline
-                points="400 304 448 352 400 400"
-                style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
-              />
-              <polyline
-                points="400 112 448 160 400 208"
-                style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
-              />
-              <polyline
-                points="64 352 192 352 252 260"
-                style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
-              />
-              <polyline
-                points="64 160 192 160 320 352 416 352"
-                style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
-              />
-              <polyline
-                points="416 160 320 160 288 208"
-                style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
-              />
-            </svg>
-          </div>
-          <div class="icon dropdown">
-            <svg
-              class="cog"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-            >
+        <div class="caret">
+          <div class="caret-rotate">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path
-                d="M436.67,184.11a27.17,27.17,0,0,1-38.3,0l-22.48-22.49a27.15,27.15,0,0,1,0-38.29l50.89-50.89a.85.85,0,0,0-.26-1.38C393.68,57,351.09,64.15,324.05,91c-25.88,25.69-27.35,64.27-17.87,98a27,27,0,0,1-7.67,27.14l-173,160.76a40.76,40.76,0,1,0,57.57,57.54l162.15-173.3A27,27,0,0,1,372,253.44c33.46,8.94,71.49,7.26,97.07-17.94,27.49-27.08,33.42-74.94,20.1-102.33a.85.85,0,0,0-1.36-.22Z"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
-              />
-              <path
-                d="M224,284c-17.48-17-25.49-24.91-31-30.29a18.24,18.24,0,0,1-3.33-21.35,20.76,20.76,0,0,1,3.5-4.62l15.68-15.29a18.66,18.66,0,0,1,5.63-3.87,18.11,18.11,0,0,1,20,3.62c5.45,5.29,15.43,15,33.41,32.52"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <path
-                d="M317.07,291.3c40.95,38.1,90.62,83.27,110,99.41a13.46,13.46,0,0,1,.94,19.92L394.63,444a14,14,0,0,1-20.29-.76c-16.53-19.18-61.09-67.11-99.27-107"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <path
-                d="M17.34,193.5l29.41-28.74a4.71,4.71,0,0,1,3.41-1.35,4.85,4.85,0,0,1,3.41,1.35h0a9.86,9.86,0,0,0,8.19,2.77c3.83-.42,7.92-1.6,10.57-4.12,6-5.8-.94-17.23,4.34-24.54a207,207,0,0,1,19.78-22.6c6-5.88,29.84-28.32,69.9-44.45A107.31,107.31,0,0,1,206.67,64c22.59,0,40,10,46.26,15.67a89.54,89.54,0,0,1,10.28,11.64A78.92,78.92,0,0,0,254,88.54,68.82,68.82,0,0,0,234,87.28c-13.33,1.09-29.41,7.26-38,14-13.9,11-19.87,25.72-20.81,44.71-.68,14.12,2.72,22.1,36.1,55.49a6.6,6.6,0,0,1-.34,9.16l-18.22,18a6.88,6.88,0,0,1-9.54.09c-21.94-21.94-36.65-33.09-45-38.16s-15.07-6.5-18.3-6.85a30.85,30.85,0,0,0-18.27,3.87,11.39,11.39,0,0,0-2.64,2,14.14,14.14,0,0,0,.42,20.08l1.71,1.6a4.63,4.63,0,0,1,0,6.64L71.73,246.6A4.71,4.71,0,0,1,68.32,248a4.86,4.86,0,0,1-3.41-1.35L17.34,200.22A4.88,4.88,0,0,1,17.34,193.5Z"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <div class="dropdown-content options-box">
-                <div class="particle-options disable" style="width:120px;">
-                  <div class="option">
-                    <label for="particle-greyscale">Greyscale</label>
-                    <input
-                      type="radio"
-                      name="particle-color"
-                      id="particle-greyscale"
-                    />
-                  </div>
-                  <div class="option">
-                    <label for="particle-colorful">Colorful</label>
-                    <input
-                      type="radio"
-                      name="particle-color"
-                      id="particle-colorful"
-                      checked
-                    />
-                  </div>
-                  <div class="option">
-                    <label for="gravity">Gravity</label>
-                    <input type="checkbox" name="gravity" />
-                  </div>
-                  <div class="option">
-                    <button class="button reset">Reset</button>
-                  </div>
-                </div>
-                <div class="life-options">
-                  <div class="option">
-                    <label for="life-greyscale">Greyscale</label>
-                    <input type="radio" name="life-color" id="life-greyscale" />
-                  </div>
-                  <div class="option">
-                    <label for="life-colorful">Colorful</label>
-                    <input
-                      type="radio"
-                      name="life-color"
-                      id="life-colorful"
-                      checked
-                    />
-                  </div>
-                  <div class="option">
-                    <label for="trace">Trace cell path</label>
-                    <input type="checkbox" name="trace" checked />
-                  </div>
-                  <div class="option">
-                    <label for="trace-length">Trace path length</label>
-                    <input
-                      type="range"
-                      name="trace-length"
-                      style="width:55px;"
-                      value="50"
-                      min="20"
-                      max="200"
-                    />
-                  </div>
-                  <div class="option">
-                    <label for="feed1D">Feed in 1D cell. automaton</label>
-                    <input type="checkbox" name="feed1D" />
-                  </div>
-                  <div class="option">
-                    <label for="delay">Animation delay</label>
-                    <input
-                      type="range"
-                      name="delay"
-                      style="width:55px;"
-                      value="30"
-                      min="20"
-                      max="100"
-                    />
-                  </div>
-                  <div class="option">
-                    <button class="button reset">Reset</button>
-                  </div>
-                  <div class="option">
-                    <a
-                      class="button"
-                      href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
-                      target="_blank"
-                    >
-                      About
-                    </a>
-                  </div>
-                </div>
-                <div class="automata-options disable" style="width:200px;">
-                  <div class="option">
-                    <label for="auto-greyscale">Greyscale</label>
-                    <input type="radio" name="auto-color" id="auto-greyscale" />
-                  </div>
-                  <div class="option">
-                    <label for="auto-colorful">Colorful</label>
-                    <input
-                      type="radio"
-                      name="auto-color"
-                      id="auto-colorful"
-                      checked
-                    />
-                  </div>
-                  <div class="option">
-                    <label for="pretty">Pretty rules only</label>
-                    <input type="checkbox" name="pretty" checked />
-                  </div>
-                  <div class="option">
-                    <label for="auto-delay">Animation delay</label>
-                    <input
-                      type="range"
-                      name="auto-delay"
-                      style="width:55px;"
-                      value="10"
-                      min="10"
-                      max="100"
-                    />
-                  </div>
-                  <div class="option">
-                    <button class="button reset">Reset</button>
-                  </div>
-                  <div class="option">
-                    <a
-                      class="button"
-                      href="https://plato.stanford.edu/entries/cellular-automata/supplement.html#:~:text=As%20we%20have%20seen%2C%20in,total%20of%20256%20possible%20rules."
-                      target="_blank"
-                    >
-                      About
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="content">
-        <div class="modal">
-          <div class="modal-body">
-            <svg
-              class="close"
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              viewBox="0 0 512 512"
-            >
-              <line
-                x1="368"
-                y1="368"
-                x2="144"
-                y2="144"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <line
-                x1="368"
-                y1="144"
-                x2="144"
-                y2="368"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-            </svg>
-            <div class="modal-top">
-              <img
-                height="80%"
-                src="./static/percussion-photo.jpg"
-                alt="Performing in the UCLA percussion ensemble"
-              />
-            </div>
-            <div class="modal-description">
-              <div>
-                <h2>MORE ABOUT ME</h2>
-                <p>
-                  I play percussion in the UCLA Percussion Ensemble and Wind
-                  Ensemble.
-                  <br />
-                  <br />
-                  I am an avid user of Vim for everything from coding to
-                  note-taking and scratch, and am fascinated with shell and text
-                  editor customization.
-                  <br />
-                  Check out my
-                  <a
-                    class="highlight"
-                    href="https://github.com/thilan-tran/dotfiles"
-                    target="_blank"
-                    >dot files</a
-                  >
-                  and
-                  <a
-                    class="highlight"
-                    href="https://github.com/thilan-tran/wiki"
-                    target="_blank"
-                    >collection of notes</a
-                  >.
-                  <br />
-                  <br />
-                  In my free time I enjoy playing online MOBAs with friends and
-                  listening to different music ranging from classic rock to
-                  contemporary jazz.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="overlay"></div>
-
-        <div id="about" class="card">
-          <div class="header">
-            <h2>ABOUT</h2>
-          </div>
-          <div class="sticky">
-            <a href="https://github.com/thilan-tran" target="_blank">
-              <svg
-                class="github"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
+                d="M98,190.06,237.78,353.18a24,24,0,0,0,36.44,0L414,190.06c13.34-15.57,2.28-39.62-18.22-39.62H116.18C95.68,150.44,84.62,174.49,98,190.06Z"
+                fill="#000"
                 stroke="#000"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                ></path>
-              </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/thilan-tran/" target="_blank">
-              <svg
-                class="linkedin"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#000"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-                ></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </a>
-            <a href="mailto:thilantran@ucla.edu">
-              <svg
-                class="mail"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  d="M441.6,171.61,266.87,85.37a24.57,24.57,0,0,0-21.74,0L70.4,171.61A40,40,0,0,0,48,207.39V392c0,22.09,18.14,40,40.52,40h335c22.38,0,40.52-17.91,40.52-40V207.39A40,40,0,0,0,441.6,171.61Z"
-                  style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:37px"
-                />
-                <path
-                  d="M397.33,368,268.07,267.46a24,24,0,0,0-29.47,0L109.33,368"
-                  style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:37px"
-                />
-                <line
-                  x1="309.33"
-                  y1="295"
-                  x2="445.33"
-                  y2="192"
-                  style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:37px"
-                />
-                <line
-                  x1="61.33"
-                  y1="192"
-                  x2="200.33"
-                  y2="297"
-                  style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:37px"
-                />
-              </svg>
-            </a>
-          </div>
-          <p>
-            I'm Thilan, a software engineer studying Computer Science and
-            Engineering at UCLA.
-            <br />
-            <br />
-            I've built
-            <a
-              class="highlight"
-              href="https://github.com/thilan-tran/restock"
-              target="_blank"
-              >Restock</a
-            >, a fullstack, real-time stock trading simulator, was the frontend
-            lead for a smart-scheduling Google calendar extension on the UCLA
-            DevX
-            <a
-              class="highlight"
-              href="https://github.com/ucladevx/twain-extension"
-              target="_blank"
-              >Twain</a
-            >
-            project, and recently created a developer
-            <a
-              class="highlight"
-              href="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing"
-              target="_blank"
-              >plugin</a
-            >
-            for debugging React and Redux apps on the platform team at Walmart
-            Labs.
-          </p>
-        </div>
-
-        <div class="card" style="cursor:default;">
-          <h2 id="projects">PROJECTS</h2>
-          <div class="grid">
-            <div class="grid-item" data-project="wml-dev-assistant">
-              <div class="title">WALMART LABS<br /><b>DEV ASSISTANT</b></div>
-              <img src="./static/wml-timeline.jpeg" alt="" />
-            </div>
-            <div class="grid-item" data-project="twain">
-              <div class="title">UCLA DEVX<br /><b>TWAIN</b></div>
-              <img src="./static/twain.jpeg" alt="" />
-            </div>
-            <div class="grid-item" data-project="terreform">
-              <div class="title">UCLA CREATIVE LABS<br /><b>TERREFORM</b></div>
-              <img src="./static/terreform-farm.jpeg" alt="" />
-            </div>
-            <div class="grid-item" data-project="restock">
-              <div class="title">SIDE PROJECT<br /><b>RESTOCK</b></div>
-              <img src="./static/restock-portfolio.jpeg" alt="" />
-            </div>
-            <div class="grid-item" data-project="weather">
-              <div class="title">SIDE PROJECT<br /><b>SIMPLE WEATHER</b></div>
-              <img src="./static/weather.jpeg" alt="" />
-            </div>
-          </div>
-        </div>
-
-        <div class="modal" data-project="wml-dev-assistant">
-          <div class="modal-body">
-            <svg
-              class="close"
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              viewBox="0 0 512 512"
-            >
-              <line
-                x1="368"
-                y1="368"
-                x2="144"
-                y2="144"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <line
-                x1="368"
-                y1="144"
-                x2="144"
-                y2="368"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+                stroke-width="25"
               />
             </svg>
-            <div class="modal-top">
-              <img
-                id="thing1"
-                height="80%"
-                src="./static/wml-timeline.jpeg"
-                alt=""
-              />
-              <img
-                id="thing2"
-                height="62%"
-                src="./static/wml-state-edit.jpeg"
-                alt=""
-              />
-            </div>
-            <div class="modal-description">
-              <div>
-                <h2><b>WALMART LABS</b>DEV ASSISTANT</h2>
-                <p>
-                  While interning at Walmart Labs, I created a plugin to address
-                  development hurdles and increase engineering productivity by
-                  handling environment specific settings, intercepting and
-                  displaying analytics, recording Redux store state and
-                  dispatched actions in a
-                  <em>replayable</em> log, as well as allowing for spoofing of
-                  actions and force setting of Redux state.
-                  <br />
-                  <br />
-                  The UI is built in React, and I used browser extension
-                  architecture such as content and background scripts
-                  extensively in my implementation. I also utilized React
-                  internals such as React Fiber nodes to
-                  <em>"hack"</em> into the Redux store externally and
-                  dynamically dispatch custom actions or overwrite Redux state
-                  without source code changes or the use of the existing Redux
-                  DevTools. <br /><br />Towards the end of my internship, I gave
-                  a tech talk with these
-                  <a
-                    class="highlight"
-                    href="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing"
-                    target="_blank"
-                    >slides</a
-                  >
-                  to demo the plugin and present my development approach.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
-        <div class="overlay"></div>
-        <div class="modal" data-project="twain">
-          <div class="modal-body">
-            <svg
-              class="close"
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              viewBox="0 0 512 512"
-            >
-              <line
-                x1="368"
-                y1="368"
-                x2="144"
-                y2="144"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <line
-                x1="368"
-                y1="144"
-                x2="144"
-                y2="368"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-            </svg>
-            <div class="modal-top">
-              <img
-                class="double-img"
-                height="80%"
-                src="./static/twain-date.jpeg"
-                alt=""
-              />
-              <img
-                class="double-img"
-                height="80%"
-                src="./static/twain-time.jpeg"
-                alt=""
-              />
-            </div>
-            <div class="modal-description">
-              <div>
-                <h2><b>UCLA DEVX</b>TWAIN</h2>
-                <p>
-                  The
-                  <a
-                    class="highlight"
-                    href="https://github.com/ucladevx/twain-extension"
-                    target="_blank"
-                    >Twain project</a
-                  >
-                  is a browser extension for Google calendar that will
-                  automatically schedule tasks in available calendar slots.
-                  Users create and schedule tasks, and can reschedule or
-                  force-schedule tasks during the UX flow. The extension is
-                  available on the Chrome
-                  <a
-                    class="highlight"
-                    href="https://chrome.google.com/webstore/detail/twain/cmljiidokkhmheonmpfciinfdonkimop?hl=en"
-                    target="_blank"
-                    >store</a
-                  >.
-
-                  <br />
-                  <br />
-                  As the frontend lead, I created the backbone structure of the
-                  client facing app and implemented reusable, complex UI
-                  components such as time and date pickers in React entirely
-                  <em>without</em> using UI libraries. I also worked on the
-                  backtracking algorithm used in the Node.js backend to place
-                  optimal tasks in free calendar slots.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="overlay"></div>
-        <div class="modal" data-project="restock">
-          <div class="modal-body">
-            <svg
-              class="close"
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              viewBox="0 0 512 512"
-            >
-              <line
-                x1="368"
-                y1="368"
-                x2="144"
-                y2="144"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <line
-                x1="368"
-                y1="144"
-                x2="144"
-                y2="368"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-            </svg>
-            <div class="modal-top">
-              <img height="80%" src="./static/restock-stockview.jpeg" alt="" />
-            </div>
-            <div class="modal-description">
-              <div>
-                <h2>RESTOCK</h2>
-                <p>
-                  As a fullstack side project, I built the
-                  <a
-                    class="highlight"
-                    href="https://github.com/thilan-tran/restock"
-                    target="_blank"
-                    >Restock</a
-                  >
-                  webapp, a real-time stock trading simulator. Users can can
-                  simulate transactions, track stocks for real-time updates, and
-                  view stock history in a dashboard or other user portfolios on
-                  a leaderboard. All user actions are authenticated, and
-                  websockets allow for instant updates from the backend to any
-                  connected clients. Check out the live
-                  <a
-                    class="highlight"
-                    href="https://restock-app.herokuapp.com/"
-                    target="_blank"
-                    >website</a
-                  >.
-
-                  <br />
-                  <br />
-                  The backend was implemented with Flask, SQLAlchemy, and
-                  websockets and the frontend utilizes React as well as ReCharts
-                  as a graphing utility.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="overlay"></div>
-        <div class="modal" data-project="terreform">
-          <div class="modal-body">
-            <svg
-              class="close"
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              viewBox="0 0 512 512"
-            >
-              <line
-                x1="368"
-                y1="368"
-                x2="144"
-                y2="144"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <line
-                x1="368"
-                y1="144"
-                x2="144"
-                y2="368"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-            </svg>
-            <div class="modal-top">
-              <img height="80%" src="./static/terreform-forest.jpeg" alt="" />
-            </div>
-            <div class="modal-description">
-              <div>
-                <h2><b>UCLA CREATIVE LABS</b>TERREFORM</h2>
-                <p>
-                  <a
-                    class="highlight"
-                    href="https://github.com/angle-zhang/terreform"
-                    target="_blank"
-                    >Terreform</a
-                  >
-                  is a donation website for non-profits fighting climate change
-                  that features interactive environments rendered using ThreeJS
-                  that evolve as users donate. See the
-                  <a
-                    class="highlight"
-                    href="http://terreform.herokuapp.com/home"
-                    target="_blank"
-                    >site</a
-                  >
-                  live.
-                  <br />
-                  <br />
-                  My responsibility as a frontend developer was to integrate
-                  together frontend client events, dynamic React component
-                  rendering, and the ThreeJS container into dynamic, animated
-                  biomes where each donation corresponds with an interactive
-                  object in the environment.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="overlay"></div>
-        <div class="modal" data-project="weather">
-          <div class="modal-body">
-            <svg
-              class="close"
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              viewBox="0 0 512 512"
-            >
-              <line
-                x1="368"
-                y1="368"
-                x2="144"
-                y2="144"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-              <line
-                x1="368"
-                y1="144"
-                x2="144"
-                y2="368"
-                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-              />
-            </svg>
-            <div class="modal-top">
-              <img height="80%" src="./static/weather-hover.jpeg" alt="" />
-            </div>
-            <div class="modal-description">
-              <div>
-                <h2>SIMPLE WEATHER</h2>
-                <p>
-                  As a self-learning exercise, I wanted to practice implementing
-                  the same application using different frontend frameworks.
-                  <br />
-                  <br />Thus,
-                  <a
-                    class="highlight"
-                    href="https://github.com/thilan-tran/simple-weather"
-                    target="_blank"
-                    >Simple Weather</a
-                  >
-                  was born, the same simple but clean weather forecast UI
-                  recreated using multiple frameworks including native
-                  JavaScript, jQuery, and React.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="overlay"></div>
       </div>
+      <a class="name-card" href="" id="site">THILAN TRAN</a>
+
+      <div class="toolbar">
+        <div class="icon swap">
+          <svg
+            class="shuffle"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <polyline
+              points="400 304 448 352 400 400"
+              style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
+            />
+            <polyline
+              points="400 112 448 160 400 208"
+              style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
+            />
+            <polyline
+              points="64 352 192 352 252 260"
+              style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
+            />
+            <polyline
+              points="64 160 192 160 320 352 416 352"
+              style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
+            />
+            <polyline
+              points="416 160 320 160 288 208"
+              style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px"
+            />
+          </svg>
+        </div>
+        <div class="icon dropdown">
+          <svg
+            class="cog"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M436.67,184.11a27.17,27.17,0,0,1-38.3,0l-22.48-22.49a27.15,27.15,0,0,1,0-38.29l50.89-50.89a.85.85,0,0,0-.26-1.38C393.68,57,351.09,64.15,324.05,91c-25.88,25.69-27.35,64.27-17.87,98a27,27,0,0,1-7.67,27.14l-173,160.76a40.76,40.76,0,1,0,57.57,57.54l162.15-173.3A27,27,0,0,1,372,253.44c33.46,8.94,71.49,7.26,97.07-17.94,27.49-27.08,33.42-74.94,20.1-102.33a.85.85,0,0,0-1.36-.22Z"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+            />
+            <path
+              d="M224,284c-17.48-17-25.49-24.91-31-30.29a18.24,18.24,0,0,1-3.33-21.35,20.76,20.76,0,0,1,3.5-4.62l15.68-15.29a18.66,18.66,0,0,1,5.63-3.87,18.11,18.11,0,0,1,20,3.62c5.45,5.29,15.43,15,33.41,32.52"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <path
+              d="M317.07,291.3c40.95,38.1,90.62,83.27,110,99.41a13.46,13.46,0,0,1,.94,19.92L394.63,444a14,14,0,0,1-20.29-.76c-16.53-19.18-61.09-67.11-99.27-107"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <path
+              d="M17.34,193.5l29.41-28.74a4.71,4.71,0,0,1,3.41-1.35,4.85,4.85,0,0,1,3.41,1.35h0a9.86,9.86,0,0,0,8.19,2.77c3.83-.42,7.92-1.6,10.57-4.12,6-5.8-.94-17.23,4.34-24.54a207,207,0,0,1,19.78-22.6c6-5.88,29.84-28.32,69.9-44.45A107.31,107.31,0,0,1,206.67,64c22.59,0,40,10,46.26,15.67a89.54,89.54,0,0,1,10.28,11.64A78.92,78.92,0,0,0,254,88.54,68.82,68.82,0,0,0,234,87.28c-13.33,1.09-29.41,7.26-38,14-13.9,11-19.87,25.72-20.81,44.71-.68,14.12,2.72,22.1,36.1,55.49a6.6,6.6,0,0,1-.34,9.16l-18.22,18a6.88,6.88,0,0,1-9.54.09c-21.94-21.94-36.65-33.09-45-38.16s-15.07-6.5-18.3-6.85a30.85,30.85,0,0,0-18.27,3.87,11.39,11.39,0,0,0-2.64,2,14.14,14.14,0,0,0,.42,20.08l1.71,1.6a4.63,4.63,0,0,1,0,6.64L71.73,246.6A4.71,4.71,0,0,1,68.32,248a4.86,4.86,0,0,1-3.41-1.35L17.34,200.22A4.88,4.88,0,0,1,17.34,193.5Z"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <div class="dropdown-content options-box">
+              <div class="particle-options disable" style="width:120px;">
+                <div class="option">
+                  <label for="particle-greyscale">Greyscale</label>
+                  <input
+                    type="radio"
+                    name="particle-color"
+                    id="particle-greyscale"
+                  />
+                </div>
+                <div class="option">
+                  <label for="particle-colorful">Colorful</label>
+                  <input
+                    type="radio"
+                    name="particle-color"
+                    id="particle-colorful"
+                    checked
+                  />
+                </div>
+                <div class="option">
+                  <label for="gravity">Gravity</label>
+                  <input type="checkbox" name="gravity" />
+                </div>
+                <div class="option">
+                  <button class="button reset">Reset</button>
+                </div>
+              </div>
+              <div class="life-options">
+                <div class="option">
+                  <label for="life-greyscale">Greyscale</label>
+                  <input type="radio" name="life-color" id="life-greyscale" />
+                </div>
+                <div class="option">
+                  <label for="life-colorful">Colorful</label>
+                  <input
+                    type="radio"
+                    name="life-color"
+                    id="life-colorful"
+                    checked
+                  />
+                </div>
+                <div class="option">
+                  <label for="trace">Trace cell path</label>
+                  <input type="checkbox" name="trace" checked />
+                </div>
+                <div class="option">
+                  <label for="trace-length">Trace path length</label>
+                  <input
+                    type="range"
+                    name="trace-length"
+                    style="width:55px;"
+                    value="50"
+                    min="20"
+                    max="200"
+                  />
+                </div>
+                <div class="option">
+                  <label for="feed1D">Feed in 1D cell. automaton</label>
+                  <input type="checkbox" name="feed1D" />
+                </div>
+                <div class="option">
+                  <label for="delay">Animation delay</label>
+                  <input
+                    type="range"
+                    name="delay"
+                    style="width:55px;"
+                    value="30"
+                    min="20"
+                    max="100"
+                  />
+                </div>
+                <div class="option">
+                  <button class="button reset">Reset</button>
+                </div>
+                <div class="option">
+                  <a
+                    class="button"
+                    href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
+                    target="_blank"
+                  >
+                    About
+                  </a>
+                </div>
+              </div>
+              <div class="automata-options disable" style="width:200px;">
+                <div class="option">
+                  <label for="auto-greyscale">Greyscale</label>
+                  <input type="radio" name="auto-color" id="auto-greyscale" />
+                </div>
+                <div class="option">
+                  <label for="auto-colorful">Colorful</label>
+                  <input
+                    type="radio"
+                    name="auto-color"
+                    id="auto-colorful"
+                    checked
+                  />
+                </div>
+                <div class="option">
+                  <label for="pretty">Pretty rules only</label>
+                  <input type="checkbox" name="pretty" checked />
+                </div>
+                <div class="option">
+                  <label for="auto-delay">Animation delay</label>
+                  <input
+                    type="range"
+                    name="auto-delay"
+                    style="width:55px;"
+                    value="10"
+                    min="10"
+                    max="100"
+                  />
+                </div>
+                <div class="option">
+                  <button class="button reset">Reset</button>
+                </div>
+                <div class="option">
+                  <a
+                    class="button"
+                    href="https://plato.stanford.edu/entries/cellular-automata/supplement.html#:~:text=As%20we%20have%20seen%2C%20in,total%20of%20256%20possible%20rules."
+                    target="_blank"
+                  >
+                    About
+                  </a>
+                </div>
+              </div>
+            </div>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div id="about" class="card">
+        <div class="header">
+          <h2>ABOUT</h2>
+        </div>
+        <div class="sticky">
+          <a href="https://github.com/thilan-tran" target="_blank">
+            <svg
+              class="github"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#000"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              ></path>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/thilan-tran/" target="_blank">
+            <svg
+              class="linkedin"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#000"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+              ></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="mailto:thilantran@ucla.edu">
+            <svg
+              class="mail"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="M441.6,171.61,266.87,85.37a24.57,24.57,0,0,0-21.74,0L70.4,171.61A40,40,0,0,0,48,207.39V392c0,22.09,18.14,40,40.52,40h335c22.38,0,40.52-17.91,40.52-40V207.39A40,40,0,0,0,441.6,171.61Z"
+                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:37px"
+              />
+              <path
+                d="M397.33,368,268.07,267.46a24,24,0,0,0-29.47,0L109.33,368"
+                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:37px"
+              />
+              <line
+                x1="309.33"
+                y1="295"
+                x2="445.33"
+                y2="192"
+                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:37px"
+              />
+              <line
+                x1="61.33"
+                y1="192"
+                x2="200.33"
+                y2="297"
+                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:37px"
+              />
+            </svg>
+          </a>
+        </div>
+        <p>
+          I'm Thilan, a software engineer studying Computer Science and
+          Engineering at UCLA.
+          <br />
+          <br />
+          I've built
+          <a
+            class="highlight"
+            href="https://github.com/thilan-tran/restock"
+            target="_blank"
+            >Restock</a
+          >, a fullstack, real-time stock trading simulator, was the frontend
+          lead for a smart-scheduling Google calendar extension on the UCLA DevX
+          <a
+            class="highlight"
+            href="https://github.com/ucladevx/twain-extension"
+            target="_blank"
+            >Twain</a
+          >
+          project, and recently created a developer
+          <a
+            class="highlight"
+            href="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing"
+            target="_blank"
+            >plugin</a
+          >
+          for debugging React and Redux apps on the platform team at Walmart
+          Labs.
+        </p>
+      </div>
+
+      <div class="modal">
+        <div class="modal-body">
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            viewBox="0 0 512 512"
+          >
+            <line
+              x1="368"
+              y1="368"
+              x2="144"
+              y2="144"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="368"
+              y1="144"
+              x2="144"
+              y2="368"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+          </svg>
+          <div class="modal-top">
+            <img
+              height="80%"
+              src="./static/percussion-photo.jpg"
+              alt="Performing in the UCLA percussion ensemble"
+            />
+          </div>
+          <div class="modal-description">
+            <div>
+              <h2>MORE ABOUT ME</h2>
+              <p>
+                I play percussion in the UCLA Percussion Ensemble and Wind
+                Ensemble.
+                <br />
+                <br />
+                I am an avid user of Vim for everything from coding to
+                note-taking and scratch, and am fascinated with shell and text
+                editor customization.
+                <br />
+                Check out my
+                <a
+                  class="highlight"
+                  href="https://github.com/thilan-tran/dotfiles"
+                  target="_blank"
+                  >dot files</a
+                >
+                and
+                <a
+                  class="highlight"
+                  href="https://github.com/thilan-tran/wiki"
+                  target="_blank"
+                  >collection of notes</a
+                >.
+                <br />
+                <br />
+                In my free time I enjoy playing online MOBAs with friends and
+                listening to different music ranging from classic rock to
+                contemporary jazz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay"></div>
+
+      <div class="card" style="cursor:default;">
+        <h2 id="projects">PROJECTS</h2>
+        <div class="grid">
+          <div class="grid-item" data-project="wml-dev-assistant">
+            <div class="title">WALMART LABS<br /><b>DEV ASSISTANT</b></div>
+            <img src="./static/wml-timeline.jpeg" alt="" />
+          </div>
+          <div class="grid-item" data-project="twain">
+            <div class="title">UCLA DEVX<br /><b>TWAIN</b></div>
+            <img src="./static/twain.jpeg" alt="" />
+          </div>
+          <div class="grid-item" data-project="terreform">
+            <div class="title">UCLA CREATIVE LABS<br /><b>TERREFORM</b></div>
+            <img src="./static/terreform-farm.jpeg" alt="" />
+          </div>
+          <div class="grid-item" data-project="restock">
+            <div class="title">SIDE PROJECT<br /><b>RESTOCK</b></div>
+            <img src="./static/restock-portfolio.jpeg" alt="" />
+          </div>
+          <div class="grid-item" data-project="weather">
+            <div class="title">SIDE PROJECT<br /><b>SIMPLE WEATHER</b></div>
+            <img src="./static/weather.jpeg" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" data-project="wml-dev-assistant">
+        <div class="modal-body">
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            viewBox="0 0 512 512"
+          >
+            <line
+              x1="368"
+              y1="368"
+              x2="144"
+              y2="144"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="368"
+              y1="144"
+              x2="144"
+              y2="368"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+          </svg>
+          <div class="modal-top">
+            <img
+              id="thing1"
+              height="80%"
+              src="./static/wml-timeline.jpeg"
+              alt=""
+            />
+            <img
+              id="thing2"
+              height="62%"
+              src="./static/wml-state-edit.jpeg"
+              alt=""
+            />
+          </div>
+          <div class="modal-description">
+            <div>
+              <h2><b>WALMART LABS</b>DEV ASSISTANT</h2>
+              <p>
+                While interning at Walmart Labs, I created a plugin to address
+                development hurdles and increase engineering productivity by
+                handling environment specific settings, intercepting and
+                displaying analytics, recording Redux store state and dispatched
+                actions in a
+                <em>replayable</em> log, as well as allowing for spoofing of
+                actions and force setting of Redux state.
+                <br />
+                <br />
+                The UI is built in React, and I used browser extension
+                architecture such as content and background scripts extensively
+                in my implementation. I also utilized React internals such as
+                React Fiber nodes to
+                <em>"hack"</em> into the Redux store externally and dynamically
+                dispatch custom actions or overwrite Redux state without source
+                code changes or the use of the existing Redux DevTools.
+                <br /><br />Towards the end of my internship, I gave a tech talk
+                with these
+                <a
+                  class="highlight"
+                  href="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing"
+                  target="_blank"
+                  >slides</a
+                >
+                to demo the plugin and present my development approach.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay"></div>
+      <div class="modal" data-project="twain">
+        <div class="modal-body">
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            viewBox="0 0 512 512"
+          >
+            <line
+              x1="368"
+              y1="368"
+              x2="144"
+              y2="144"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="368"
+              y1="144"
+              x2="144"
+              y2="368"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+          </svg>
+          <div class="modal-top">
+            <img
+              class="double-img"
+              height="80%"
+              src="./static/twain-date.jpeg"
+              alt=""
+            />
+            <img
+              class="double-img"
+              height="80%"
+              src="./static/twain-time.jpeg"
+              alt=""
+            />
+          </div>
+          <div class="modal-description">
+            <div>
+              <h2><b>UCLA DEVX</b>TWAIN</h2>
+              <p>
+                The
+                <a
+                  class="highlight"
+                  href="https://github.com/ucladevx/twain-extension"
+                  target="_blank"
+                  >Twain project</a
+                >
+                is a browser extension for Google calendar that will
+                automatically schedule tasks in available calendar slots. Users
+                create and schedule tasks, and can reschedule or force-schedule
+                tasks during the UX flow. The extension is available on the
+                Chrome
+                <a
+                  class="highlight"
+                  href="https://chrome.google.com/webstore/detail/twain/cmljiidokkhmheonmpfciinfdonkimop?hl=en"
+                  target="_blank"
+                  >store</a
+                >.
+
+                <br />
+                <br />
+                As the frontend lead, I created the backbone structure of the
+                client facing app and implemented reusable, complex UI
+                components such as time and date pickers in React entirely
+                <em>without</em> using UI libraries. I also worked on the
+                backtracking algorithm used in the Node.js backend to place
+                optimal tasks in free calendar slots.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay"></div>
+      <div class="modal" data-project="restock">
+        <div class="modal-body">
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            viewBox="0 0 512 512"
+          >
+            <line
+              x1="368"
+              y1="368"
+              x2="144"
+              y2="144"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="368"
+              y1="144"
+              x2="144"
+              y2="368"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+          </svg>
+          <div class="modal-top">
+            <img height="80%" src="./static/restock-stockview.jpeg" alt="" />
+          </div>
+          <div class="modal-description">
+            <div>
+              <h2>RESTOCK</h2>
+              <p>
+                As a fullstack side project, I built the
+                <a
+                  class="highlight"
+                  href="https://github.com/thilan-tran/restock"
+                  target="_blank"
+                  >Restock</a
+                >
+                webapp, a real-time stock trading simulator. Users can can
+                simulate transactions, track stocks for real-time updates, and
+                view stock history in a dashboard or other user portfolios on a
+                leaderboard. All user actions are authenticated, and websockets
+                allow for instant updates from the backend to any connected
+                clients. Check out the live
+                <a
+                  class="highlight"
+                  href="https://restock-app.herokuapp.com/"
+                  target="_blank"
+                  >website</a
+                >.
+
+                <br />
+                <br />
+                The backend was implemented with Flask, SQLAlchemy, and
+                websockets and the frontend utilizes React as well as ReCharts
+                as a graphing utility.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay"></div>
+      <div class="modal" data-project="terreform">
+        <div class="modal-body">
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            viewBox="0 0 512 512"
+          >
+            <line
+              x1="368"
+              y1="368"
+              x2="144"
+              y2="144"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="368"
+              y1="144"
+              x2="144"
+              y2="368"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+          </svg>
+          <div class="modal-top">
+            <img height="80%" src="./static/terreform-forest.jpeg" alt="" />
+          </div>
+          <div class="modal-description">
+            <div>
+              <h2><b>UCLA CREATIVE LABS</b>TERREFORM</h2>
+              <p>
+                <a
+                  class="highlight"
+                  href="https://github.com/angle-zhang/terreform"
+                  target="_blank"
+                  >Terreform</a
+                >
+                is a donation website for non-profits fighting climate change
+                that features interactive environments rendered using ThreeJS
+                that evolve as users donate. See the
+                <a
+                  class="highlight"
+                  href="http://terreform.herokuapp.com/home"
+                  target="_blank"
+                  >site</a
+                >
+                live.
+                <br />
+                <br />
+                My responsibility as a frontend developer was to integrate
+                together frontend client events, dynamic React component
+                rendering, and the ThreeJS container into dynamic, animated
+                biomes where each donation corresponds with an interactive
+                object in the environment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay"></div>
+      <div class="modal" data-project="weather">
+        <div class="modal-body">
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            viewBox="0 0 512 512"
+          >
+            <line
+              x1="368"
+              y1="368"
+              x2="144"
+              y2="144"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+            <line
+              x1="368"
+              y1="144"
+              x2="144"
+              y2="368"
+              style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+            />
+          </svg>
+          <div class="modal-top">
+            <img height="80%" src="./static/weather-hover.jpeg" alt="" />
+          </div>
+          <div class="modal-description">
+            <div>
+              <h2>SIMPLE WEATHER</h2>
+              <p>
+                As a self-learning exercise, I wanted to practice implementing
+                the same application using different frontend frameworks.
+                <br />
+                <br />Thus,
+                <a
+                  class="highlight"
+                  href="https://github.com/thilan-tran/simple-weather"
+                  target="_blank"
+                  >Simple Weather</a
+                >
+                was born, the same simple but clean weather forecast UI
+                recreated using multiple frameworks including native JavaScript,
+                jQuery, and React.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay"></div>
     </div>
   </body>
 </html>

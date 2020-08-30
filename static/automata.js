@@ -5,7 +5,7 @@ const BASE_LIFESPAN = 20;
 // const BASE_TRACESPAN = 60;
 let BASE_TRACESPAN = 50;
 
-const BASE_RESOLUTION = 10;
+const BASE_RESOLUTION = 5;
 const NUM_COLORS = 20; // number of colors in gradient (lower => more performant)
 const ONEDIM_PREVIEW = 10; // number of rows to preview 1D cellular automata input
 let PRETTY_RULES_ONLY = true;
@@ -23,26 +23,17 @@ const randRange = (range) => Math.floor(Math.random() * range);
 const canvas = document.querySelector('#automata');
 const ctx = canvas.getContext('2d');
 
-const PRETTY_RULES = [
-  18,
-  30,
+const PRETTY_RULES = [18, 30, 60, 86, 110, 124, 150];
+const CLUTTERED_RULES = [
   45,
-  60,
   73,
   75,
-  86,
   89,
-  102,
   105,
   109,
-  110,
-  121,
-  124,
   129,
   135,
   137,
-  150,
-  153,
   169,
   193,
   195
