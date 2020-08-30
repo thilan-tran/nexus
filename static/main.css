@@ -595,6 +595,10 @@ a {
     width: 100%;
   }
 
+  .content {
+    padding-top: 30px;
+  }
+
   .name-card {
     /* margin: 10px; */
     /* padding: 0 10px; */
