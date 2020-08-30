@@ -588,7 +588,7 @@ a {
 
 @media (max-width: 640px) {
   body {
-    letter-spacing: -3px;
+    /* letter-spacing: -3px; */
   }
 
   .showcase-overlay {
