@@ -326,8 +326,7 @@ body {
   min-height: 100vh;
   max-width: 1200px;
   width: 100%;
-  /* margin: 0 calc((100vw - 1200px) / 2); */
-  margin: 0 auto;
+  margin: 0 calc((100vw - 1200px) / 2);
 }
 
 .card {
@@ -580,10 +579,6 @@ a {
 
 .sticky {
   height: 30px;
-}
-
-.sticky svg {
-  margin: 0 5px;
 }
 
 @media (max-width: 1200px) {
