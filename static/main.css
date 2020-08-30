@@ -588,8 +588,12 @@ a {
 }
 
 @media (max-width: 640px) {
-  body {
-    /* letter-spacing: -3px; */
+  .ios-spacing .title b {
+    letter-spacing: -3px;
+  }
+
+  body.ios-font-spacing {
+    letter-spacing: -3px;
   }
 
   .showcase-overlay {
@@ -737,10 +741,6 @@ a {
 
   .title {
     letter-spacing: 0;
-  }
-
-  .title b {
-    /* letter-spacing: -3px; */
   }
 
   .sticky.up {
