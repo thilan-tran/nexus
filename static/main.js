@@ -290,5 +290,5 @@ const iOS = () =>
   (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
 
 if (iOS) {
-  body.style.letterSpacing = '-3px';
+  document.body.style.letterSpacing = '-3px';
 }
