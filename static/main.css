@@ -249,7 +249,7 @@ body {
 
   cursor: pointer;
   animation: pulse 1.5s infinite;
-  transition: 0.2s all ease;
+  transition: 0.2 fill ease;
   z-index: 1;
 }
 
@@ -265,7 +265,6 @@ body {
 }
 
 .caret.point-up {
-  transition: bottom 0s;
   bottom: calc(100% - 90px);
 }
 
@@ -296,7 +295,8 @@ body {
   padding: 0 5px;
   top: 0px;
 
-  border: 2px solid #000;
+  border: 2px solid transparent;
+  border-bottom: 2px solid #000;
   box-shadow: -7px 3px 0 0 #000;
   color: #000;
   background-color: #fff;

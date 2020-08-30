@@ -47,7 +47,7 @@ if (content.getBoundingClientRect().top < window.innerHeight / 2) {
   caret.classList.add('point-up');
 }
 const sticky = document.querySelector('.sticky');
-document.addEventListener('scroll', () => {
+document.addEventListener('scroll', (evt) => {
   const rect = content.getBoundingClientRect();
   const pastSticky = document.querySelector('#about p').getBoundingClientRect();
   if (rect.top < window.innerHeight / 2) {
@@ -69,9 +69,9 @@ document.addEventListener('mousemove', (evt) => {
     caret.classList.contains('point-up') &&
     evt.screenY > window.innerHeight / 5
   ) {
-    caret.style.display = 'none';
+    caret.style.visibility = 'hidden';
   } else {
-    caret.style.display = 'block';
+    caret.style.visibility = 'visible';
   }
 });
 

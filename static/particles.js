@@ -1,5 +1,5 @@
 const MAX_SPEED = 15;
-const MAX_LIFESPAN = 8;
+const MAX_LIFESPAN = 3;
 const DELAY = 10;
 
 const GRAVITY_ACCEL = +0.05 / (DELAY / 1000);
@@ -95,10 +95,9 @@ const moveParticles = () => {
     let drawY = newY < 0 ? -1 * newY : newY;
     drawX = drawX + 10 > WIDTH ? 2 * WIDTH - drawX : drawX;
     drawY = drawY + 10 > HEIGHT ? 2 * HEIGHT - drawY : drawY;
-    // ctx.fillStyle = getGradientColor(
-    //   2 * MAX_SPEED - (Math.abs(velX) + Math.abs(velY))
-    // );
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = getGradientColor(
+      2 * MAX_SPEED - (Math.abs(velX) + Math.abs(velY))
+    );
     ctx.fillRect(drawX, drawY, 10, 10);
 
     if (newX > WIDTH || newX < 0) {
