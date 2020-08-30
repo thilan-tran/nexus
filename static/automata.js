@@ -222,7 +222,7 @@ const reset = () => {
 };
 
 const spawn = () => {
-  const randJ = parseInt(randRange(COLS * 0.9) + COLS * 0.1);
+  const randJ = parseInt(randRange(COLS * 0.5) + COLS * 0.25);
   reset();
   createCell(ONEDIM_SPAWN, randJ, true);
   rowCnt = 1;
