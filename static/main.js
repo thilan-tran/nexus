@@ -108,24 +108,18 @@ const closeModal = (elem) => {
 
 const registerModalEvents = (clickElem, modalElem) => {
   const modalBody = modalElem.querySelector('.modal-body');
-  clickElem.addEventListener('click', (evt) => {
-    openModal(modalElem);
-    evt.stopPropagation();
-  });
   modalElem
     .querySelector('.close')
     .addEventListener('click', () => closeModal(modalElem));
-  if (IS_MOBILE) {
-    document.addEventListener('touchstart', (evt) => {
-      !modalBody.contains(evt.target) && closeModal(modalElem);
-      evt.stopPropagation();
-    });
-  } else {
-    document.addEventListener('click', (evt) => {
-      !modalBody.contains(evt.target) && closeModal(modalElem);
-      evt.stopPropagation();
-    });
-  }
+  const triggerEvent = IS_MOBILE ? 'touchend' : 'click';
+  clickElem.addEventListener(triggerEvent, (evt) => {
+    openModal(modalElem);
+    evt.stopPropagation();
+  });
+  document.addEventListener(triggerEvent, (evt) => {
+    !modalBody.contains(evt.target) && closeModal(modalElem);
+    evt.stopPropagation();
+  });
 };
 const firstModal = document.querySelector('.modal');
 if (IS_MOBILE) {
