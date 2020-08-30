@@ -1,6 +1,7 @@
 import Fade from './fade.js';
 import GoL from './life.js';
 import Particles from './particles.js';
+import Automata from './automata.js';
 
 const IS_MOBILE = window.innerWidth <= 640;
 
@@ -152,35 +153,43 @@ for (const item of document.querySelector('.grid').children) {
 //   (evt) => !modal.contains(evt.target) && modal.classList.remove('show')
 // );
 
-let CAROUSEL_STATE = 0;
-const SHOWCASES = [GoL, Particles];
+const SHOWCASES = [
+  { obj: GoL, el: '#game-of-life', options: '.life-options' },
+  { obj: Automata, el: '#automata', options: '.automata-options' },
+  { obj: Particles, el: '#particles', options: '.particle-options' }
+];
+let STATE = 0;
 
 const swap = document.querySelector('.swap');
 const actionButton = document.querySelector('.action-button');
 
-const lifeOptions = document.querySelector('.life-options');
-const particleOptions = document.querySelector('.particle-options');
-const OPTIONS_ARR = [lifeOptions, particleOptions];
-
 swap.addEventListener('click', () => {
-  const nextState = (CAROUSEL_STATE + 1) % carousel.children.length;
-  for (let i = 0; i < carousel.children.length; i++) {
-    SHOWCASES[i].reset();
-    OPTIONS_ARR[i].classList.toggle('disable');
-    carousel.children[i].classList.toggle('showcase-disable');
+  const nextState = (STATE + 1) % SHOWCASES.length;
+  for (let i = 0; i < SHOWCASES.length; i++) {
+    const { obj, el, options } = SHOWCASES[i];
+    obj.reset();
+    if (i === nextState) {
+      document.querySelector(el).classList.remove('showcase-disable');
+      document.querySelector(options).classList.remove('disable');
+    } else {
+      document.querySelector(el).classList.add('showcase-disable');
+      document.querySelector(options).classList.add('disable');
+    }
   }
-  actionButton.textContent = carousel.children[nextState].dataset.descrip;
-  CAROUSEL_STATE = nextState;
+  actionButton.textContent = document.querySelector(
+    SHOWCASES[nextState].el
+  ).dataset.descrip;
+  STATE = nextState;
   swap.classList.toggle('clicked');
 });
 
 actionButton.addEventListener('click', (evt) => {
   evt.target.blur();
-  SHOWCASES[CAROUSEL_STATE].spawn(evt);
+  SHOWCASES[STATE].obj.spawn(evt);
 });
 const resetButtons = document.querySelectorAll('.reset');
 resetButtons.forEach((button) =>
-  button.addEventListener('click', () => SHOWCASES[CAROUSEL_STATE].reset())
+  button.addEventListener('click', () => SHOWCASES[STATE].obj.reset())
 );
 
 const greySelector = document.querySelector('input[id="life-greyscale"]');
@@ -226,6 +235,23 @@ gravSelector.addEventListener('click', () =>
   Particles.setOption(Particles.options.gravity, gravSelector.checked)
 );
 
+const autoGreySelector = document.querySelector('input[id="auto-greyscale"]');
+autoGreySelector.addEventListener('click', () =>
+  Automata.setOption(Automata.options.greyscale, autoGreySelector.checked)
+);
+const autoColorSelector = document.querySelector('input[id="auto-colorful"]');
+autoColorSelector.addEventListener('click', () =>
+  Automata.setOption(Automata.options.greyscale, autoGreySelector.checked)
+);
+const prettySelector = document.querySelector('input[name="pretty"]');
+prettySelector.addEventListener('click', () =>
+  Automata.setOption(Automata.options.pretty, prettySelector.checked)
+);
+const autoDelaySlider = document.querySelector('input[name="auto-delay"]');
+autoDelaySlider.addEventListener('change', () =>
+  Automata.setOption(Automata.options.delay, autoDelaySlider.value)
+);
+
 const testFade = () => {
   let showcase = null;
   for (let i = 0; i < carousel.children.length; i++) {
@@ -247,3 +273,6 @@ GoL.draw();
 
 Particles.init(optionsDrop);
 Particles.draw();
+
+Automata.init();
+Automata.draw();

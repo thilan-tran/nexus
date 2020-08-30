@@ -16,6 +16,7 @@
     <script type="module" src="fade.js"></script>
     <script type="module" src="life.js"></script>
     <script type="module" src="particles.js"></script>
+    <script type="module" src="automata.js"></script>
     <script type="module" src="main.js"></script>
   </head>
   <body>
@@ -30,6 +31,11 @@
           id="particles"
           class="showcase showcase-disable"
           data-descrip="SPAWN SOME PARTICLES."
+        ></canvas>
+        <canvas
+          id="automata"
+          class="showcase showcase-disable"
+          data-descrip="SPAWN CELLULAR AUTOMATON."
         ></canvas>
       </div>
 
@@ -163,7 +169,7 @@
                     />
                   </div>
                   <div class="option">
-                    <label for="feed1D">Feed in 1D cell. automata</label>
+                    <label for="feed1D">Feed in 1D cell. automaton</label>
                     <input type="checkbox" name="feed1D" />
                   </div>
                   <div class="option">
@@ -184,6 +190,48 @@
                     <a
                       class="button"
                       href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
+                      target="_blank"
+                    >
+                      About
+                    </a>
+                  </div>
+                </div>
+                <div class="automata-options disable" style="width:200px;">
+                  <div class="option">
+                    <label for="auto-greyscale">Greyscale</label>
+                    <input type="radio" name="auto-color" id="auto-greyscale" />
+                  </div>
+                  <div class="option">
+                    <label for="auto-colorful">Colorful</label>
+                    <input
+                      type="radio"
+                      name="auto-color"
+                      id="auto-colorful"
+                      checked
+                    />
+                  </div>
+                  <div class="option">
+                    <label for="pretty">Pretty rules only</label>
+                    <input type="checkbox" name="pretty" checked />
+                  </div>
+                  <div class="option">
+                    <label for="auto-delay">Animation delay</label>
+                    <input
+                      type="range"
+                      name="auto-delay"
+                      style="width:55px;"
+                      value="10"
+                      min="10"
+                      max="100"
+                    />
+                  </div>
+                  <div class="option">
+                    <button class="button reset">Reset</button>
+                  </div>
+                  <div class="option">
+                    <a
+                      class="button"
+                      href="https://plato.stanford.edu/entries/cellular-automata/supplement.html#:~:text=As%20we%20have%20seen%2C%20in,total%20of%20256%20possible%20rules."
                       target="_blank"
                     >
                       About
@@ -425,7 +473,7 @@
               />
               <img
                 id="thing2"
-                height="63%"
+                height="65%"
                 src="./static/wml-state-edit.jpeg"
                 alt=""
               />

@@ -1,5 +1,5 @@
 const MAX_SPEED = 15;
-const MAX_LIFESPAN = 3;
+const MAX_LIFESPAN = 2;
 const DELAY = 10;
 
 const GRAVITY_ACCEL = +0.05 / (DELAY / 1000);

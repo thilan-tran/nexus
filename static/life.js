@@ -209,7 +209,7 @@ const createCell = (i, j, forceWriteCpy = false) => {
   GRID[i][j].lifespan = LIFESPAN;
   changeList.push([i, j, ALIVE, LIFESPAN]);
   if (forceWriteCpy) {
-    GRID_CPY[i][j] = 1;
+    GRID_CPY[i][j] = true;
   }
 };
 

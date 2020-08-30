@@ -54,7 +54,7 @@ body {
   transition: 0.2s all ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (min-width: 640px) {
   .action-button:hover,
   .action-button:focus {
     background-color: #555;
@@ -207,6 +207,7 @@ body {
 }
 
 .icon {
+  position: relative;
   padding: 5px;
   width: 30px;
   height: 30px;
@@ -221,7 +222,7 @@ body {
   transition: 0.2s transform ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (min-width: 640px) {
   .icon:hover {
     background-color: #eee;
     box-shadow: 7px 3px 0 0 #000;
@@ -257,10 +258,10 @@ body {
   transition: all 0.2s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (min-width: 640px) {
   .caret:hover svg path {
     /* padding-bottom: 5px; */
-    fill: transparent !important;
+    fill: #eee !important;
   }
 }
 
@@ -311,7 +312,7 @@ body {
   z-index: 1;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (min-width: 640px) {
   .name-card:hover {
     background-color: #eee;
     box-shadow: 7px 3px 0 0 #000;
@@ -710,7 +711,7 @@ a {
   }
 
   .caret.point-up svg path {
-    fill: transparent !important;
+    fill: #eee !important;
   }
 
   #thing1 {
@@ -761,5 +762,9 @@ a {
   .carousel .showcase {
     margin-top: 64px;
     height: calc(100vh - 64px);
+  }
+
+  .caret.point-up svg path {
+    fill: #fff !important;
   }
 }
