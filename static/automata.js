@@ -5,7 +5,7 @@ const BASE_LIFESPAN = 20;
 // const BASE_TRACESPAN = 60;
 let BASE_TRACESPAN = 50;
 
-const BASE_RESOLUTION = 10;
+const BASE_RESOLUTION = 5;
 const NUM_COLORS = 20; // number of colors in gradient (lower => more performant)
 const ONEDIM_PREVIEW = 10; // number of rows to preview 1D cellular automata input
 let PRETTY_RULES_ONLY = true;
@@ -14,7 +14,7 @@ let PRETTY_RULES_ONLY = true;
 let LIFESPAN = BASE_LIFESPAN;
 let TRACESPAN = BASE_TRACESPAN;
 let ONEDIM_INPUT = false;
-let DELAY = 10; // delay between draw cycles in msec (higher => more performant)
+let DELAY = 0; // delay between draw cycles in msec (higher => more performant)
 // up to 60 FPS (~20 msec delay) with window.requestAnimationFrame
 let USING_GREYSCALE = false;
 
