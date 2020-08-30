@@ -119,7 +119,7 @@ const registerModalEvents = (clickElem, modalElem) => {
     !modalBody.contains(evt.target) && closeModal(modalElem);
     evt.stopPropagation();
   });
-  document.addEventListener('touchend', (evt) => {
+  document.addEventListener('touchstart', (evt) => {
     !modalBody.contains(evt.target) && closeModal(modalElem);
     evt.stopPropagation();
   });
