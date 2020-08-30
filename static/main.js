@@ -115,14 +115,17 @@ const registerModalEvents = (clickElem, modalElem) => {
   modalElem
     .querySelector('.close')
     .addEventListener('click', () => closeModal(modalElem));
-  document.addEventListener('click', (evt) => {
-    !modalBody.contains(evt.target) && closeModal(modalElem);
-    evt.stopPropagation();
-  });
-  document.addEventListener('touchstart', (evt) => {
-    !modalBody.contains(evt.target) && closeModal(modalElem);
-    evt.stopPropagation();
-  });
+  if (IS_MOBILE) {
+    document.addEventListener('touchstart', (evt) => {
+      !modalBody.contains(evt.target) && closeModal(modalElem);
+      evt.stopPropagation();
+    });
+  } else {
+    document.addEventListener('click', (evt) => {
+      !modalBody.contains(evt.target) && closeModal(modalElem);
+      evt.stopPropagation();
+    });
+  }
 };
 const firstModal = document.querySelector('.modal');
 if (IS_MOBILE) {
