@@ -108,22 +108,23 @@ const closeModal = (elem) => {
 
 const registerModalEvents = (clickElem, modalElem) => {
   const modalBody = modalElem.querySelector('.modal-body');
+  const overlay = modalElem.nextElementSibling;
+  overlay.addEventListener('click', () => {});
+  modalElem
+    .querySelector('.close')
+    .addEventListener('click', () => closeModal(modalElem));
   clickElem.addEventListener('click', (evt) => {
     openModal(modalElem);
     evt.stopPropagation();
   });
-  modalElem
-    .querySelector('.close')
-    .addEventListener('click', () => closeModal(modalElem));
   document.addEventListener('click', (evt) => {
-    !modalBody.contains(evt.target) && closeModal(modalElem);
-    evt.stopPropagation();
-  });
-  document.addEventListener('touchend', (evt) => {
-    !modalBody.contains(evt.target) && closeModal(modalElem);
-    evt.stopPropagation();
+    if (!modalBody.contains(evt.target)) {
+      closeModal(modalElem);
+      evt.stopPropagation();
+    }
   });
 };
+
 const firstModal = document.querySelector('.modal');
 if (IS_MOBILE) {
   firstModal.style.height = `${window.innerHeight * 0.9}px`;
