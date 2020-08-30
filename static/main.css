@@ -588,12 +588,12 @@ a {
 }
 
 @media (max-width: 640px) {
-  .ios-spacing .title b {
+  body.ios-font-spacing {
     letter-spacing: -3px;
   }
 
-  body.ios-font-spacing {
-    letter-spacing: -3px;
+  .ios-spacing .title b {
+    letter-spacing: -3px !important;
   }
 
   .showcase-overlay {
