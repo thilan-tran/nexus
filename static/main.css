@@ -610,12 +610,14 @@ a {
   .swap {
     top: 2px;
     right: 42px;
+    background-color: transparent;
     box-shadow: none !important;
     border: none;
     z-index: 2;
   }
 
   .dropdown {
+    background-color: transparent;
     border: none;
     top: 2px;
     right: 2px;
