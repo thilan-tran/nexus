@@ -249,7 +249,7 @@ body {
 
   cursor: pointer;
   animation: pulse 1.5s infinite;
-  transition: 0.2 fill ease;
+  /* transition: 0.2 fill ease; */
   z-index: 1;
 }
 
@@ -608,15 +608,17 @@ a {
   }
 
   .swap {
-    top: 0;
+    top: 2px;
     right: 42px;
     box-shadow: none !important;
+    border: none;
     z-index: 2;
   }
 
   .dropdown {
-    top: 0;
-    right: 0;
+    border: none;
+    top: 2px;
+    right: 2px;
     box-shadow: none !important;
     z-index: 2;
   }
@@ -686,6 +688,10 @@ a {
     animation: none;
     right: 10px;
     top: -2px;
+  }
+
+  .caret svg path {
+    transition: none;
   }
 
   .caret.point-up svg path {
