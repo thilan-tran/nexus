@@ -288,6 +288,6 @@ const iOS = () =>
   ].includes(navigator.platform) ||
   (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
 
-if (iOS) {
+if (true) {
   document.body.classList.add('ios-font-spacing');
 }
