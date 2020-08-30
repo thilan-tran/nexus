@@ -295,8 +295,7 @@ body {
   padding: 0 5px;
   top: 0px;
 
-  border: 2px solid transparent;
-  border-bottom: 2px solid #000;
+  border: 2px solid #000;
   box-shadow: -7px 3px 0 0 #000;
   color: #000;
   background-color: #fff;
@@ -599,6 +598,8 @@ a {
   .name-card {
     /* margin: 10px; */
     /* padding: 0 10px; */
+    border: 2px solid transparent;
+    border-bottom: 2px solid #000;
     margin: 0;
     padding: 0px 10px;
     width: calc(100vw - 24px);
