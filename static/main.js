@@ -3,19 +3,31 @@ import GoL from './life.js';
 import Particles from './particles.js';
 import Automata from './automata.js';
 
-const measureScrollbarWidth = () => {
-  let scrollbox = document.createElement('div');
-  scrollbox.style.overflow = 'scroll';
-  document.body.appendChild(scrollbox);
-  let scrollBarWidth = scrollbox.offsetWidth - scrollbox.clientWidth;
-  document.body.removeChild(scrollbox);
-  return scrollBarWidth;
+const getScrollWidth = () => {
+  let scroll = document.createElement('div');
+  scroll.style.overflow = 'scroll';
+  document.body.appendChild(scroll);
+  let width = scroll.offsetWidth - scroll.clientWidth;
+  document.body.removeChild(scroll);
+  return width;
 };
-const SCROLL_WIDTH = measureScrollbarWidth();
+const SCROLL_WIDTH = getScrollWidth();
+
+const getIos = () =>
+  [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ].includes(navigator.platform) ||
+  (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
+if (getIos()) {
+  document.body.classList.add('ios-font-spacing');
+}
 
 const IS_MOBILE = window.innerWidth <= 640;
-
-const carousel = document.querySelector('.carousel');
 
 const optionsDrop = document.querySelector('.dropdown');
 const dropContent = document.querySelector('.dropdown .dropdown-content');
@@ -35,6 +47,7 @@ document.addEventListener(
     !optionsDrop.contains(evt.target) && optionsDrop.classList.remove('expand')
 );
 
+const carousel = document.querySelector('.carousel');
 const content = document.querySelector('.content');
 
 const caret = document.querySelector('.caret');
@@ -99,174 +112,68 @@ links.forEach((link) =>
   link.addEventListener('click', (evt) => evt.stopPropagation())
 );
 
-const wrapper = document.querySelector('.body-wrapper');
-const openModal = (elem) => {
-  if (!elem.classList.contains('show')) {
-    wrapper.style.top = `-${window.scrollY}px`;
-    wrapper.style.position = 'fixed';
-    wrapper.style.width = `calc(100% - ${SCROLL_WIDTH}px)`;
-    // document.body.style.overflowY = 'scroll';
-    elem.classList.add('show');
-  }
-};
-const closeModal = (elem) => {
-  if (elem.classList.contains('show')) {
-    const top = wrapper.style.top;
-    wrapper.style.position = '';
-    wrapper.style.top = '';
-    wrapper.style.width = 'auto';
-    // document.body.style.overflowY = 'auto';
-    window.scrollTo(0, parseInt(top || '0') * -1);
-    elem.classList.remove('show');
-  }
-};
-
-const registerModalEvents = (clickElem, modalElem) => {
-  const modalBody = modalElem.querySelector('.modal-body');
-  const overlay = modalElem.nextElementSibling;
-  overlay.addEventListener('click', () => {});
-  modalElem
-    .querySelector('.close')
-    .addEventListener('click', () => closeModal(modalElem));
-  clickElem.addEventListener('click', (evt) => {
-    openModal(modalElem);
-    evt.stopPropagation();
-  });
-  document.addEventListener('click', (evt) => {
-    if (!modalBody.contains(evt.target)) {
-      closeModal(modalElem);
-      evt.stopPropagation();
-    }
-  });
-};
-
-const firstModal = document.querySelector('.modal');
-if (IS_MOBILE) {
-  firstModal.style.height = `${window.innerHeight * 0.9}px`;
-}
-registerModalEvents(document.querySelector('.card'), firstModal);
+const modalList = [['.card', '.modal']];
 for (const item of document.querySelector('.grid').children) {
-  const modal = document.querySelector(
-    `.modal[data-project="${item.dataset.project}"]`
-  );
-  if (IS_MOBILE) {
-    modal.style.height = `${window.innerHeight * 0.9}px`;
-  }
-  modal && registerModalEvents(item, modal);
+  modalList.push([item, `.modal[data-project="${item.dataset.project}"]`]);
 }
 
-// document.querySelector('.card').addEventListener('click', (evt) => {
-//   modal.classList.toggle('show');
-//   evt.stopPropagation();
-// });
-// modal
-//   .querySelector('.close')
-//   .addEventListener('click', () => modal.classList.remove('show'));
-// document.addEventListener(
-//   'click',
-//   (evt) => !modal.contains(evt.target) && modal.classList.remove('show')
-// );
+initModals(modalList);
 
-const SHOWCASES = [
-  { obj: GoL, el: '#game-of-life', options: '.life-options' },
-  { obj: Automata, el: '#automata', options: '.automata-options' },
-  { obj: Particles, el: '#particles', options: '.particle-options' }
-];
-let STATE = 0;
+function initModals(modalList) {
+  const wrapper = document.querySelector('.body-wrapper');
 
-const swap = document.querySelector('.swap');
-const actionButton = document.querySelector('.action-button');
-
-swap.addEventListener('click', () => {
-  const nextState = (STATE + 1) % SHOWCASES.length;
-  for (let i = 0; i < SHOWCASES.length; i++) {
-    const { obj, el, options } = SHOWCASES[i];
-    obj.reset();
-    if (i === nextState) {
-      document.querySelector(el).classList.remove('showcase-disable');
-      document.querySelector(options).classList.remove('disable');
-    } else {
-      document.querySelector(el).classList.add('showcase-disable');
-      document.querySelector(options).classList.add('disable');
+  const openModal = (elem) => {
+    if (!elem.classList.contains('show')) {
+      wrapper.style.top = `-${window.scrollY}px`;
+      wrapper.style.position = 'fixed';
+      wrapper.style.width = `calc(100% - ${SCROLL_WIDTH}px)`;
+      elem.classList.add('show');
     }
-  }
-  actionButton.textContent = document.querySelector(
-    SHOWCASES[nextState].el
-  ).dataset.descrip;
-  STATE = nextState;
-  swap.classList.toggle('clicked');
-});
+  };
+  const closeModal = (elem) => {
+    if (elem.classList.contains('show')) {
+      const top = wrapper.style.top;
+      wrapper.style.position = '';
+      wrapper.style.top = '';
+      wrapper.style.width = 'auto';
+      window.scrollTo(0, parseInt(top || '0') * -1);
+      elem.classList.remove('show');
+    }
+  };
 
-actionButton.addEventListener('click', (evt) => {
-  evt.target.blur();
-  SHOWCASES[STATE].obj.spawn(evt);
-});
-const resetButtons = document.querySelectorAll('.reset');
-resetButtons.forEach((button) =>
-  button.addEventListener('click', () => SHOWCASES[STATE].obj.reset())
-);
+  const registerModal = (clickElem, modalElem) => {
+    if (IS_MOBILE) {
+      modalElem.style.height = `${window.innerHeight * 0.9}px`;
+    }
 
-const greySelector = document.querySelector('input[id="life-greyscale"]');
-greySelector.addEventListener('click', () =>
-  GoL.setOption(GoL.options.greyscale, greySelector.checked)
-);
-const colorSelector = document.querySelector('input[id="life-colorful"]');
-colorSelector.addEventListener('click', () =>
-  GoL.setOption(GoL.options.greyscale, greySelector.checked)
-);
-const traceSelector = document.querySelector('input[name="trace"]');
-traceSelector.addEventListener('click', () =>
-  GoL.setOption(GoL.options.trace, traceSelector.checked)
-);
-const oneDimSelector = document.querySelector('input[name="feed1D"]');
-oneDimSelector.addEventListener('click', () =>
-  GoL.setOption(GoL.options.oneDimIput, oneDimSelector.checked)
-);
+    const modalBody = modalElem.querySelector('.modal-body');
+    const overlay = modalElem.nextElementSibling;
+    overlay.addEventListener('click', () => {});
+    modalElem
+      .querySelector('.close')
+      .addEventListener('click', () => closeModal(modalElem));
+    clickElem.addEventListener('click', (evt) => {
+      openModal(modalElem);
+      evt.stopPropagation();
+    });
+    document.addEventListener('click', (evt) => {
+      if (!modalBody.contains(evt.target)) {
+        closeModal(modalElem);
+        evt.stopPropagation();
+      }
+    });
+  };
 
-const delaySlider = document.querySelector('input[name="delay"]');
-delaySlider.addEventListener('change', () =>
-  GoL.setOption(GoL.options.delay, delaySlider.value)
-);
-const traceSlider = document.querySelector('input[name="trace-length"]');
-traceSlider.addEventListener('change', () =>
-  GoL.setOption(GoL.options.traceLength, traceSlider.value)
-);
+  modalList.forEach(([trigger, modal]) => {
+    console.log(trigger, modal);
+    registerModal(
+      typeof trigger === 'string' ? document.querySelector(trigger) : trigger,
+      typeof modal === 'string' ? document.querySelector(modal) : modal
+    );
+  });
+}
 
-const partGreySelector = document.querySelector(
-  'input[id="particle-greyscale"]'
-);
-partGreySelector.addEventListener('click', () =>
-  Particles.setOption(Particles.options.greyscale, partGreySelector.checked)
-);
-const partColorSelector = document.querySelector(
-  'input[id="particle-colorful"]'
-);
-partColorSelector.addEventListener('click', () =>
-  Particles.setOption(Particles.options.greyscale, partGreySelector.checked)
-);
-const gravSelector = document.querySelector('input[name="gravity"]');
-gravSelector.addEventListener('click', () =>
-  Particles.setOption(Particles.options.gravity, gravSelector.checked)
-);
-
-const autoGreySelector = document.querySelector('input[id="auto-greyscale"]');
-autoGreySelector.addEventListener('click', () =>
-  Automata.setOption(Automata.options.greyscale, autoGreySelector.checked)
-);
-const autoColorSelector = document.querySelector('input[id="auto-colorful"]');
-autoColorSelector.addEventListener('click', () =>
-  Automata.setOption(Automata.options.greyscale, autoGreySelector.checked)
-);
-const prettySelector = document.querySelector('input[name="pretty"]');
-prettySelector.addEventListener('click', () =>
-  Automata.setOption(Automata.options.pretty, prettySelector.checked)
-);
-const autoDelaySlider = document.querySelector('input[name="auto-delay"]');
-autoDelaySlider.addEventListener('change', () =>
-  Automata.setOption(Automata.options.delay, autoDelaySlider.value)
-);
-
-const testFade = () => {
+const shouldFadeOverlay = () => {
   let showcase = null;
   for (let i = 0; i < carousel.children.length; i++) {
     if (!carousel.children[i].classList.contains('showcase-disable')) {
@@ -280,28 +187,93 @@ const testFade = () => {
   return [fade, nextDelay];
 };
 
-Fade.init(testFade, IS_MOBILE);
+Fade.init(shouldFadeOverlay, IS_MOBILE);
 
-GoL.init(IS_MOBILE ? 8 : 10);
-GoL.draw();
+const SHOWCASES = [
+  {
+    obj: GoL,
+    el: '#game-of-life',
+    optionsEl: '.life-options',
+    initOptions: [IS_MOBILE ? 8 : 10]
+  },
+  {
+    obj: Automata,
+    el: '#automata',
+    optionsEl: '.automata-options',
+    initOptions: []
+  },
+  {
+    obj: Particles,
+    el: '#particles',
+    optionsEl: '.particle-options',
+    initOptions: [optionsDrop]
+  }
+];
 
-Particles.init(optionsDrop);
-Particles.draw();
+startShowcases('.swap', '.action-button');
 
-Automata.init();
-Automata.draw();
+function startShowcases(swapSelector, actionSelector) {
+  let STATE = 0;
 
-const iOS = () =>
-  [
-    'iPad Simulator',
-    'iPhone Simulator',
-    'iPod Simulator',
-    'iPad',
-    'iPhone',
-    'iPod'
-  ].includes(navigator.platform) ||
-  (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
+  const swap = document.querySelector(swapSelector);
+  const actionButton = document.querySelector(actionSelector);
+  actionButton.textContent = document.querySelector(
+    SHOWCASES[0].el
+  ).dataset.descrip;
 
-if (iOS()) {
-  document.body.classList.add('ios-font-spacing');
+  swap.addEventListener('click', () => {
+    const nextState = (STATE + 1) % SHOWCASES.length;
+    for (let i = 0; i < SHOWCASES.length; i++) {
+      const { obj, el, optionsEl } = SHOWCASES[i];
+      obj.reset();
+      if (i === nextState) {
+        document.querySelector(el).classList.remove('showcase-disable');
+        document.querySelector(optionsEl).classList.remove('disable');
+      } else {
+        document.querySelector(el).classList.add('showcase-disable');
+        document.querySelector(optionsEl).classList.add('disable');
+      }
+    }
+    actionButton.textContent = document.querySelector(
+      SHOWCASES[nextState].el
+    ).dataset.descrip;
+    STATE = nextState;
+    swap.classList.toggle('clicked');
+  });
+
+  actionButton.addEventListener('click', (evt) => {
+    evt.target.blur();
+    SHOWCASES[STATE].obj.spawn(evt);
+  });
+  const resetButtons = document.querySelectorAll('.reset');
+  resetButtons.forEach((button) =>
+    button.addEventListener('click', () => SHOWCASES[STATE].obj.reset())
+  );
+
+  GoL.initOptionListeners({
+    greyId: 'input[id="life-greyscale"]',
+    colorId: 'input[id="life-colorful"]',
+    traceId: 'input[name="trace"]',
+    feedId: 'input[name="feed1D"]',
+    delayId: 'input[name="delay"]',
+    traceLengthId: 'input[name="trace-length"]'
+  });
+
+  Particles.initOptionListeners({
+    greyId: 'input[id="particle-greyscale"]',
+    colorId: 'input[id="particle-colorful"]',
+    gravityId: 'input[name="gravity"]'
+  });
+
+  Automata.initOptionListeners({
+    greyId: 'input[id="auto-greyscale"]',
+    colorId: 'input[id="auto-colorful"]',
+    prettyId: 'input[name="pretty"]',
+    delayId: 'input[name="auto-delay"]'
+  });
+
+  SHOWCASES.forEach(({ obj, initOptions }) => {
+    obj.init(...initOptions);
+    obj.draw();
+  });
 }

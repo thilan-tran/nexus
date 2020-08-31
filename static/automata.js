@@ -1,19 +1,8 @@
-// how live cell color changes w/ gradient in frames
-const BASE_LIFESPAN = 20;
-// how long traces of live cell paths last in frames and
-// how trace cell color changes w/ gradient (lower => shorter traces, more performant)
-// const BASE_TRACESPAN = 60;
-let BASE_TRACESPAN = 50;
-
 const BASE_RESOLUTION = 5;
 const NUM_COLORS = 20; // number of colors in gradient (lower => more performant)
-const ONEDIM_PREVIEW = 10; // number of rows to preview 1D cellular automata input
 let PRETTY_RULES_ONLY = true;
 
 // Changed by options:
-let LIFESPAN = BASE_LIFESPAN;
-let TRACESPAN = BASE_TRACESPAN;
-let ONEDIM_INPUT = false;
 let DELAY = 10; // delay between draw cycles in msec (higher => more performant)
 // up to 60 FPS (~20 msec delay) with window.requestAnimationFrame
 let USING_GREYSCALE = false;
@@ -68,11 +57,7 @@ const init = (resolution = RESOLUTION) => {
   }
 };
 
-const LIVE_CELL_COLORS = [
-  [18, 223, 153],
-  [38, 164, 121]
-];
-const TRACE_CELL_COLORS = [
+const COLORFUL = [
   [15, 160, 187],
   [5, 51, 60]
 ];
@@ -128,7 +113,7 @@ const colorCell = (i, j, type) => {
   let color = getGradient(
     randRange(NUM_COLORS),
     NUM_COLORS,
-    USING_GREYSCALE ? GREY : TRACE_CELL_COLORS
+    USING_GREYSCALE ? GREY : COLORFUL
   );
   let fill = type ? color : '#fff';
   ctx.fillStyle = fill;
@@ -239,10 +224,30 @@ const options = {
   pretty: 2
 };
 
+const initOptionListeners = ({ greyId, colorId, prettyId, delayId }) => {
+  const greySelector = document.querySelector(greyId);
+  greySelector.addEventListener('click', () =>
+    setOption(options.greyscale, greySelector.checked)
+  );
+  const colorSelector = document.querySelector(colorId);
+  colorSelector.addEventListener('click', () =>
+    setOption(options.greyscale, greySelector.checked)
+  );
+  const prettySelector = document.querySelector(prettyId);
+  prettySelector.addEventListener('click', () =>
+    setOption(options.pretty, prettySelector.checked)
+  );
+  const delaySlider = document.querySelector(delayId);
+  delaySlider.addEventListener('change', () =>
+    setOption(options.delay, delaySlider.value)
+  );
+};
+
 const setOption = (type, value) => {
   switch (type) {
     case options.greyscale:
       USING_GREYSCALE = value;
+      reset();
       break;
     case options.delay:
       console.log('Set animation delay to', value);
@@ -254,4 +259,12 @@ const setOption = (type, value) => {
   }
 };
 
-export default { init, draw, reset, spawn, options, setOption };
+export default {
+  init,
+  initOptionListeners,
+  draw,
+  reset,
+  spawn,
+  options,
+  setOption
+};

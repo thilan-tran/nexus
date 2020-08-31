@@ -397,6 +397,40 @@ const options = {
   oneDimIput: 4
 };
 
+const initOptionListeners = ({
+  greyId,
+  colorId,
+  traceId,
+  feedId,
+  delayId,
+  traceLengthId
+}) => {
+  const greySelector = document.querySelector(greyId);
+  greySelector.addEventListener('click', () =>
+    setOption(options.greyscale, greySelector.checked)
+  );
+  const colorSelector = document.querySelector(colorId);
+  colorSelector.addEventListener('click', () =>
+    setOption(options.greyscale, greySelector.checked)
+  );
+  const traceSelector = document.querySelector(traceId);
+  traceSelector.addEventListener('click', () =>
+    setOption(options.trace, traceSelector.checked)
+  );
+  const oneDimSelector = document.querySelector(feedId);
+  oneDimSelector.addEventListener('click', () =>
+    setOption(options.oneDimIput, oneDimSelector.checked)
+  );
+  const delaySlider = document.querySelector(delayId);
+  delaySlider.addEventListener('change', () =>
+    setOption(options.delay, delaySlider.value)
+  );
+  const traceSlider = document.querySelector(traceLengthId);
+  traceSlider.addEventListener('change', () =>
+    setOption(options.traceLength, traceSlider.value)
+  );
+};
+
 const setOption = (type, value) => {
   switch (type) {
     case options.delay:
@@ -435,4 +469,12 @@ const setOption = (type, value) => {
   reColorCells();
 };
 
-export default { init, draw, reset, spawn, options, setOption };
+export default {
+  init,
+  initOptionListeners,
+  draw,
+  reset,
+  spawn,
+  options,
+  setOption
+};
