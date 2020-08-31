@@ -16,9 +16,15 @@ module.exports = {
         test: /\.html$/,
         use: ['html-loader']
       },
+      { test: /\.otf$/, use: ['file-loader'] },
       {
-        test: /\.(png|jpg|jpeg|otf)$/,
-        use: ['file-loader']
+        test: /\.(png|jpg|jpeg)$/,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader'
+          }
+        ]
       }
     ]
   },
