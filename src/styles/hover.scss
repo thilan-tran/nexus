@@ -1,0 +1,27 @@
+@media (hover: hover) and (min-width: 640px) {
+  .name-card:hover {
+    background-color: #eee;
+    box-shadow: 7px 3px 0 0 #000;
+  }
+
+  .action-button:hover,
+  .action-button:focus {
+    background-color: #555;
+    box-shadow: -6px -6px 0 0 #000;
+    outline: none;
+  }
+
+  .action-button:hover::after,
+  .action-button:focus::after {
+    opacity: 0;
+  }
+
+  .caret:hover svg path {
+    fill: #eee;
+  }
+
+  .icon:hover {
+    background-color: #eee;
+    box-shadow: 7px 3px 0 0 #000;
+  }
+}

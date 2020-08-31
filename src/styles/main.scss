@@ -1,0 +1,28 @@
+@import './overlay';
+@import './content';
+@import './modal';
+
+@import './hover';
+@import './responsive';
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+@font-face {
+  font-family: 'CircularStd';
+  src: url('../static/CircularStd-Book.otf') format('opentype');
+}
+
+$header-font: 'Oswald', sans-serif;
+$body-font: 'CircularStd', sans-serif;
+
+body {
+  position: relative;
+  margin: 0;
+  font-family: $header-font;
+  overflow-anchor: none;
+  scrollbar-width: thin;
+
+  p {
+    font-family: $body-font;
+  }
+}

@@ -1,0 +1,129 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100vh;
+  max-width: 1200px;
+  width: 100vw;
+  margin: 0 calc((100vw - 1200px) / 2);
+}
+
+.card {
+  padding: 0 30px;
+  margin: 60px 50px;
+  cursor: pointer;
+  transition: 0.3s box-shadow ease;
+
+  &:hover {
+    box-shadow: -2px 2px 0 0 #eee;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 40px;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  h2::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: 0.3s width ease;
+  }
+
+  &:hover h2::after {
+    width: 100%;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 35px;
+  }
+}
+
+.socials svg {
+  height: 35px;
+  margin: 0 5px;
+}
+
+.highlight {
+  position: relative;
+  color: #000;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 7px 0 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(-7px);
+    transition: box-shadow 0.1s ease, transform 0.2s ease;
+  }
+
+  &:hover::after {
+    transform: translateY(-22px);
+    box-shadow: 0 22px 0 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 49%);
+  grid-gap: 2%;
+  margin-bottom: 7%;
+}
+
+.grid-item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 375px;
+  overflow: hidden;
+  background-color: #eee;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+  }
+
+  &:hover::after {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .title {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    color: #fff;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .title b {
+    font-size: 30px;
+  }
+
+  &:hover .title {
+    opacity: 1;
+  }
+
+  img {
+    height: 250px;
+  }
+}
