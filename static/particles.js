@@ -148,6 +148,21 @@ const options = {
   gravity: 1
 };
 
+const initOptionListeners = ({ greyId, colorId, gravityId }) => {
+  const greySelector = document.querySelector(greyId);
+  greySelector.addEventListener('click', () =>
+    setOption(options.greyscale, greySelector.checked)
+  );
+  const colorSelector = document.querySelector(colorId);
+  colorSelector.addEventListener('click', () =>
+    setOption(options.greyscale, greySelector.checked)
+  );
+  const gravSelector = document.querySelector(gravityId);
+  gravSelector.addEventListener('click', () =>
+    setOption(options.gravity, gravSelector.checked)
+  );
+};
+
 const setOption = (type, value) => {
   switch (type) {
     case options.greyscale:
@@ -187,4 +202,12 @@ const draw = () => {
 
 const init = (elem) => (OPTIONS_ELEM = elem);
 
-export default { init, draw, reset, spawn, options, setOption };
+export default {
+  init,
+  initOptionListeners,
+  draw,
+  reset,
+  spawn,
+  options,
+  setOption
+};
