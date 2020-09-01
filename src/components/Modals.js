@@ -379,6 +379,23 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
         style={{ height: height && `${height}px` }}
       >
         <div className="modal-body" ref={ref}>
+          <div
+            className={'button'}
+            onClick={() => {
+              console.log('TESTCLICK2');
+              resetModal();
+            }}
+          >
+            TEST2
+          </div>
+          <button
+            onClick={() => {
+              console.log('TESTCLICK');
+              resetModal();
+            }}
+          >
+            TEST
+          </button>
           <svg
             className="close"
             xmlns="http://www.w3.org/2000/svg"
