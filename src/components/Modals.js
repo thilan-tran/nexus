@@ -411,8 +411,8 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               cursor: 'pointer',
               padding: 0
             }}
-            onMouseDown={() => setDown(new Date())}
-            onMouseUp={() => {
+            onTouchStart={() => setDown(new Date())}
+            onTouchEnd={() => {
               if (down && new Date() - down < 300) {
                 resetModal();
               }
