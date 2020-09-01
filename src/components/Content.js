@@ -35,6 +35,7 @@ const About = ({ openModal }) => {
         console.log('clcik');
         openModal('about');
       }}
+      onTouchMove={() => setDown(null)}
       onTouchStart={() => setDown(new Date())}
       onTouchEnd={() => {
         if (down && new Date() - down < 300) {

@@ -394,6 +394,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               cursor: 'pointer',
               padding: 0
             }}
+            onTouchMove={() => setDown(null)}
             onTouchStart={() => setDown(new Date())}
             onTouchEnd={() => {
               if (down && new Date() - down < 300) {
