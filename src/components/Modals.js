@@ -324,6 +324,13 @@ const modalArr = [
 const Modals = ({ showModalId, resetModal, isMobile }) => {
   const currModal = modalArr.find(({ id }) => id === showModalId);
 
+  const [height, setHeight] = useState(null);
+  useEffect(() => {
+    if (isMobile) {
+      setHeight(window.innerHeight * 0.9);
+    }
+  }, []);
+
   const ref = useRef(null);
   useEffect(() => {
     let down = false;
@@ -356,10 +363,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   return (
     <>
       <div>{prefetchImages}</div>
-      <div
-        className={'modal show'}
-        style={{ height: isMobile && `${window.innerHeight * 0.9}px` }}
-      >
+      <div className={'modal show'} style={{ height: height && `${height}px` }}>
         <div className="modal-body" ref={ref}>
           <svg
             className="close"
