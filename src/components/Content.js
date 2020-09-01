@@ -40,7 +40,14 @@ const About = ({ openModal }) => {
         <h2>ABOUT</h2>
       </div>
       <div className={`socials ${pastContent ? 'stick-top' : ''}`}>
-        <a href="https://github.com/thilan-tran" target="_blank">
+        <a
+          href="https://github.com/thilan-tran"
+          target="_blank"
+          onClick={(e) => {
+            console.log('linkd lcick');
+            e.stopPropagation();
+          }}
+        >
           <svg
             className="github"
             xmlns="http://www.w3.org/2000/svg"

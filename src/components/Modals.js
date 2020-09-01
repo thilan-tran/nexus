@@ -331,6 +331,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
     }
   }, [isMobile]);
 
+  const closeRef = useRef(null);
   const ref = useRef(null);
   useEffect(() => {
     let down = false;
@@ -356,6 +357,14 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
     <link rel="prefetch" href={url} key={url} />
   ));
 
+  useEffect(() => {
+    if (closeRef.current) {
+      const listener = () => resetModal();
+      closeRef.current.addEventListener('click', listener);
+      return () => closeRef.current.removeEventListener('click', listener);
+    }
+  }, [closeRef]);
+
   if (!currModal) {
     return <div>{prefetchImages}</div>;
   }
@@ -378,7 +387,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               strokeWidth: '32px',
               cursor: 'pointer'
             }}
-            onClick={resetModal}
+            ref={closeRef}
           >
             <line x1="368" y1="368" x2="144" y2="144" />
             <line x1="368" y1="144" x2="144" y2="368" />
