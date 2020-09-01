@@ -337,13 +337,17 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   useEffect(() => {
     let down = false;
     const handleDown = (evt) => {
-      console.log('mousedown', ref.current, !ref.current.contains(evt.target));
+      console.log(
+        'mousedown',
+        ref.current && !ref.current.contains(evt.target)
+      );
       if (ref.current && !ref.current.contains(evt.target)) {
         console.log('setting down');
         down = true;
       }
     };
     const handleUp = (evt) => {
+      console.log('mouseup');
       if (down && ref.current && !ref.current.contains(evt.target)) {
         resetModal();
       }
