@@ -5,6 +5,7 @@ import Modals from './Modals';
 
 const About = ({ openModal }) => {
   const aboutContentRef = useRef(null);
+  const [down, setDown] = useState(false);
 
   const getContentTop = () =>
     aboutContentRef.current &&
@@ -33,8 +34,17 @@ const About = ({ openModal }) => {
         console.log('clcik');
         openModal('about');
       }}
-      onTouchStart={() => console.log('touchstart')}
-      onTouchEnd={() => console.log('touchend')}
+      onTouchStart={() => {
+        console.log('touchstart');
+        setDown(true);
+      }}
+      onTouchEnd={() => {
+        console.log('touchend');
+        if (down) {
+          openModal('about');
+          setDown(false);
+        }
+      }}
     >
       <div className="header">
         <h2>ABOUT</h2>
