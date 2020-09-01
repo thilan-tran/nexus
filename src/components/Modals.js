@@ -361,14 +361,14 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   useEffect(() => {
     if (closeRef.current) {
       closeRef.current.click();
-      const handle = () => {
-        console.log('CLICKED');
-        resetModal();
-      };
-      closeRef.current.addEventListener('click', handle);
-      return () => {
-        closeRef.current.removeEventListener('click', handle);
-      };
+      // const handle = () => {
+      //   console.log('CLICKED');
+      //   resetModal();
+      // };
+      // closeRef.current.addEventListener('click', handle);
+      // return () => {
+      //   closeRef.current.removeEventListener('click', handle);
+      // };
     }
   }, [closeRef]);
 
@@ -411,6 +411,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               cursor: 'pointer',
               padding: 0
             }}
+            onClick={resetModal}
             ref={closeRef}
           >
             <line x1="368" y1="368" x2="144" y2="144" />
