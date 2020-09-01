@@ -335,31 +335,31 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   const closeRef = useRef(null);
   const ref = useRef(null);
   useEffect(() => {
-    let down = false;
-    const handleDown = (evt) => {
-      console.log(
-        'mousedown',
-        ref.current && !ref.current.contains(evt.target)
-      );
-      if (ref.current && !ref.current.contains(evt.target)) {
-        console.log('setting down');
-        down = true;
-      }
-    };
-    const handleUp = (evt) => {
-      console.log('mouseup');
-      if (down && ref.current && !ref.current.contains(evt.target)) {
-        resetModal();
-      }
-      down = false;
-    };
-    document.addEventListener('mousedown', handleDown);
-    document.addEventListener('mouseup', handleUp);
+    // let down = false;
+    // const handleDown = (evt) => {
+    //   console.log(
+    //     'mousedown',
+    //     ref.current && !ref.current.contains(evt.target)
+    //   );
+    //   if (ref.current && !ref.current.contains(evt.target)) {
+    //     console.log('setting down');
+    //     down = true;
+    //   }
+    // };
+    // const handleUp = (evt) => {
+    //   console.log('mouseup');
+    //   if (down && ref.current && !ref.current.contains(evt.target)) {
+    //     resetModal();
+    //   }
+    //   down = false;
+    // };
+    // document.addEventListener('mousedown', handleDown);
+    // document.addEventListener('mouseup', handleUp);
     // document.addEventListener('touchstart', handleDown);
     // document.addEventListener('touchend', handleUp);
     return () => {
-      document.removeEventListener('mousedown', handleDown);
-      document.removeEventListener('mouseup', handleUp);
+      // document.removeEventListener('mousedown', handleDown);
+      // document.removeEventListener('mouseup', handleUp);
       // document.removeEventListener('touchstart', handleDown);
       // document.removeEventListener('touchend', handleUp);
     };
@@ -422,7 +422,14 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
         </div>
       </div>
       )
-      <div className={`overlay ${currModal ? 'show' : ''}`} />
+      <div
+        className={`overlay ${currModal ? 'show' : ''}`}
+        onClick={() => {
+          if (currModal) {
+            resetModal();
+          }
+        }}
+      />
     </>
   );
 };
