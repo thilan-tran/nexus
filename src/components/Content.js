@@ -32,18 +32,19 @@ const About = ({ openModal }) => {
       id="about"
       className="card"
       style={{ pointer: 'cursor' }}
-      onTouchMove={() => setDown(null)}
+      onTouchMove={() => setDown(false)}
       onTouchStart={(evt) => {
         console.log('touchstart', down);
-        console.log(!evt.contains(socialsRef.current));
-        setDown(new Date());
+        setDown(true);
+        // console.log(!evt.contains(socialsRef.current));
+        // setDown(new Date());
       }}
       onTouchEnd={() => {
         console.log('touchend', down);
         if (down) {
           // if (down && new Date() - down < 300) {
           openModal('about');
-          setDown(null);
+          setDown(false);
         }
       }}
     >
