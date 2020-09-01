@@ -35,8 +35,10 @@ const About = ({ openModal }) => {
       onTouchMove={() => setDown(false)}
       onTouchStart={(evt) => {
         console.log('touchstart', down);
-        setDown(true);
-        // console.log(!evt.contains(socialsRef.current));
+        console.log(!evt.contains(socialsRef.current));
+        if (!evt.contains(socialsRef.current)) {
+          setDown(true);
+        }
         // setDown(new Date());
       }}
       onTouchEnd={() => {
