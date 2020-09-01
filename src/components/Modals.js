@@ -375,7 +375,8 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               stroke: '#000',
               strokeLinecap: 'round',
               strokeLinejoin: 'round',
-              strokeWidth: '32px'
+              strokeWidth: '32px',
+              cursor: 'pointer'
             }}
             onClick={resetModal}
           >
