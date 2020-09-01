@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import PercussionPhoto from '../static/percussion-photo.jpg';
 import WmlTimeline from '../static/wml-timeline.jpeg';
@@ -330,6 +330,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
       setHeight(window.innerHeight * 0.9);
     }
   }, []);
+  useEffect(() => console.log(height), [height]);
 
   const ref = useRef(null);
   useEffect(() => {

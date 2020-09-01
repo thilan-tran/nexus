@@ -26,7 +26,16 @@ const About = ({ openModal }) => {
   }, [aboutContentRef]);
 
   return (
-    <div id="about" className="card" onClick={() => openModal('about')}>
+    <div
+      id="about"
+      className="card"
+      onClick={() => {
+        console.log('clcik');
+        openModal('about');
+      }}
+      onTouchStart={() => console.log('touchstart')}
+      onTouchEnd={() => console.log('touchend')}
+    >
       <div className="header">
         <h2>ABOUT</h2>
       </div>
