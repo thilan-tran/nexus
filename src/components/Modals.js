@@ -359,7 +359,11 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
 
   useEffect(() => {
     if (closeRef.current) {
-      const listener = () => resetModal();
+      console.log('restigset listener');
+      const listener = () => {
+        console.log('cose click');
+        resetModal();
+      };
       closeRef.current.addEventListener('click', listener);
       return () => closeRef.current.removeEventListener('click', listener);
     }

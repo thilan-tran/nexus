@@ -35,6 +35,9 @@ const About = ({ openModal }) => {
         console.log('clcik');
         openModal('about');
       }}
+      onTouchTap={() => {
+        console.log('touchtap');
+      }}
     >
       <div className="header">
         <h2>ABOUT</h2>
