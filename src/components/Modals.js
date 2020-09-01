@@ -324,6 +324,7 @@ const modalArr = [
 const Modals = ({ showModalId, resetModal, isMobile }) => {
   const currModal = modalArr.find(({ id }) => id === showModalId);
 
+  const [down, setDown] = useState(false);
   const [height, setHeight] = useState(null);
   useEffect(() => {
     if (isMobile) {
@@ -358,15 +359,17 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   ));
 
   // useEffect(() => {
-  //   console.log(closeRef.current);
+  //   let down = false;
   //   if (closeRef.current) {
-  //     console.log('restigset listener');
-  //     const listener = () => {
-  //       console.log('cose click');
-  //       resetModal();
+  //     const mdown = () => {
+  //       down = true;
   //     };
-  //     closeRef.current.addEventListener('click', listener);
-  //     return () => closeRef.current.removeEventListener('click', listener);
+  //     closeRef.current.addEventListener('mousedown', mdown);
+  //     closeRef.current.addEventListener('mouseup', mup);
+  //     return () => {
+  //       closeRef.current.removeEventListener('mousedown', mdown);
+  //       closeRef.current.removeEventListener('mouseup', mup);
+  //     };
   //   }
   // }, [closeRef]);
 
@@ -392,7 +395,13 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               cursor: 'pointer',
               padding: 0
             }}
-            onClick={() => resetModal()}
+            onMouseDown={() => setDown(true)}
+            onMouseUp={() => {
+              if (down) {
+                setDown(false);
+                resetModal();
+              }
+            }}
             ref={closeRef}
           >
             <line x1="368" y1="368" x2="144" y2="144" />
