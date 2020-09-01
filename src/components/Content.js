@@ -32,10 +32,6 @@ const About = ({ openModal }) => {
       id="about"
       className="card"
       style={{ pointer: 'cursor' }}
-      onClick={() => {
-        console.log('clcik');
-        openModal('about');
-      }}
       onTouchMove={() => setDown(null)}
       onTouchStart={(evt) => {
         console.log(!evt.contains(socialsRef.current));
