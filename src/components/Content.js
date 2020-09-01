@@ -35,6 +35,13 @@ const About = ({ openModal }) => {
         console.log('clcik');
         openModal('about');
       }}
+      onTouchStart={() => setDown(new Date())}
+      onTouchEnd={() => {
+        if (down && new Date() - down < 300) {
+          openModal('about');
+        }
+        setDown(null);
+      }}
     >
       <div className="header">
         <h2>ABOUT</h2>
