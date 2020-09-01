@@ -337,7 +337,9 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   useEffect(() => {
     let down = false;
     const handleDown = (evt) => {
+      console.log('mousedown', ref.current, !ref.current.contains(evt.target));
       if (ref.current && !ref.current.contains(evt.target)) {
+        console.log('setting down');
         down = true;
       }
     };
@@ -347,15 +349,15 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
       }
       down = false;
     };
-    // document.addEventListener('mousedown', handleDown);
-    // document.addEventListener('mouseup', handleUp);
-    document.addEventListener('touchstart', handleDown);
-    document.addEventListener('touchend', handleUp);
+    document.addEventListener('mousedown', handleDown);
+    document.addEventListener('mouseup', handleUp);
+    // document.addEventListener('touchstart', handleDown);
+    // document.addEventListener('touchend', handleUp);
     return () => {
-      // document.removeEventListener('mousedown', handleDown);
-      // document.removeEventListener('mouseup', handleUp);
-      document.removeEventListener('touchstart', handleDown);
-      document.removeEventListener('touchend', handleUp);
+      document.removeEventListener('mousedown', handleDown);
+      document.removeEventListener('mouseup', handleUp);
+      // document.removeEventListener('touchstart', handleDown);
+      // document.removeEventListener('touchend', handleUp);
     };
   }, []);
 
