@@ -330,8 +330,6 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
       setHeight(window.innerHeight * 0.9);
     }
   }, [isMobile]);
-  console.log(isMobile, height);
-  useEffect(() => console.log(height), [height]);
 
   const ref = useRef(null);
   useEffect(() => {

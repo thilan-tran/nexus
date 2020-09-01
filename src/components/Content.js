@@ -30,6 +30,7 @@ const About = ({ openModal }) => {
     <div
       id="about"
       className="card"
+      style={{ pointer: 'cursor' }}
       onClick={() => {
         console.log('clcik');
         openModal('about');
