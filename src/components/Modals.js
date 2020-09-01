@@ -349,13 +349,13 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
     };
     document.addEventListener('mousedown', handleDown);
     document.addEventListener('mouseup', handleUp);
-    document.addEventListener('touchstart', handleDown);
-    document.addEventListener('touchend', handleUp);
+    // document.addEventListener('touchstart', handleDown);
+    // document.addEventListener('touchend', handleUp);
     return () => {
       document.removeEventListener('mousedown', handleDown);
       document.removeEventListener('mouseup', handleUp);
-      document.removeEventListener('touchstart', handleDown);
-      document.removeEventListener('touchend', handleUp);
+      // document.removeEventListener('touchstart', handleDown);
+      // document.removeEventListener('touchend', handleUp);
     };
   }, []);
 
