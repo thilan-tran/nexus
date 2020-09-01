@@ -14,9 +14,9 @@
   cursor: pointer;
   transition: 0.3s box-shadow ease;
 
-  &:hover {
-    box-shadow: -2px 2px 0 0 #eee;
-  }
+  // &:hover {
+  //   box-shadow: -2px 2px 0 0 #eee;
+  // }
 
   h2 {
     font-weight: bold;
@@ -34,9 +34,9 @@
     transition: 0.3s width ease;
   }
 
-  &:hover h2::after {
-    width: 100%;
-  }
+  // &:hover h2::after {
+  //   width: 100%;
+  // }
 
   p {
     font-weight: 400;
