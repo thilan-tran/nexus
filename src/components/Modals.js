@@ -370,14 +370,13 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
     }
   }, [closeRef]);
 
-  if (!currModal) {
-    return <div>{prefetchImages}</div>;
-  }
-
   return (
     <>
       <div>{prefetchImages}</div>
-      <div className={'modal show'} style={{ height: height && `${height}px` }}>
+      <div
+        className={`modal ${currModal ? 'show' : ''}`}
+        style={{ height: height && `${height}px` }}
+      >
         <div className="modal-body" ref={ref}>
           <svg
             className="close"
@@ -392,16 +391,17 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               strokeWidth: '32px',
               cursor: 'pointer'
             }}
+            onClick={() => console.log('close')}
             ref={closeRef}
           >
             <line x1="368" y1="368" x2="144" y2="144" />
             <line x1="368" y1="144" x2="144" y2="368" />
           </svg>
-          {currModal.body}
+          {currModal && currModal.body}
         </div>
       </div>
       )
-      <div className={'overlay show'} />
+      <div className={`overlay ${currModal ? 'show' : ''}`} />
     </>
   );
 };
