@@ -1,13 +1,13 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect } from 'react';
 
-import PercussionPhoto from "../static/percussion-photo.jpg"
-import WmlTimeline from "../static/wml-timeline.jpeg"
-import WmlState from "../static/wml-state-edit.jpeg"
-import TwainDate from "../static/twain-date.jpeg"
-import TwainTime from "../static/twain-time.jpeg"
-import RestockStocks from "../static/restock-stockview.jpeg"
-import TerreformForest from "../static/terreform-forest.jpeg"
-import WeatherUI from "../static/weather-hover.jpeg"
+import PercussionPhoto from '../static/percussion-photo.jpg';
+import WmlTimeline from '../static/wml-timeline.jpeg';
+import WmlState from '../static/wml-state-edit.jpeg';
+import TwainDate from '../static/twain-date.jpeg';
+import TwainTime from '../static/twain-time.jpeg';
+import RestockStocks from '../static/restock-stockview.jpeg';
+import TerreformForest from '../static/terreform-forest.jpeg';
+import WeatherUI from '../static/weather-hover.jpeg';
 
 const images = {
   PercussionPhoto,
@@ -17,8 +17,8 @@ const images = {
   TwainTime,
   RestockStocks,
   TerreformForest,
-  WeatherUI,
-}
+  WeatherUI
+};
 
 const AboutModal = () => {
   return (
@@ -41,7 +41,7 @@ const AboutModal = () => {
             and scratch, and am fascinated with shell and text editor
             customization.
             <br />
-            Check out my{" "}
+            Check out my{' '}
             <a
               className="highlight"
               href="https://github.com/thilan-tran/dotfiles"
@@ -49,8 +49,8 @@ const AboutModal = () => {
               rel="noreferrer"
             >
               dot files
-            </a>{" "}
-            and{" "}
+            </a>{' '}
+            and{' '}
             <a
               className="highlight"
               href="https://github.com/thilan-tran/wiki"
@@ -69,8 +69,8 @@ const AboutModal = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 const WmlModal = () => (
   <>
@@ -95,7 +95,7 @@ const WmlModal = () => (
           While interning at Walmart Labs, I created a plugin to address
           development hurdles and increase engineering productivity by handling
           environment specific settings, intercepting and displaying analytics,
-          recording Redux store state and dispatched actions in a{" "}
+          recording Redux store state and dispatched actions in a{' '}
           <em>replayable</em> log, as well as allowing for spoofing of actions
           and force setting of Redux state.
           <br />
@@ -107,7 +107,7 @@ const WmlModal = () => (
           dynamically dispatch custom actions or overwrite Redux state without
           source code changes or the use of the existing Redux DevTools. <br />
           <br />
-          Towards the end of my internship, I gave a tech talk with these{" "}
+          Towards the end of my internship, I gave a tech talk with these{' '}
           <a
             className="highlight"
             href="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing"
@@ -115,13 +115,13 @@ const WmlModal = () => (
             rel="noreferrer"
           >
             slides
-          </a>{" "}
+          </a>{' '}
           to demo the plugin and present my development approach.
         </p>
       </div>
     </div>
   </>
-)
+);
 
 const TwainModal = () => (
   <>
@@ -135,7 +135,7 @@ const TwainModal = () => (
           <b>UCLA DEVX</b>TWAIN
         </h2>
         <p>
-          The{" "}
+          The{' '}
           <a
             className="highlight"
             href="https://github.com/ucladevx/twain-extension"
@@ -143,11 +143,11 @@ const TwainModal = () => (
             rel="noreferrer"
           >
             Twain project
-          </a>{" "}
+          </a>{' '}
           is a browser extension for Google calendar that will automatically
           schedule tasks in available calendar slots. Users create and schedule
           tasks, and can reschedule or force-schedule tasks during the UX flow.
-          The extension is available on the Chrome{" "}
+          The extension is available on the Chrome{' '}
           <a
             className="highlight"
             href="https://chrome.google.com/webstore/detail/twain/cmljiidokkhmheonmpfciinfdonkimop?hl=en"
@@ -168,7 +168,7 @@ const TwainModal = () => (
       </div>
     </div>
   </>
-)
+);
 
 const TerreformModal = () => (
   <>
@@ -192,10 +192,10 @@ const TerreformModal = () => (
             rel="noreferrer"
           >
             Terreform
-          </a>{" "}
+          </a>{' '}
           is a donation website for non-profits fighting climate change that
           features interactive environments rendered using ThreeJS that evolve
-          as users donate. See the{" "}
+          as users donate. See the{' '}
           <a
             className="highlight"
             href="http://terreform.herokuapp.com/home"
@@ -203,7 +203,7 @@ const TerreformModal = () => (
             rel="noreferrer"
           >
             site
-          </a>{" "}
+          </a>{' '}
           live.
           <br />
           <br />
@@ -215,7 +215,7 @@ const TerreformModal = () => (
       </div>
     </div>
   </>
-)
+);
 
 const RestockModal = () => (
   <>
@@ -230,7 +230,7 @@ const RestockModal = () => (
       <div>
         <h2>RESTOCK</h2>
         <p>
-          As a fullstack side project, I built the{" "}
+          As a fullstack side project, I built the{' '}
           <a
             className="highlight"
             href="https://github.com/thilan-tran/restock"
@@ -238,12 +238,12 @@ const RestockModal = () => (
             rel="noreferrer"
           >
             Restock
-          </a>{" "}
+          </a>{' '}
           webapp, a real-time stock trading simulator. Users can can simulate
           transactions, track stocks for real-time updates, and view stock
           history in a dashboard or other user portfolios on a leaderboard. All
           user actions are authenticated, and websockets allow for instant
-          updates from the backend to any connected clients. Check out the live{" "}
+          updates from the backend to any connected clients. Check out the live{' '}
           <a
             className="highlight"
             href="https://restock-app.herokuapp.com/"
@@ -261,7 +261,7 @@ const RestockModal = () => (
       </div>
     </div>
   </>
-)
+);
 
 const WeatherModal = () => (
   <>
@@ -276,7 +276,7 @@ const WeatherModal = () => (
           same application using different frontend frameworks.
           <br />
           <br />
-          Thus,{" "}
+          Thus,{' '}
           <a
             className="highlight"
             href="https://github.com/thilan-tran/simple-weather"
@@ -284,7 +284,7 @@ const WeatherModal = () => (
             rel="noreferrer"
           >
             Simple Weather
-          </a>{" "}
+          </a>{' '}
           was born, the same simple but clean weather forecast UI recreated
           using multiple frameworks including native JavaScript, jQuery, and
           React.
@@ -292,71 +292,74 @@ const WeatherModal = () => (
       </div>
     </div>
   </>
-)
+);
 
 const modalArr = [
   {
-    id: "about",
-    body: <AboutModal />,
+    id: 'about',
+    body: <AboutModal />
   },
   {
-    id: "wml",
-    body: <WmlModal />,
+    id: 'wml',
+    body: <WmlModal />
   },
   {
-    id: "twain",
-    body: <TwainModal />,
+    id: 'twain',
+    body: <TwainModal />
   },
   {
-    id: "terreform",
-    body: <TerreformModal />,
+    id: 'terreform',
+    body: <TerreformModal />
   },
   {
-    id: "restock",
-    body: <RestockModal />,
+    id: 'restock',
+    body: <RestockModal />
   },
   {
-    id: "weather",
-    body: <WeatherModal />,
-  },
-]
+    id: 'weather',
+    body: <WeatherModal />
+  }
+];
 
-const Modals = ({ showModalId, resetModal, data }) => {
-  const currModal = modalArr.find(({ id }) => id === showModalId)
+const Modals = ({ showModalId, resetModal, isMobile }) => {
+  const currModal = modalArr.find(({ id }) => id === showModalId);
 
-  const ref = useRef(null)
+  const ref = useRef(null);
   useEffect(() => {
-    let down = false
-    const handleDown = evt => {
+    let down = false;
+    const handleDown = (evt) => {
       if (ref.current && !ref.current.contains(evt.target)) {
-        down = true
+        down = true;
       }
-    }
-    const handleUp = evt => {
+    };
+    const handleUp = (evt) => {
       if (down && ref.current && !ref.current.contains(evt.target)) {
-        resetModal()
+        resetModal();
       }
-      down = false
-    }
-    document.addEventListener("mousedown", handleDown)
-    document.addEventListener("mouseup", handleUp)
+      down = false;
+    };
+    document.addEventListener('mousedown', handleDown);
+    document.addEventListener('mouseup', handleUp);
     return () =>
-      document.removeEventListener("mousedown", handleDown) &&
-      document.removeEventListener("mouseup", handleUp)
-  }, [])
+      document.removeEventListener('mousedown', handleDown) &&
+      document.removeEventListener('mouseup', handleUp);
+  }, []);
 
-  const prefetchImages = Object.values(images).map(url => (
+  const prefetchImages = Object.values(images).map((url) => (
     <link rel="prefetch" href={url} key={url} />
-  ))
+  ));
 
   if (!currModal) {
-    return <div>{prefetchImages}</div>
+    return <div>{prefetchImages}</div>;
   }
 
   return (
     <>
       <div>{prefetchImages}</div>
-      <div className={"modal show"}>
+      <div
+        className={'modal show'}
+        style={{ height: isMobile && `${window.innerHeight * 0.9}px` }}
+      >
         <div className="modal-body" ref={ref}>
           <svg
             className="close"
@@ -364,11 +367,11 @@ const Modals = ({ showModalId, resetModal, data }) => {
             width="30"
             viewBox="0 0 512 512"
             style={{
-              fill: "none",
-              stroke: "#000",
-              strokeLinecap: "round",
-              strokeLinejoin: "round",
-              strokeWidth: "32px",
+              fill: 'none',
+              stroke: '#000',
+              strokeLinecap: 'round',
+              strokeLinejoin: 'round',
+              strokeWidth: '32px'
             }}
             onClick={resetModal}
           >
@@ -379,9 +382,9 @@ const Modals = ({ showModalId, resetModal, data }) => {
         </div>
       </div>
       )
-      <div className={"overlay show"} />
+      <div className={'overlay show'} />
     </>
-  )
-}
+  );
+};
 
-export default Modals
+export default Modals;
