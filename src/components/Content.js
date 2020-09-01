@@ -37,9 +37,10 @@ const About = ({ openModal }) => {
         openModal('about');
       }}
       onTouchMove={() => setDown(null)}
-      onTouchStart={(evt) =>
-        !evt.contains(socialsRef.current) && setDown(new Date())
-      }
+      onTouchStart={(evt) => {
+        console.log(!evt.contains(socialsRef.current));
+        setDown(new Date());
+      }}
       onTouchEnd={() => {
         if (down && new Date() - down < 300) {
           openModal('about');
