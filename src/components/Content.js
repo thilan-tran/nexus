@@ -167,21 +167,6 @@ const Content = React.forwardRef(
           resetModal={() => setOpenModal('')}
           isMobile={isMobile}
         />
-        <div
-          className={'button'}
-          onClick={() => {
-            console.log('TESTCLICK2');
-          }}
-        >
-          TEST2
-        </div>
-        <button
-          onClick={() => {
-            console.log('TESTCLICK');
-          }}
-        >
-          TEST
-        </button>
       </div>
     );
   }

@@ -360,6 +360,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
 
   useEffect(() => {
     if (closeRef.current) {
+      closeRef.current.click();
       const handle = () => {
         console.log('CLICKED');
         resetModal();
