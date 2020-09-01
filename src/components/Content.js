@@ -43,8 +43,8 @@ const About = ({ openModal }) => {
         if (down) {
           // if (down && new Date() - down < 300) {
           openModal('about');
+          setDown(null);
         }
-        setDown(null);
       }}
     >
       <div className="header">
