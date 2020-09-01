@@ -358,20 +358,18 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
     <link rel="prefetch" href={url} key={url} />
   ));
 
-  // useEffect(() => {
-  //   let down = false;
-  //   if (closeRef.current) {
-  //     const mdown = () => {
-  //       down = true;
-  //     };
-  //     closeRef.current.addEventListener('mousedown', mdown);
-  //     closeRef.current.addEventListener('mouseup', mup);
-  //     return () => {
-  //       closeRef.current.removeEventListener('mousedown', mdown);
-  //       closeRef.current.removeEventListener('mouseup', mup);
-  //     };
-  //   }
-  // }, [closeRef]);
+  useEffect(() => {
+    if (closeRef.current) {
+      const handle = () => {
+        console.log('CLICKED');
+        resetModal();
+      };
+      closeRef.current.addEventListener('click', handle);
+      return () => {
+        closeRef.current.removeEventListener('click', handle);
+      };
+    }
+  }, [closeRef]);
 
   return (
     <>
@@ -394,17 +392,6 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               strokeWidth: '32px',
               cursor: 'pointer',
               padding: 0
-            }}
-            onTouchStart={(evt) => {
-              console.log('touchstart', evt.target);
-              setDown(true);
-            }}
-            onTouchEnd={(evt) => {
-              console.log('touchend', evt.target);
-              if (down) {
-                setDown(false);
-                resetModal();
-              }
             }}
             ref={closeRef}
           >
