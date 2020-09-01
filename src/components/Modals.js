@@ -359,17 +359,17 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   ));
 
   useEffect(() => {
-    if (closeRef.current) {
-      closeRef.current.click();
-      // const handle = () => {
-      //   console.log('CLICKED');
-      //   resetModal();
-      // };
-      // closeRef.current.addEventListener('click', handle);
-      // return () => {
-      //   closeRef.current.removeEventListener('click', handle);
-      // };
-    }
+    // if (closeRef.current) {
+    //   closeRef.current.click();
+    // const handle = () => {
+    //   console.log('CLICKED');
+    //   resetModal();
+    // };
+    // closeRef.current.addEventListener('click', handle);
+    // return () => {
+    //   closeRef.current.removeEventListener('click', handle);
+    // };
+    // }
   }, [closeRef]);
 
   return (

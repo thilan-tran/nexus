@@ -14,9 +14,9 @@
   cursor: pointer;
   transition: 0.3s box-shadow ease;
 
-  &:hover {
-    box-shadow: -2px 2px 0 0 #eee;
-  }
+  // &:hover {
+  //   box-shadow: -2px 2px 0 0 #eee;
+  // }
 
   h2 {
     font-weight: bold;
@@ -34,9 +34,9 @@
     transition: 0.3s width ease;
   }
 
-  &:hover h2::after {
-    width: 100%;
-  }
+  // &:hover h2::after {
+  //   width: 100%;
+  // }
 
   p {
     font-weight: 400;
@@ -67,10 +67,10 @@
     transition: box-shadow 0.1s ease, transform 0.2s ease;
   }
 
-  &:hover::after {
-    transform: translateY(-22px);
-    box-shadow: 0 22px 0 0 rgba(0, 0, 0, 0.2);
-  }
+  // &:hover::after {
+  //   transform: translateY(-22px);
+  //   box-shadow: 0 22px 0 0 rgba(0, 0, 0, 0.2);
+  // }
 }
 
 .grid {
@@ -102,9 +102,9 @@
     transition: background-color 0.2s ease;
   }
 
-  &:hover::after {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+  // &:hover::after {
+  //   background-color: rgba(0, 0, 0, 0.2);
+  // }
 
   .title {
     position: absolute;
@@ -119,9 +119,9 @@
     font-size: 30px;
   }
 
-  &:hover .title {
-    opacity: 1;
-  }
+  // &:hover .title {
+  //   opacity: 1;
+  // }
 
   img {
     height: 250px;
