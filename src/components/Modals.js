@@ -395,8 +395,12 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               cursor: 'pointer',
               padding: 0
             }}
-            onTouchStart={() => setDown(true)}
-            onTouchEnd={() => {
+            onTouchStart={() => {
+              console.log('touchstart', evt.target);
+              setDown(true);
+            }}
+            onTouchEnd={(evt) => {
+              console.log('touchend', evt.target);
               if (down) {
                 setDown(false);
                 resetModal();
