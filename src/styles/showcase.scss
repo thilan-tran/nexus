@@ -1,0 +1,12 @@
+.showcase {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  overflow: hidden;
+  z-inex: -1;
+}
+
+input[type="range"] {
+  width: 55px;
+}
