@@ -34,11 +34,14 @@ const About = ({ openModal }) => {
       style={{ pointer: 'cursor' }}
       onTouchMove={() => setDown(null)}
       onTouchStart={(evt) => {
+        console.log('touchstart');
         console.log(!evt.contains(socialsRef.current));
         setDown(new Date());
       }}
       onTouchEnd={() => {
-        if (down && new Date() - down < 300) {
+        console.log('touchend');
+        if (down) {
+          // if (down && new Date() - down < 300) {
           openModal('about');
         }
         setDown(null);
