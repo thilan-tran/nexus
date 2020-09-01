@@ -395,8 +395,8 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               cursor: 'pointer',
               padding: 0
             }}
-            onMouseDown={() => setDown(true)}
-            onMouseUp={() => {
+            onTouchStart={() => setDown(true)}
+            onTouchEnd={() => {
               if (down) {
                 setDown(false);
                 resetModal();
