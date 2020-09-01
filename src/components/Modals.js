@@ -357,18 +357,18 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
     <link rel="prefetch" href={url} key={url} />
   ));
 
-  useEffect(() => {
-    console.log(closeRef.current);
-    if (closeRef.current) {
-      console.log('restigset listener');
-      const listener = () => {
-        console.log('cose click');
-        resetModal();
-      };
-      closeRef.current.addEventListener('click', listener);
-      return () => closeRef.current.removeEventListener('click', listener);
-    }
-  }, [closeRef]);
+  // useEffect(() => {
+  //   console.log(closeRef.current);
+  //   if (closeRef.current) {
+  //     console.log('restigset listener');
+  //     const listener = () => {
+  //       console.log('cose click');
+  //       resetModal();
+  //     };
+  //     closeRef.current.addEventListener('click', listener);
+  //     return () => closeRef.current.removeEventListener('click', listener);
+  //   }
+  // }, [closeRef]);
 
   return (
     <>
@@ -389,9 +389,10 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               strokeLinecap: 'round',
               strokeLinejoin: 'round',
               strokeWidth: '32px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              padding: 0
             }}
-            onClick={() => console.log('close')}
+            onClick={() => resetModal()}
             ref={closeRef}
           >
             <line x1="368" y1="368" x2="144" y2="144" />
