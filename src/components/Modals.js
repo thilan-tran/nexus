@@ -411,7 +411,13 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               cursor: 'pointer',
               padding: 0
             }}
-            onClick={resetModal}
+            onMouseDown={() => setDown(new Date())}
+            onMouseUp={() => {
+              if (down && new Date() - down < 300) {
+                resetModal();
+              }
+              setDown(null);
+            }}
             ref={closeRef}
           >
             <line x1="368" y1="368" x2="144" y2="144" />
