@@ -424,6 +424,8 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
       )
       <div
         className={`overlay ${currModal ? 'show' : ''}`}
+        onTouchStart={() => console.log('touchstart')}
+        onTouchStart={() => console.log('touchend')}
         onClick={() => {
           if (currModal) {
             resetModal();
