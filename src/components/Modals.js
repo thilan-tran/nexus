@@ -358,6 +358,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   ));
 
   useEffect(() => {
+    console.log(closeRef.current);
     if (closeRef.current) {
       console.log('restigset listener');
       const listener = () => {
