@@ -5,6 +5,7 @@ import Modals from './Modals';
 
 const About = ({ openModal }) => {
   const aboutContentRef = useRef(null);
+  const socialsRef = useRef(null);
   const [down, setDown] = useState(false);
 
   const getContentTop = () =>
@@ -36,7 +37,9 @@ const About = ({ openModal }) => {
         openModal('about');
       }}
       onTouchMove={() => setDown(null)}
-      onTouchStart={() => setDown(new Date())}
+      onTouchStart={(evt) =>
+        !evt.contains(socialsRef.current) && setDown(new Date())
+      }
       onTouchEnd={() => {
         if (down && new Date() - down < 300) {
           openModal('about');
@@ -47,7 +50,10 @@ const About = ({ openModal }) => {
       <div className="header">
         <h2>ABOUT</h2>
       </div>
-      <div className={`socials ${pastContent ? 'stick-top' : ''}`}>
+      <div
+        className={`socials ${pastContent ? 'stick-top' : ''}`}
+        ref={socialsRef}
+      >
         <a
           href="https://github.com/thilan-tran"
           target="_blank"
