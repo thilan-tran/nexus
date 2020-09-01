@@ -51,6 +51,10 @@ const About = ({ openModal }) => {
         <a
           href="https://github.com/thilan-tran"
           target="_blank"
+          onTouchStart={(e) => {
+            console.log('linkd lcick');
+            e.stopPropagation();
+          }}
           onClick={(e) => {
             console.log('linkd lcick');
             e.stopPropagation();
