@@ -30,7 +30,8 @@ const ActionButton = ({ onClick, getPrompt }) => (
 );
 
 const Caret = ({ onClick, caretOpts, isMobile }) => {
-  const clickEvents = useResponsiveClick(onClick, isMobile);
+  console.log(isMobile);
+  const clickEvents = useResponsiveClick(onClick, true);
   return (
     <div
       className={`caret ${caretOpts.up ? 'point-up' : ''} ${
