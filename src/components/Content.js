@@ -9,6 +9,9 @@ import { useResponsiveClick } from '../utils/hooks';
 const About = ({ openModal, isMobile }) => {
   const aboutContentRef = useRef(null);
   const socialsRef = useRef(null);
+  const githubRef = useRef(null);
+  const linkedRef = useRef(null);
+  const mailRef = useRef(null);
 
   const getContentTop = () =>
     aboutContentRef.current &&
@@ -29,10 +32,23 @@ const About = ({ openModal, isMobile }) => {
     return () => document.removeEventListener('scroll', handleScroll);
   }, [aboutContentRef]);
 
-  const clickEvents = useResponsiveClick(
+  const modalClickEvents = useResponsiveClick(
     () => openModal('about'),
     isMobile,
     (evt) => socialsRef.current && !socialsRef.current.contains(evt.target)
+  );
+
+  const gitClickEvents = useResponsiveClick(
+    () => githubRef.current && githubRef.current.click(),
+    isMobile
+  );
+  const linkedClickEvents = useResponsiveClick(
+    () => linkedRef.current && linkedRef.current.click(),
+    isMobile
+  );
+  const mailClickEvents = useResponsiveClick(
+    () => mailRef.current && mailRef.current.click(),
+    isMobile
   );
 
   return (
@@ -40,7 +56,7 @@ const About = ({ openModal, isMobile }) => {
       id="about"
       className="card"
       style={{ pointer: 'cursor' }}
-      {...clickEvents}
+      {...modalClickEvents}
     >
       <div className="header">
         <h2>ABOUT</h2>
@@ -53,7 +69,8 @@ const About = ({ openModal, isMobile }) => {
           href="https://github.com/thilan-tran"
           target="_blank"
           rel="noreferrer"
-          onClick={() => {}}
+          ref={githubRef}
+          {...gitClickEvents}
         >
           <svg
             className="github"
@@ -74,7 +91,8 @@ const About = ({ openModal, isMobile }) => {
           href="https://www.linkedin.com/in/thilan-tran/"
           target="_blank"
           rel="noreferrer"
-          onClick={() => {}}
+          ref={linkedRef}
+          {...linkedClickEvents}
         >
           <svg
             className="linkedin"
@@ -93,7 +111,7 @@ const About = ({ openModal, isMobile }) => {
             <circle cx="4" cy="4" r="2"></circle>
           </svg>
         </a>
-        <a href="mailto:thilantran@ucla.edu" onClick={() => {}}>
+        <a href="mailto:thilantran@ucla.edu" ref={mailRef} {...mailClickEvents}>
           <svg
             className="mail"
             xmlns="http://www.w3.org/2000/svg"
