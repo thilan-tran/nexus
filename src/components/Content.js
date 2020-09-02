@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import Projects from './Projects';
 import Modals from './Modals';
 
-const About = ({ openModal }) => {
+import DeviceSpecificContext from '../context/deviceSpecificContext';
+import { useOnMobileClick } from '../utils/hooks';
+
+const About = ({ openModal, isMobile }) => {
   const aboutContentRef = useRef(null);
   const socialsRef = useRef(null);
-  const [down, setDown] = useState(false);
 
   const getContentTop = () =>
     aboutContentRef.current &&
@@ -27,30 +29,20 @@ const About = ({ openModal }) => {
     return () => document.removeEventListener('scroll', handleScroll);
   }, [aboutContentRef]);
 
+  const onMobileClick = useOnMobileClick(
+    () => openModal('about'),
+    (evt) => socialsRef.current && !socialsRef.current.contains(evt.target)
+  );
+  const clickEvents = isMobile
+    ? onMobileClick
+    : { onClick: () => openModal('about') };
+
   return (
     <div
       id="about"
       className="card"
       style={{ pointer: 'cursor' }}
-      onTouchMove={() => setDown(false)}
-      onTouchStart={(evt) => {
-        console.log('touchstart', down);
-        console.log(
-          socialsRef.current && !socialsRef.current.contains(evt.target)
-        );
-        if (socialsRef.current && !socialsRef.current.contains(evt.target)) {
-          setDown(true);
-        }
-        // setDown(new Date());
-      }}
-      onTouchEnd={() => {
-        console.log('touchend', down);
-        if (down) {
-          // if (down && new Date() - down < 300) {
-          openModal('about');
-          setDown(false);
-        }
-      }}
+      {...clickEvents}
     >
       <div className="header">
         <h2>ABOUT</h2>
@@ -62,10 +54,8 @@ const About = ({ openModal }) => {
         <a
           href="https://github.com/thilan-tran"
           target="_blank"
-          onClick={(e) => {
-            console.log('linkd lcick');
-            e.stopPropagation();
-          }}
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
         >
           <svg
             className="github"
@@ -82,7 +72,11 @@ const About = ({ openModal }) => {
             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
           </svg>
         </a>
-        <a href="https://www.linkedin.com/in/thilan-tran/" target="_blank">
+        <a
+          href="https://www.linkedin.com/in/thilan-tran/"
+          target="_blank"
+          rel="noreferrer"
+        >
           <svg
             className="linkedin"
             xmlns="http://www.w3.org/2000/svg"
@@ -130,6 +124,7 @@ const About = ({ openModal }) => {
           className="highlight"
           href="https://github.com/thilan-tran/restock"
           target="_blank"
+          rel="noreferrer"
         >
           Restock
         </a>{' '}
@@ -139,6 +134,7 @@ const About = ({ openModal }) => {
           className="highlight"
           href="https://github.com/ucladevx/twain-extension"
           target="_blank"
+          rel="noreferrer"
         >
           Twain
         </a>{' '}
@@ -147,6 +143,7 @@ const About = ({ openModal }) => {
           className="highlight"
           href="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing"
           target="_blank"
+          rel="noreferrer"
         >
           plugin
         </a>{' '}
@@ -156,39 +153,38 @@ const About = ({ openModal }) => {
   );
 };
 
-const Content = React.forwardRef(
-  ({ wrapperRef, scrollBarWidth, isMobile }, ref) => {
-    const [openModal, setOpenModal] = useState('');
+const Content = React.forwardRef(({ wrapperRef }, ref) => {
+  const { scrollBarWidth, isMobile } = useContext(DeviceSpecificContext);
+  const [openModal, setOpenModal] = useState('');
 
-    useEffect(() => {
-      const wrapper = wrapperRef.current;
-      if (wrapper) {
-        if (openModal) {
-          wrapper.style.top = `-${window.scrollY}px`;
-          wrapper.style.position = 'fixed';
-          wrapper.style.width = `calc(100% - ${scrollBarWidth}px)`;
-        } else {
-          const top = wrapper.style.top;
-          wrapper.style.position = '';
-          wrapper.style.top = '';
-          wrapper.style.width = 'auto';
-          window.scrollTo(0, parseInt(top || '0') * -1);
-        }
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (wrapper) {
+      if (openModal) {
+        wrapper.style.top = `-${window.scrollY}px`;
+        wrapper.style.position = 'fixed';
+        wrapper.style.width = `calc(100% - ${scrollBarWidth}px)`;
+      } else {
+        const top = wrapper.style.top;
+        wrapper.style.position = '';
+        wrapper.style.top = '';
+        wrapper.style.width = 'auto';
+        window.scrollTo(0, parseInt(top || '0') * -1);
       }
-    }, [openModal]);
+    }
+  }, [openModal]);
 
-    return (
-      <div className="content" ref={ref}>
-        <About openModal={setOpenModal} />
-        <Projects openModal={setOpenModal} />
-        <Modals
-          showModalId={openModal}
-          resetModal={() => setOpenModal('')}
-          isMobile={isMobile}
-        />
-      </div>
-    );
-  }
-);
+  return (
+    <div className="content" ref={ref}>
+      <About openModal={setOpenModal} isMobile={isMobile} />
+      <Projects openModal={setOpenModal} />
+      <Modals
+        showModalId={openModal}
+        resetModal={() => setOpenModal('')}
+        isMobile={isMobile}
+      />
+    </div>
+  );
+});
 
 export default Content;

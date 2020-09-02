@@ -4,7 +4,9 @@ import '../styles/main.scss';
 import Showcase from './Showcase';
 import LandingOverlay from './LandingOverlay';
 import Content from './Content';
+
 import ShowcaseContext from '../context/showcaseContext';
+import DeviceSpecificContext from '../context/deviceSpecificContext';
 
 import GoL from '../js/life';
 import Automata from '../js/automata';
@@ -15,17 +17,21 @@ const App = () => {
   const [vertBreakpoints, setVertBreakpoints] = useState([0, 0]);
   const [scrollBarWidth, setScrollBarWidth] = useState(17);
   const [isIos, setIos] = useState(false);
-  const [isMobileView, setMobileView] = useState(false);
+  const [isMobile, setMobile] = useState(false);
 
   useEffect(() => {
-    setMobileView(getMobileView());
-    setVertBreakpoints([window.innerHeight / 5, window.innerHeight / 2]);
+    setMobile(getMobileView());
+    setVertBreakpoints([
+      window.innerHeight / 5,
+      window.innerHeight / 2,
+      window.innerHeight * 0.9
+    ]);
     setScrollBarWidth(getScrollBarWidth());
     setIos(getIos());
   }, []);
 
   const showcases = [GoL, Automata, Particles];
-  const showcaseInitOptions = [isMobileView ? 8 : 10, null, null];
+  const showcaseInitOptions = [isMobile ? 8 : 10, null, null];
 
   const wrapperRef = useRef(null);
   const showcaseRef = React.createRef();
@@ -88,22 +94,29 @@ const App = () => {
           setShowcaseIdx((showcaseIdx + 1) % showcases.length)
       }}
     >
-      <div ref={wrapperRef} className={isIos ? 'ios-font-spacing' : ''}>
-        <div ref={showcaseRef}>
-          <Showcase />
+      <DeviceSpecificContext.Provider
+        value={{
+          isMobile,
+          scrollBarWidth,
+          customModalHeight: isMobile ? vertBreakpoints[2] : false
+        }}
+      >
+        <div ref={wrapperRef} className={isIos ? 'ios-font-spacing' : ''}>
+          <div ref={showcaseRef}>
+            <Showcase />
+          </div>
+          <LandingOverlay
+            clickCaret={handleClick}
+            caretOpts={{ up: caretUp, visible: caretVis }}
+          />
+          <Content
+            ref={contentRef}
+            wrapperRef={wrapperRef}
+            scrollBarWidth={scrollBarWidth}
+            isMobile={isMobile}
+          />
         </div>
-        <LandingOverlay
-          clickCaret={handleClick}
-          caretOpts={{ up: caretUp, visible: caretVis }}
-          isMobile={isMobileView}
-        />
-        <Content
-          ref={contentRef}
-          wrapperRef={wrapperRef}
-          scrollBarWidth={scrollBarWidth}
-          isMobile={isMobileView}
-        />
-      </div>
+      </DeviceSpecificContext.Provider>
     </ShowcaseContext.Provider>
   );
 };

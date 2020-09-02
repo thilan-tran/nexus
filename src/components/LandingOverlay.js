@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 
 import WithFade from './Fade';
 import { Options } from './Showcase';
-import showcaseContext from '../context/showcaseContext';
+
+import ShowcaseContext from '../context/showcaseContext';
+import DeviceSpecificContext from '../context/showcaseContext';
 
 const NameCard = ({ name }) => (
   <a className="name-card" href="https://thilantran.com">
@@ -145,8 +147,9 @@ const Toolbar = ({ hide, reset, next, Options }) => {
   );
 };
 
-const LandingOverlay = ({ clickCaret, caretOpts, isMobile }) => {
-  const { showcase, switchNextShowcase } = useContext(showcaseContext);
+const LandingOverlay = ({ clickCaret, caretOpts }) => {
+  const { showcase, switchNextShowcase } = useContext(ShowcaseContext);
+  const { isMobile } = useContext(DeviceSpecificContext);
 
   const ref = useRef(null);
   useEffect(() => {

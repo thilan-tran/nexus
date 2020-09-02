@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PercussionPhoto from '../static/percussion-photo.jpg';
 import WmlTimeline from '../static/wml-timeline.jpeg';
@@ -325,72 +325,25 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
   const currModal = modalArr.find(({ id }) => id === showModalId);
 
   const [down, setDown] = useState(false);
-  const [height, setHeight] = useState(null);
+  const [customHeight, setCustomHeight] = useState(null);
   useEffect(() => {
     if (isMobile) {
-      setHeight(window.innerHeight * 0.9);
+      setCustomHeight(window.innerHeight * 0.9);
     }
   }, [isMobile]);
-
-  const closeRef = useRef(null);
-  const ref = useRef(null);
-  useEffect(() => {
-    // let down = false;
-    // const handleDown = (evt) => {
-    //   console.log(
-    //     'mousedown',
-    //     ref.current && !ref.current.contains(evt.target)
-    //   );
-    //   if (ref.current && !ref.current.contains(evt.target)) {
-    //     console.log('setting down');
-    //     down = true;
-    //   }
-    // };
-    // const handleUp = (evt) => {
-    //   console.log('mouseup');
-    //   if (down && ref.current && !ref.current.contains(evt.target)) {
-    //     resetModal();
-    //   }
-    //   down = false;
-    // };
-    // document.addEventListener('mousedown', handleDown);
-    // document.addEventListener('mouseup', handleUp);
-    // document.addEventListener('touchstart', handleDown);
-    // document.addEventListener('touchend', handleUp);
-    return () => {
-      // document.removeEventListener('mousedown', handleDown);
-      // document.removeEventListener('mouseup', handleUp);
-      // document.removeEventListener('touchstart', handleDown);
-      // document.removeEventListener('touchend', handleUp);
-    };
-  }, []);
 
   const prefetchImages = Object.values(images).map((url) => (
     <link rel="prefetch" href={url} key={url} />
   ));
-
-  useEffect(() => {
-    // if (closeRef.current) {
-    //   closeRef.current.click();
-    // const handle = () => {
-    //   console.log('CLICKED');
-    //   resetModal();
-    // };
-    // closeRef.current.addEventListener('click', handle);
-    // return () => {
-    //   closeRef.current.removeEventListener('click', handle);
-    // };
-    // }
-  }, [closeRef]);
 
   return (
     <>
       <div>{prefetchImages}</div>
       <div
         className={`modal ${currModal ? 'show' : ''}`}
-        style={{ height: height && `${height}px` }}
+        style={{ height: customHeight && `${customHeight}px` }}
       >
-        <div className="modal-body" ref={ref}>
+        <div className="modal-body">
           <svg
             className="close"
             xmlns="http://www.w3.org/2000/svg"
@@ -401,9 +354,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               stroke: '#000',
               strokeLinecap: 'round',
               strokeLinejoin: 'round',
-              strokeWidth: '32px',
-              cursor: 'pointer',
-              padding: 0
+              strokeWidth: '32px'
             }}
             onTouchMove={() => setDown(null)}
             onTouchStart={() => setDown(new Date())}
@@ -413,7 +364,6 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               }
               setDown(null);
             }}
-            ref={closeRef}
           >
             <line x1="368" y1="368" x2="144" y2="144" />
             <line x1="368" y1="144" x2="144" y2="368" />
