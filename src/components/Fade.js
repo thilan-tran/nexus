@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef } from 'react';
 
-const defaultDelay = 3
+const defaultDelay = 3;
 
 const WithFade = (
   Component,
@@ -8,47 +8,46 @@ const WithFade = (
   animationDelay = defaultDelay,
   updateFn = () => true
 ) => {
-  const ref = useRef(null)
+  const ref = useRef(null);
 
   useEffect(() => {
-    let timer
+    let timer;
     const makeTimer = () => {
       return setTimeout(() => {
-        const shouldFade = updateFn()
+        const shouldFade = updateFn();
         if (shouldFade) {
-          ref.current.style.pointerEvents = "none"
-          ref.current.style.transition = `opacity ${animationDelay}s ease`
-          ref.current.style.opacity = 0
+          ref.current.style.pointerEvents = 'none';
+          ref.current.style.transition = `opacity ${animationDelay}s ease`;
+          ref.current.style.opacity = 0;
         } else {
-          timer = makeTimer()
+          timer = makeTimer();
         }
-      }, delay * 1000)
-    }
-    timer = makeTimer()
+      }, delay * 1000);
+    };
+    timer = makeTimer();
 
     const handleMove = () => {
-      clearTimeout(timer)
-      ref.current.style.pointerEvents = "auto"
-      ref.current.style.transition = `opacity 0s`
-      ref.current.style.opacity = 1
-      timer = makeTimer()
-    }
-    document.addEventListener("mousemove", handleMove)
-    document.addEventListener("touchstart", handleMove)
+      clearTimeout(timer);
+      ref.current.style.pointerEvents = 'auto';
+      ref.current.style.transition = `opacity 0s`;
+      ref.current.style.opacity = 1;
+      timer = makeTimer();
+    };
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('touchstart', handleMove);
 
     return () => {
-      console.log("clear")
-      clearTimeout(timer)
-      document.removeEventListener("mousemove", handleMove)
-      document.addEventListener("touchstart", handleMove)
-    }
-  }, [])
+      clearTimeout(timer);
+      document.removeEventListener('mousemove', handleMove);
+      document.addEventListener('touchstart', handleMove);
+    };
+  }, []);
 
-  return props => (
+  return (props) => (
     <div ref={ref}>
       <Component {...props} />
     </div>
-  )
-}
+  );
+};
 
-export default WithFade
+export default WithFade;

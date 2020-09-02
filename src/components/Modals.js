@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import PercussionPhoto from '../static/percussion-photo.jpg';
 import WmlTimeline from '../static/wml-timeline.jpeg';
@@ -329,12 +329,18 @@ const Modals = ({
   isTouchDevice,
   customModalHeight
 }) => {
+  const ref = useRef(null);
+
   const currModal = modalArr.find(({ id }) => id === showModalId);
 
   const prefetchImages = Object.values(images).map((url) => (
     <link rel="prefetch" href={url} key={url} />
   ));
 
+  const modalMarginClickEvents = useResponsiveClick(
+    (evt) => ref.current && !ref.current.contains(evt.target) && resetModal(),
+    isTouchDevice
+  );
   const closeClickEvents = useResponsiveClick(
     () => resetModal(),
     isTouchDevice
@@ -350,8 +356,9 @@ const Modals = ({
       <div
         className={`modal ${currModal ? 'show' : ''}`}
         style={{ height: customModalHeight && `${customModalHeight}px` }}
+        {...modalMarginClickEvents}
       >
-        <div className="modal-body">
+        <div className="modal-body" ref={ref}>
           <svg
             className="close"
             xmlns="http://www.w3.org/2000/svg"
