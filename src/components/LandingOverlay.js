@@ -5,6 +5,7 @@ import { Options } from './Showcase';
 
 import ShowcaseContext from '../context/showcaseContext';
 import DeviceSpecificContext from '../context/showcaseContext';
+import { useResponsiveClick } from '../utils/hooks';
 
 const NameCard = ({ name }) => (
   <a className="name-card" href="https://thilantran.com">
@@ -28,25 +29,29 @@ const ActionButton = ({ onClick, getPrompt }) => (
   </div>
 );
 
-const Caret = ({ onClick, caretOpts }) => (
-  <div
-    className={`caret ${caretOpts.up ? 'point-up' : ''} ${
-      !caretOpts.visible ? 'hide' : ''
-    }`}
-    onClick={onClick}
-  >
-    <div className="caret-rotate">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        <path
-          d="M98,190.06,237.78,353.18a24,24,0,0,0,36.44,0L414,190.06c13.34-15.57,2.28-39.62-18.22-39.62H116.18C95.68,150.44,84.62,174.49,98,190.06Z"
-          fill="#000"
-          stroke="#000"
-          strokeWidth="25"
-        />
-      </svg>
+const Caret = ({ onClick, caretOpts }) => {
+  // const clickEvents = useResponsiveClick(onClick, isMobile);
+  return (
+    <div
+      className={`caret ${caretOpts.up ? 'point-up' : ''} ${
+        !caretOpts.visible ? 'hide' : ''
+      }`}
+      tabIndex="0"
+      onClick={onClick}
+    >
+      <div className="caret-rotate">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            d="M98,190.06,237.78,353.18a24,24,0,0,0,36.44,0L414,190.06c13.34-15.57,2.28-39.62-18.22-39.62H116.18C95.68,150.44,84.62,174.49,98,190.06Z"
+            fill="#000"
+            stroke="#000"
+            strokeWidth="25"
+          />
+        </svg>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Toolbar = ({ hide, reset, next, Options }) => {
   const [swapped, setSwapped] = useState(false);
