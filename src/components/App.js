@@ -116,7 +116,6 @@ const App = () => {
             ref={contentRef}
             wrapperRef={wrapperRef}
             scrollBarWidth={scrollBarWidth}
-            isMobile={isMobile}
           />
         </div>
       </DeviceSpecificContext.Provider>

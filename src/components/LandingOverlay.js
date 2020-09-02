@@ -154,7 +154,9 @@ const Toolbar = ({ hide, reset, next, Options }) => {
 
 const LandingOverlay = ({ clickCaret, caretOpts }) => {
   const { showcase, switchNextShowcase } = useContext(ShowcaseContext);
-  const { isMobile } = useContext(DeviceSpecificContext);
+  const Obj = useContext(DeviceSpecificContext);
+  const { isMobile } = Obj;
+  console.log('context', Obj);
 
   const ref = useRef(null);
   useEffect(() => {
