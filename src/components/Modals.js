@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import PercussionPhoto from '../static/percussion-photo.jpg';
 import WmlTimeline from '../static/wml-timeline.jpeg';
@@ -323,15 +323,26 @@ const modalArr = [
   }
 ];
 
-const Modals = ({ showModalId, resetModal, isMobile, customModalHeight }) => {
+const Modals = ({
+  showModalId,
+  resetModal,
+  isTouchDevice,
+  customModalHeight
+}) => {
   const currModal = modalArr.find(({ id }) => id === showModalId);
 
   const prefetchImages = Object.values(images).map((url) => (
     <link rel="prefetch" href={url} key={url} />
   ));
 
-  const closeClickEvents = useResponsiveClick(() => resetModal(), isMobile);
-  const overlayClickEvents = useResponsiveClick(() => resetModal(), isMobile);
+  const closeClickEvents = useResponsiveClick(
+    () => resetModal(),
+    isTouchDevice
+  );
+  const overlayClickEvents = useResponsiveClick(
+    () => resetModal(),
+    isTouchDevice
+  );
 
   return (
     <>

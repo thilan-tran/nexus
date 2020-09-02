@@ -8,23 +8,26 @@ import WeatherUI from '../static/weather.jpeg';
 
 import { useResponsiveClick } from '../utils/hooks';
 
-const Projects = ({ openModal, isMobile }) => {
-  const wmlClickEvents = useResponsiveClick(() => openModal('wml'), isMobile);
+const Projects = ({ openModal, isTouchDevice }) => {
+  const wmlClickEvents = useResponsiveClick(
+    () => openModal('wml'),
+    isTouchDevice
+  );
   const twainClickEvents = useResponsiveClick(
     () => openModal('twain'),
-    isMobile
+    isTouchDevice
   );
   const terreformClickEvents = useResponsiveClick(
     () => openModal('terreform'),
-    isMobile
+    isTouchDevice
   );
   const restockClickEvents = useResponsiveClick(
     () => openModal('restock'),
-    isMobile
+    isTouchDevice
   );
   const weatherClickEvents = useResponsiveClick(
     () => openModal('weather'),
-    isMobile
+    isTouchDevice
   );
 
   return (

@@ -6,7 +6,7 @@ import Modals from './Modals';
 import DeviceSpecificContext from '../context/deviceSpecificContext';
 import { useResponsiveClick } from '../utils/hooks';
 
-const About = ({ openModal, isMobile }) => {
+const About = ({ openModal, isTouchDevice }) => {
   const aboutContentRef = useRef(null);
   const socialsRef = useRef(null);
   const githubRef = useRef(null);
@@ -34,21 +34,21 @@ const About = ({ openModal, isMobile }) => {
 
   const modalClickEvents = useResponsiveClick(
     () => openModal('about'),
-    isMobile,
+    isTouchDevice,
     (evt) => socialsRef.current && !socialsRef.current.contains(evt.target)
   );
 
   const gitClickEvents = useResponsiveClick(
     () => githubRef.current && githubRef.current.click(),
-    isMobile
+    isTouchDevice
   );
   const linkedClickEvents = useResponsiveClick(
     () => linkedRef.current && linkedRef.current.click(),
-    isMobile
+    isTouchDevice
   );
   const mailClickEvents = useResponsiveClick(
     () => mailRef.current && mailRef.current.click(),
-    isMobile
+    isTouchDevice
   );
 
   return (
@@ -171,7 +171,7 @@ const About = ({ openModal, isMobile }) => {
 };
 
 const Content = React.forwardRef(({ wrapperRef }, ref) => {
-  const { scrollBarWidth, isMobile, customModalHeight } = useContext(
+  const { scrollBarWidth, isTouchDevice, customModalHeight } = useContext(
     DeviceSpecificContext
   );
   const [openModal, setOpenModal] = useState('');
@@ -195,12 +195,12 @@ const Content = React.forwardRef(({ wrapperRef }, ref) => {
 
   return (
     <div className="content" ref={ref}>
-      <About openModal={setOpenModal} isMobile={isMobile} />
-      <Projects openModal={setOpenModal} isMobile={isMobile} />
+      <About openModal={setOpenModal} isTouchDevice={isTouchDevice} />
+      <Projects openModal={setOpenModal} isTouchDevice={isTouchDevice} />
       <Modals
         showModalId={openModal}
         resetModal={() => setOpenModal('')}
-        isMobile={isMobile}
+        isTouchDevice={isTouchDevice}
         customModalHeight={customModalHeight}
       />
     </div>

@@ -7,11 +7,23 @@ import ShowcaseContext from '../context/showcaseContext';
 import DeviceSpecificContext from '../context/deviceSpecificContext';
 import { useResponsiveClick } from '../utils/hooks';
 
-const NameCard = ({ name }) => (
-  <a className="name-card" href="https://thilantran.com" onClick={() => {}}>
-    {name}
-  </a>
-);
+const NameCard = ({ name, isTouchDevice }) => {
+  const ref = useRef(null);
+  const clickEvents = useResponsiveClick(
+    () => ref.current && ref.current.click(),
+    isTouchDevice
+  );
+  return (
+    <a
+      className="name-card"
+      href="https://thilantran.com"
+      ref={ref}
+      {...clickEvents}
+    >
+      {name}
+    </a>
+  );
+};
 
 const ActionButton = ({ onClick, getPrompt }) => (
   <div className="center-both">
@@ -29,8 +41,8 @@ const ActionButton = ({ onClick, getPrompt }) => (
   </div>
 );
 
-const Caret = ({ onClick, caretOpts, isMobile }) => {
-  const clickEvents = useResponsiveClick(onClick, isMobile);
+const Caret = ({ onClick, caretOpts, isTouchDevice }) => {
+  const clickEvents = useResponsiveClick(onClick, isTouchDevice);
   return (
     <div
       className={`caret ${caretOpts.up ? 'point-up' : ''} ${
@@ -153,7 +165,7 @@ const Toolbar = ({ hide, reset, next, Options }) => {
 
 const LandingOverlay = ({ clickCaret, caretOpts }) => {
   const { showcase, switchNextShowcase } = useContext(ShowcaseContext);
-  const { isMobile } = useContext(DeviceSpecificContext);
+  const { isMobileView, isTouchDevice } = useContext(DeviceSpecificContext);
 
   const ref = useRef(null);
   useEffect(() => {
@@ -169,12 +181,16 @@ const LandingOverlay = ({ clickCaret, caretOpts }) => {
   const ActionButtons = () => (
     <>
       <ActionButtonWrap />
-      <Caret onClick={clickCaret} caretOpts={caretOpts} isMobile={false} />
+      <Caret
+        onClick={clickCaret}
+        caretOpts={caretOpts}
+        isTouchDevice={isTouchDevice}
+      />
     </>
   );
 
   let FadingButtons = WithFade(
-    isMobile ? ActionButtonWrap : ActionButtons,
+    isMobileView ? ActionButtonWrap : ActionButtons,
     2,
     1,
     () => ref.current.getActive()
@@ -182,11 +198,15 @@ const LandingOverlay = ({ clickCaret, caretOpts }) => {
 
   return (
     <div className="landing-overlay">
-      <NameCard name="THILAN TRAN" />
-      {isMobile ? (
+      <NameCard name="THILAN TRAN" isTouchDevice={true} />
+      {isMobileView ? (
         <>
           <FadingButtons />
-          <Caret onClick={clickCaret} caretOpts={caretOpts} isMobile={true} />
+          <Caret
+            onClick={clickCaret}
+            caretOpts={caretOpts}
+            isTouchDevice={isTouchDevice}
+          />
         </>
       ) : (
         <FadingButtons />

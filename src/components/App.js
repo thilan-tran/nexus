@@ -11,16 +11,23 @@ import DeviceSpecificContext from '../context/deviceSpecificContext';
 import GoL from '../js/life';
 import Automata from '../js/automata';
 import Particles from '../js/particles';
-import { getScrollBarWidth, getIos, getMobileView } from '../utils/utils';
+import {
+  getScrollBarWidth,
+  getIos,
+  getMobileView,
+  getTouchSupported
+} from '../utils/utils';
 
 const App = () => {
   const [vertBreakpoints, setVertBreakpoints] = useState([0, 0]);
   const [scrollBarWidth, setScrollBarWidth] = useState(17);
   const [isIos, setIos] = useState(false);
-  const [isMobile, setMobile] = useState(false);
+  const [isTouchDevice, setTouchDevice] = useState(false);
+  const [isMobileView, setMobileView] = useState(false);
 
   useEffect(() => {
-    setMobile(getMobileView());
+    setMobileView(getMobileView());
+    setTouchDevice(getTouchSupported());
     setVertBreakpoints([
       window.innerHeight / 5,
       window.innerHeight / 2,
@@ -28,13 +35,10 @@ const App = () => {
     ]);
     setScrollBarWidth(getScrollBarWidth());
     setIos(getIos());
-    if ('ontouchstart' in document.documentElement) {
-      console.log('mobile touch');
-    }
   }, []);
 
   const showcases = [GoL, Automata, Particles];
-  const showcaseInitOptions = [isMobile ? 8 : 10, null, null];
+  const showcaseInitOptions = [isMobileView ? 8 : 10, null, null];
 
   const wrapperRef = useRef(null);
   const showcaseRef = React.createRef();
@@ -99,9 +103,10 @@ const App = () => {
     >
       <DeviceSpecificContext.Provider
         value={{
-          isMobile,
+          isMobileView,
+          isTouchDevice,
           scrollBarWidth,
-          customModalHeight: isMobile ? vertBreakpoints[2] : false
+          customModalHeight: isMobileView ? vertBreakpoints[2] : false
         }}
       >
         <div ref={wrapperRef} className={isIos ? 'ios-font-spacing' : ''}>
