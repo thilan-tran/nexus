@@ -29,15 +29,14 @@ const ActionButton = ({ onClick, getPrompt }) => (
   </div>
 );
 
-const Caret = ({ onClick, caretOpts }) => {
-  // const clickEvents = useResponsiveClick(onClick, isMobile);
+const Caret = ({ onClick, caretOpts, isMobile }) => {
+  const clickEvents = useResponsiveClick(() => onClick(), isMobile);
   return (
     <div
       className={`caret ${caretOpts.up ? 'point-up' : ''} ${
         !caretOpts.visible ? 'hide' : ''
       }`}
-      tabIndex="0"
-      onClick={onClick}
+      {...clickEvents}
     >
       <div className="caret-rotate">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -167,10 +166,10 @@ const LandingOverlay = ({ clickCaret, caretOpts }) => {
       getPrompt={() => showcase.spawnPrompt}
     />
   );
-  const ActionButtons = ({ onClick, caretOpts }) => (
+  const ActionButtons = () => (
     <>
       <ActionButtonWrap />
-      <Caret onClick={onClick} caretOpts={caretOpts} />
+      <Caret onClick={clickCaret} caretOpts={caretOpts} isMobile={isMobile} />
     </>
   );
 
@@ -187,10 +186,14 @@ const LandingOverlay = ({ clickCaret, caretOpts }) => {
       {isMobile ? (
         <>
           <FadingButtons />
-          <Caret onClick={clickCaret} caretOpts={caretOpts} />
+          <Caret
+            onClick={clickCaret}
+            caretOpts={caretOpts}
+            isMobile={isMobile}
+          />
         </>
       ) : (
-        <FadingButtons onClick={clickCaret} caretOpts={caretOpts} />
+        <FadingButtons />
       )}
       <Toolbar
         hide={caretOpts.up}
