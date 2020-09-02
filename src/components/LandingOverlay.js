@@ -30,7 +30,7 @@ const ActionButton = ({ onClick, getPrompt }) => (
 );
 
 const Caret = ({ onClick, caretOpts, isMobile }) => {
-  const clickEvents = useResponsiveClick(() => onClick(), isMobile);
+  const clickEvents = useResponsiveClick(onClick, isMobile);
   return (
     <div
       className={`caret ${caretOpts.up ? 'point-up' : ''} ${
@@ -169,7 +169,7 @@ const LandingOverlay = ({ clickCaret, caretOpts }) => {
   const ActionButtons = () => (
     <>
       <ActionButtonWrap />
-      <Caret onClick={clickCaret} caretOpts={caretOpts} isMobile={isMobile} />
+      <Caret onClick={clickCaret} caretOpts={caretOpts} isMobile={false} />
     </>
   );
 
@@ -186,11 +186,7 @@ const LandingOverlay = ({ clickCaret, caretOpts }) => {
       {isMobile ? (
         <>
           <FadingButtons />
-          <Caret
-            onClick={clickCaret}
-            caretOpts={caretOpts}
-            isMobile={isMobile}
-          />
+          <Caret onClick={clickCaret} caretOpts={caretOpts} isMobile={true} />
         </>
       ) : (
         <FadingButtons />
