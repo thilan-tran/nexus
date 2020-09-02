@@ -53,7 +53,7 @@
   }
 
   .caret {
-    z-index: 3;
+    z-index: 2;
     opacity: 1 !important;
 
     &.point-up {
@@ -68,7 +68,7 @@
     }
 
     &.point-up svg path {
-      fill: transparent;
+      fill: #fff;
     }
   }
 

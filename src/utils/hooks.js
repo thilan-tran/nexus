@@ -1,23 +1,29 @@
 import { useState } from 'react';
 
-const lambda = () => {};
+const lambda = () => true;
 
-export const useOnMobileClick = (
+export const useResponsiveClick = (
   onClick,
-  customDownCheck = lambda,
+  isMobile = false,
+  customClickCheck = lambda,
   delay = 300
 ) => {
   const [touchDown, setTouchDown] = useState(null);
 
-  const onTouchMove = () => setTouchDown(null);
-  const onTouchStart = (evt) =>
-    customDownCheck(evt) && setTouchDown(new Date());
-  const onTouchEnd = (evt) => {
-    if (touchDown && new Date() - touchDown > delay) {
-      onClick(evt);
-      setTouchDown(null);
-    }
-  };
-
-  return { onTouchMove, onTouchStart, onTouchEnd };
+  if (isMobile) {
+    const onTouchMove = () => setTouchDown(null);
+    const onTouchStart = (evt) =>
+      customClickCheck(evt) && setTouchDown(new Date());
+    const onTouchEnd = (evt) => {
+      if (touchDown && new Date() - touchDown < delay) {
+        console.log('touchend');
+        onClick(evt);
+        setTouchDown(null);
+        evt.preventDefault();
+      }
+    };
+    return { onTouchMove, onTouchStart, onTouchEnd };
+  } else {
+    return { onClick: (evt) => customClickCheck(evt) && onClick(evt) };
+  }
 };

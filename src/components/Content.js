@@ -4,7 +4,7 @@ import Projects from './Projects';
 import Modals from './Modals';
 
 import DeviceSpecificContext from '../context/deviceSpecificContext';
-import { useOnMobileClick } from '../utils/hooks';
+import { useResponsiveClick } from '../utils/hooks';
 
 const About = ({ openModal, isMobile }) => {
   const aboutContentRef = useRef(null);
@@ -29,13 +29,11 @@ const About = ({ openModal, isMobile }) => {
     return () => document.removeEventListener('scroll', handleScroll);
   }, [aboutContentRef]);
 
-  const onMobileClick = useOnMobileClick(
+  const clickEvents = useResponsiveClick(
     () => openModal('about'),
+    isMobile,
     (evt) => socialsRef.current && !socialsRef.current.contains(evt.target)
   );
-  const clickEvents = isMobile
-    ? onMobileClick
-    : { onClick: () => openModal('about') };
 
   return (
     <div
@@ -55,7 +53,6 @@ const About = ({ openModal, isMobile }) => {
           href="https://github.com/thilan-tran"
           target="_blank"
           rel="noreferrer"
-          onClick={(e) => e.stopPropagation()}
         >
           <svg
             className="github"
@@ -154,7 +151,9 @@ const About = ({ openModal, isMobile }) => {
 };
 
 const Content = React.forwardRef(({ wrapperRef }, ref) => {
-  const { scrollBarWidth, isMobile } = useContext(DeviceSpecificContext);
+  const { scrollBarWidth, isMobile, customModalHeight } = useContext(
+    DeviceSpecificContext
+  );
   const [openModal, setOpenModal] = useState('');
 
   useEffect(() => {
@@ -182,6 +181,7 @@ const Content = React.forwardRef(({ wrapperRef }, ref) => {
         showModalId={openModal}
         resetModal={() => setOpenModal('')}
         isMobile={isMobile}
+        customModalHeight={customModalHeight}
       />
     </div>
   );

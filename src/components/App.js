@@ -28,6 +28,9 @@ const App = () => {
     ]);
     setScrollBarWidth(getScrollBarWidth());
     setIos(getIos());
+    if ('ontouchstart' in document.documentElement) {
+      console.log('mobile touch');
+    }
   }, []);
 
   const showcases = [GoL, Automata, Particles];

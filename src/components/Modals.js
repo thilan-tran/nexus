@@ -9,6 +9,8 @@ import RestockStocks from '../static/restock-stockview.jpeg';
 import TerreformForest from '../static/terreform-forest.jpeg';
 import WeatherUI from '../static/weather-hover.jpeg';
 
+import { useResponsiveClick } from '../utils/hooks';
+
 const images = {
   PercussionPhoto,
   WmlTimeline,
@@ -321,27 +323,22 @@ const modalArr = [
   }
 ];
 
-const Modals = ({ showModalId, resetModal, isMobile }) => {
+const Modals = ({ showModalId, resetModal, isMobile, customModalHeight }) => {
   const currModal = modalArr.find(({ id }) => id === showModalId);
-
-  const [down, setDown] = useState(false);
-  const [customHeight, setCustomHeight] = useState(null);
-  useEffect(() => {
-    if (isMobile) {
-      setCustomHeight(window.innerHeight * 0.9);
-    }
-  }, [isMobile]);
 
   const prefetchImages = Object.values(images).map((url) => (
     <link rel="prefetch" href={url} key={url} />
   ));
+
+  const closeClickEvents = useResponsiveClick(() => resetModal(), isMobile);
+  const overlayClickEvents = useResponsiveClick(() => resetModal(), isMobile);
 
   return (
     <>
       <div>{prefetchImages}</div>
       <div
         className={`modal ${currModal ? 'show' : ''}`}
-        style={{ height: customHeight && `${customHeight}px` }}
+        style={{ height: customModalHeight && `${customModalHeight}px` }}
       >
         <div className="modal-body">
           <svg
@@ -356,14 +353,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
               strokeLinejoin: 'round',
               strokeWidth: '32px'
             }}
-            onTouchMove={() => setDown(null)}
-            onTouchStart={() => setDown(new Date())}
-            onTouchEnd={() => {
-              if (down && new Date() - down < 300) {
-                resetModal();
-              }
-              setDown(null);
-            }}
+            {...closeClickEvents}
           >
             <line x1="368" y1="368" x2="144" y2="144" />
             <line x1="368" y1="144" x2="144" y2="368" />
@@ -374,23 +364,7 @@ const Modals = ({ showModalId, resetModal, isMobile }) => {
       )
       <div
         className={`overlay ${currModal ? 'show' : ''}`}
-        onTouchMove={() => setDown(false)}
-        onTouchStart={() => {
-          console.log('touchstart');
-          setDown(true);
-        }}
-        onTouchEnd={() => {
-          console.log('touchend');
-          if (down) {
-            resetModal();
-            setDown(false);
-          }
-        }}
-        onClick={() => {
-          if (currModal) {
-            resetModal();
-          }
-        }}
+        {...overlayClickEvents}
       />
     </>
   );
