@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import PercussionPhoto from '../static/percussion-photo.jpg';
 import WmlTimeline from '../static/wml-timeline.jpeg';
@@ -361,7 +361,6 @@ const Modals = ({ showModalId, resetModal, isMobile, customModalHeight }) => {
           {currModal && currModal.body}
         </div>
       </div>
-      )
       <div
         className={`overlay ${currModal ? 'show' : ''}`}
         {...overlayClickEvents}

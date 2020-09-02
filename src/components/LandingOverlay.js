@@ -8,7 +8,7 @@ import DeviceSpecificContext from '../context/deviceSpecificContext';
 import { useResponsiveClick } from '../utils/hooks';
 
 const NameCard = ({ name }) => (
-  <a className="name-card" href="https://thilantran.com">
+  <a className="name-card" href="https://thilantran.com" onClick={() => {}}>
     {name}
   </a>
 );

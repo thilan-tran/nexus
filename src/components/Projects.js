@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import WmlTimeline from '../static/wml-timeline.jpeg';
 import TwainUI from '../static/twain.jpeg';
@@ -6,14 +6,27 @@ import TerreformFarm from '../static/terreform-farm.jpeg';
 import RestockPortfolio from '../static/restock-portfolio.jpeg';
 import WeatherUI from '../static/weather.jpeg';
 
-const Projects = ({ openModal }) => {
-  const [touched, setTouched] = useState({
-    wml: false,
-    twain: false,
-    terre: false,
-    restock: false,
-    weather: false
-  });
+import { useResponsiveClick } from '../utils/hooks';
+
+const Projects = ({ openModal, isMobile }) => {
+  const wmlClickEvents = useResponsiveClick(() => openModal('wml'), isMobile);
+  const twainClickEvents = useResponsiveClick(
+    () => openModal('twain'),
+    isMobile
+  );
+  const terreformClickEvents = useResponsiveClick(
+    () => openModal('terreform'),
+    isMobile
+  );
+  const restockClickEvents = useResponsiveClick(
+    () => openModal('restock'),
+    isMobile
+  );
+  const weatherClickEvents = useResponsiveClick(
+    () => openModal('weather'),
+    isMobile
+  );
+
   return (
     <div className="card" style={{ cursor: 'default' }}>
       <h2 id="projects">PROJECTS</h2>
@@ -21,15 +34,7 @@ const Projects = ({ openModal }) => {
         <div
           className="grid-item"
           data-project="wml-dev-assistant"
-          onClick={() => openModal('wml')}
-          onTouchMove={() => setTouched({ ...touched, wml: false })}
-          onTouchStart={() => setTouched({ ...touched, wml: true })}
-          onTouchEnd={() => {
-            if (touched.wml) {
-              openModal('wml');
-            }
-            setTouched({ ...touched, wml: false });
-          }}
+          {...wmlClickEvents}
         >
           <div className="title">
             WALMART LABS
@@ -38,19 +43,7 @@ const Projects = ({ openModal }) => {
           </div>
           <img src={WmlTimeline} alt="WalmartLabs Dev Assistant timeline" />
         </div>
-        <div
-          className="grid-item"
-          data-project="twain"
-          onClick={() => openModal('twain')}
-          onTouchMove={() => setTouched({ ...touched, twain: false })}
-          onTouchStart={() => setTouched({ ...touched, twain: true })}
-          onTouchEnd={() => {
-            if (touched.twain) {
-              openModal('twain');
-            }
-            setTouched({ ...touched, twain: false });
-          }}
-        >
+        <div className="grid-item" data-project="twain" {...twainClickEvents}>
           <div className="title">
             UCLA DEVX
             <br />
@@ -61,7 +54,7 @@ const Projects = ({ openModal }) => {
         <div
           className="grid-item"
           data-project="terreform"
-          onClick={() => openModal('terreform')}
+          {...terreformClickEvents}
         >
           <div className="title">
             UCLA CREATIVE LABS
@@ -73,7 +66,7 @@ const Projects = ({ openModal }) => {
         <div
           className="grid-item"
           data-project="restock"
-          onClick={() => openModal('restock')}
+          {...restockClickEvents}
         >
           <div className="title">
             SIDE PROJECT
@@ -85,7 +78,7 @@ const Projects = ({ openModal }) => {
         <div
           className="grid-item"
           data-project="weather"
-          onClick={() => openModal('weather')}
+          {...weatherClickEvents}
         >
           <div className="title">
             SIDE PROJECT

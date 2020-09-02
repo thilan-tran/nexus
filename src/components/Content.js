@@ -53,9 +53,7 @@ const About = ({ openModal, isMobile }) => {
           href="https://github.com/thilan-tran"
           target="_blank"
           rel="noreferrer"
-          onTouchStart={() => console.log('touchstart')}
-          onTouchEnd={() => console.log('touchend')}
-          onClick={() => console.log('click')}
+          onClick={() => {}}
         >
           <svg
             className="github"
@@ -76,6 +74,7 @@ const About = ({ openModal, isMobile }) => {
           href="https://www.linkedin.com/in/thilan-tran/"
           target="_blank"
           rel="noreferrer"
+          onClick={() => {}}
         >
           <svg
             className="linkedin"
@@ -94,7 +93,7 @@ const About = ({ openModal, isMobile }) => {
             <circle cx="4" cy="4" r="2"></circle>
           </svg>
         </a>
-        <a href="mailto:thilantran@ucla.edu">
+        <a href="mailto:thilantran@ucla.edu" onClick={() => {}}>
           <svg
             className="mail"
             xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +178,7 @@ const Content = React.forwardRef(({ wrapperRef }, ref) => {
   return (
     <div className="content" ref={ref}>
       <About openModal={setOpenModal} isMobile={isMobile} />
-      <Projects openModal={setOpenModal} />
+      <Projects openModal={setOpenModal} isMobile={isMobile} />
       <Modals
         showModalId={openModal}
         resetModal={() => setOpenModal('')}
