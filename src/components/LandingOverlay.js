@@ -4,7 +4,7 @@ import WithFade from './Fade';
 import { Options } from './Showcase';
 
 import ShowcaseContext from '../context/showcaseContext';
-import DeviceSpecificContext from '../context/showcaseContext';
+import DeviceSpecificContext from '../context/deviceSpecificContext';
 import { useResponsiveClick } from '../utils/hooks';
 
 const NameCard = ({ name }) => (
@@ -30,8 +30,7 @@ const ActionButton = ({ onClick, getPrompt }) => (
 );
 
 const Caret = ({ onClick, caretOpts, isMobile }) => {
-  console.log(isMobile);
-  const clickEvents = useResponsiveClick(onClick, true);
+  const clickEvents = useResponsiveClick(onClick, isMobile);
   return (
     <div
       className={`caret ${caretOpts.up ? 'point-up' : ''} ${
@@ -154,14 +153,7 @@ const Toolbar = ({ hide, reset, next, Options }) => {
 
 const LandingOverlay = ({ clickCaret, caretOpts }) => {
   const { showcase, switchNextShowcase } = useContext(ShowcaseContext);
-  const Obj = useContext(DeviceSpecificContext);
-  const { isMobile } = Obj;
-  console.log(
-    'context',
-    Obj.isMobile,
-    Obj.scrollBarWidth,
-    Obj.customModalHeight
-  );
+  const { isMobile } = useContext(DeviceSpecificContext);
 
   const ref = useRef(null);
   useEffect(() => {

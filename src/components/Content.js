@@ -53,6 +53,9 @@ const About = ({ openModal, isMobile }) => {
           href="https://github.com/thilan-tran"
           target="_blank"
           rel="noreferrer"
+          onTouchStart={() => console.log('touchstart')}
+          onTouchEnd={() => console.log('touchend')}
+          onClick={() => console.log('click')}
         >
           <svg
             className="github"

@@ -112,11 +112,7 @@ const App = () => {
             clickCaret={handleClick}
             caretOpts={{ up: caretUp, visible: caretVis }}
           />
-          <Content
-            ref={contentRef}
-            wrapperRef={wrapperRef}
-            scrollBarWidth={scrollBarWidth}
-          />
+          <Content ref={contentRef} wrapperRef={wrapperRef} />
         </div>
       </DeviceSpecificContext.Provider>
     </ShowcaseContext.Provider>
