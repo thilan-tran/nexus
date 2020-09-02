@@ -156,7 +156,12 @@ const LandingOverlay = ({ clickCaret, caretOpts }) => {
   const { showcase, switchNextShowcase } = useContext(ShowcaseContext);
   const Obj = useContext(DeviceSpecificContext);
   const { isMobile } = Obj;
-  console.log('context', Obj);
+  console.log(
+    'context',
+    Obj.isMobile,
+    Obj.scrollBarWidth,
+    Obj.customModalHeight
+  );
 
   const ref = useRef(null);
   useEffect(() => {
