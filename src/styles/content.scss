@@ -45,9 +45,13 @@
   }
 }
 
-.socials svg {
-  height: 35px;
-  margin: 0 5px;
+.socials {
+  width: 135px;
+
+  svg {
+    height: 35px;
+    margin: 0 5px;
+  }
 }
 
 .highlight {

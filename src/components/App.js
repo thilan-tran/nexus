@@ -18,7 +18,7 @@ import {
   getTouchSupported
 } from '../utils/utils';
 
-const App = () => {
+const App = ({ images }) => {
   const [vertBreakpoints, setVertBreakpoints] = useState([0, 0]);
   const [scrollBarWidth, setScrollBarWidth] = useState(17);
   const [isIos, setIos] = useState(false);
@@ -117,7 +117,7 @@ const App = () => {
             clickCaret={handleClick}
             caretOpts={{ up: caretUp, visible: caretVis }}
           />
-          <Content ref={contentRef} wrapperRef={wrapperRef} />
+          <Content ref={contentRef} wrapperRef={wrapperRef} images={images} />
         </div>
       </DeviceSpecificContext.Provider>
     </ShowcaseContext.Provider>

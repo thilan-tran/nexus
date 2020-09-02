@@ -170,7 +170,7 @@ const About = ({ openModal, isTouchDevice }) => {
   );
 };
 
-const Content = React.forwardRef(({ wrapperRef }, ref) => {
+const Content = React.forwardRef(({ wrapperRef, images }, ref) => {
   const { scrollBarWidth, isTouchDevice, customModalHeight } = useContext(
     DeviceSpecificContext
   );
@@ -196,8 +196,13 @@ const Content = React.forwardRef(({ wrapperRef }, ref) => {
   return (
     <div className="content" ref={ref}>
       <About openModal={setOpenModal} isTouchDevice={isTouchDevice} />
-      <Projects openModal={setOpenModal} isTouchDevice={isTouchDevice} />
+      <Projects
+        images={images}
+        openModal={setOpenModal}
+        isTouchDevice={isTouchDevice}
+      />
       <Modals
+        images={images}
         showModalId={openModal}
         resetModal={() => setOpenModal('')}
         isTouchDevice={isTouchDevice}

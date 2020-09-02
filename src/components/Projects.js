@@ -1,14 +1,9 @@
 import React from 'react';
-
-import WmlTimeline from '../static/wml-timeline.jpeg';
-import TwainUI from '../static/twain.jpeg';
-import TerreformFarm from '../static/terreform-farm.jpeg';
-import RestockPortfolio from '../static/restock-portfolio.jpeg';
-import WeatherUI from '../static/weather.jpeg';
+import Img from 'gatsby-image';
 
 import { useResponsiveClick } from '../utils/hooks';
 
-const Projects = ({ openModal, isTouchDevice }) => {
+const Projects = ({ images, openModal, isTouchDevice }) => {
   const wmlClickEvents = useResponsiveClick(
     () => openModal('wml'),
     isTouchDevice
@@ -44,7 +39,15 @@ const Projects = ({ openModal, isTouchDevice }) => {
             <br />
             <b>DEV ASSISTANT</b>
           </div>
-          <img src={WmlTimeline} alt="WalmartLabs Dev Assistant timeline" />
+          <Img
+            fluid={images.wmlCover.childImageSharp.fluid}
+            style={{
+              height: '75%',
+              width: '75%'
+            }}
+            imgStyle={{ objectFit: 'contain' }}
+            alt="WalmartLabs Dev Assistant Timeline"
+          />
         </div>
         <div className="grid-item" data-project="twain" {...twainClickEvents}>
           <div className="title">
@@ -52,7 +55,15 @@ const Projects = ({ openModal, isTouchDevice }) => {
             <br />
             <b>TWAIN</b>
           </div>
-          <img src={TwainUI} alt="Twain calendar UI" />
+          <Img
+            fluid={images.twainCover.childImageSharp.fluid}
+            style={{
+              height: '75%',
+              width: '75%'
+            }}
+            imgStyle={{ objectFit: 'contain' }}
+            alt="Twain calendar UI"
+          />
         </div>
         <div
           className="grid-item"
@@ -64,7 +75,15 @@ const Projects = ({ openModal, isTouchDevice }) => {
             <br />
             <b>TERREFORM</b>
           </div>
-          <img src={TerreformFarm} alt="Terreform farm environment" />
+          <Img
+            fluid={images.terreformCover.childImageSharp.fluid}
+            style={{
+              height: '75%',
+              width: '75%'
+            }}
+            imgStyle={{ objectFit: 'contain' }}
+            alt="Terreform farm environment"
+          />
         </div>
         <div
           className="grid-item"
@@ -76,7 +95,15 @@ const Projects = ({ openModal, isTouchDevice }) => {
             <br />
             <b>RESTOCK</b>
           </div>
-          <img src={RestockPortfolio} alt="Restock user portfolio UI" />
+          <Img
+            fluid={images.restockCover.childImageSharp.fluid}
+            style={{
+              height: '75%',
+              width: '75%'
+            }}
+            imgStyle={{ objectFit: 'contain' }}
+            alt="Restock user portfolio UI"
+          />
         </div>
         <div
           className="grid-item"
@@ -88,7 +115,15 @@ const Projects = ({ openModal, isTouchDevice }) => {
             <br />
             <b>SIMPLE WEATHER</b>
           </div>
-          <img src={WeatherUI} alt="Simple weather UI" />
+          <Img
+            fluid={images.weatherCover.childImageSharp.fluid}
+            style={{
+              height: '75%',
+              width: '75%'
+            }}
+            imgStyle={{ objectFit: 'contain' }}
+            alt="Simple weather UI"
+          />
         </div>
       </div>
     </div>

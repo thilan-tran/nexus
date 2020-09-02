@@ -1,34 +1,18 @@
 import React, { useRef } from 'react';
-
-import PercussionPhoto from '../static/percussion-photo.jpg';
-import WmlTimeline from '../static/wml-timeline.jpeg';
-import WmlState from '../static/wml-state-edit.jpeg';
-import TwainDate from '../static/twain-date.jpeg';
-import TwainTime from '../static/twain-time.jpeg';
-import RestockStocks from '../static/restock-stockview.jpeg';
-import TerreformForest from '../static/terreform-forest.jpeg';
-import WeatherUI from '../static/weather-hover.jpeg';
+import Img from 'gatsby-image';
 
 import { useResponsiveClick } from '../utils/hooks';
 
-const images = {
-  PercussionPhoto,
-  WmlTimeline,
-  WmlState,
-  TwainDate,
-  TwainTime,
-  RestockStocks,
-  TerreformForest,
-  WeatherUI
-};
-
-const AboutModal = () => {
+const AboutModal = ({ image }) => {
   return (
     <>
       <div className="modal-top">
-        <img
-          height="80%"
-          src={images.PercussionPhoto}
+        <Img
+          fluid={image}
+          style={{
+            width: '100%'
+          }}
+          imgStyle={{ objectFit: 'cover' }}
           alt="Performing in the UCLA percussion ensemble"
         />
       </div>
@@ -74,18 +58,17 @@ const AboutModal = () => {
   );
 };
 
-const WmlModal = () => (
+const WmlModal = ({ image }) => (
   <>
     <div className="modal-top">
-      <img
-        height="80%"
-        src={images.WmlTimeline}
-        alt="WalmartLabs Dev Assistant timeline"
-      />
-      <img
-        height="62%"
-        src={images.WmlState}
-        alt="WalmartLabs Dev Assistant state change"
+      <Img
+        fluid={image}
+        style={{
+          height: '90%',
+          width: '95%'
+        }}
+        imgStyle={{ objectFit: 'contain' }}
+        alt="Terreform forest environment"
       />
     </div>
     <div className="modal-description">
@@ -125,11 +108,18 @@ const WmlModal = () => (
   </>
 );
 
-const TwainModal = () => (
+const TwainModal = ({ image }) => (
   <>
     <div className="modal-top">
-      <img height="80%" src={images.TwainDate} alt="Twain date picker UI" />
-      <img height="80%" src={images.TwainTime} alt="Twain time picker UI" />
+      <Img
+        fluid={image}
+        style={{
+          height: '90%',
+          width: '95%'
+        }}
+        imgStyle={{ objectFit: 'contain' }}
+        alt="Terreform forest environment"
+      />
     </div>
     <div className="modal-description">
       <div>
@@ -172,12 +162,16 @@ const TwainModal = () => (
   </>
 );
 
-const TerreformModal = () => (
+const TerreformModal = ({ image }) => (
   <>
     <div className="modal-top">
-      <img
-        height="80%"
-        src={images.TerreformForest}
+      <Img
+        fluid={image}
+        style={{
+          height: '90%',
+          width: '95%'
+        }}
+        imgStyle={{ objectFit: 'contain' }}
         alt="Terreform forest environment"
       />
     </div>
@@ -219,12 +213,16 @@ const TerreformModal = () => (
   </>
 );
 
-const RestockModal = () => (
+const RestockModal = ({ image }) => (
   <>
     <div className="modal-top">
-      <img
-        height="80%"
-        src={images.RestockStocks}
+      <Img
+        fluid={image}
+        style={{
+          height: '90%',
+          width: '95%'
+        }}
+        imgStyle={{ objectFit: 'contain' }}
         alt="Restock stock view UI"
       />
     </div>
@@ -265,10 +263,18 @@ const RestockModal = () => (
   </>
 );
 
-const WeatherModal = () => (
+const WeatherModal = ({ image }) => (
   <>
     <div className="modal-top">
-      <img height="80%" src={images.WeatherUI} alt="Simple weather hover UI" />
+      <Img
+        fluid={image}
+        style={{
+          height: '90%',
+          width: '95%'
+        }}
+        imgStyle={{ objectFit: 'contain' }}
+        alt="Simple weather hover UI"
+      />
     </div>
     <div className="modal-description">
       <div>
@@ -296,45 +302,52 @@ const WeatherModal = () => (
   </>
 );
 
-const modalArr = [
-  {
-    id: 'about',
-    body: <AboutModal />
-  },
-  {
-    id: 'wml',
-    body: <WmlModal />
-  },
-  {
-    id: 'twain',
-    body: <TwainModal />
-  },
-  {
-    id: 'terreform',
-    body: <TerreformModal />
-  },
-  {
-    id: 'restock',
-    body: <RestockModal />
-  },
-  {
-    id: 'weather',
-    body: <WeatherModal />
-  }
-];
-
 const Modals = ({
   showModalId,
   resetModal,
   isTouchDevice,
-  customModalHeight
+  customModalHeight,
+  images
 }) => {
+  const modalArr = [
+    {
+      id: 'about',
+      body: <AboutModal image={images.coverPhoto.childImageSharp.fluid} />
+    },
+    {
+      id: 'wml',
+      body: <WmlModal image={images.wmlModal.childImageSharp.fluid} />
+    },
+    {
+      id: 'twain',
+      body: <TwainModal image={images.twainModal.childImageSharp.fluid} />
+    },
+    {
+      id: 'terreform',
+      body: (
+        <TerreformModal image={images.terreformModal.childImageSharp.fluid} />
+      )
+    },
+    {
+      id: 'restock',
+      body: <RestockModal image={images.restockModal.childImageSharp.fluid} />
+    },
+    {
+      id: 'weather',
+      body: <WeatherModal image={images.weatherModal.childImageSharp.fluid} />
+    }
+  ];
+
   const ref = useRef(null);
 
   const currModal = modalArr.find(({ id }) => id === showModalId);
 
-  const prefetchImages = Object.values(images).map((url) => (
-    <link rel="prefetch" href={url} key={url} />
+  const prefetchImages = Object.values(images).map((gatsbySharp) => (
+    <link
+      rel="prefetch"
+      href={gatsbySharp.childImageSharp.fluid.src}
+      key={gatsbySharp.childImageSharp.fluid.src}
+    />
   ));
 
   const modalMarginClickEvents = useResponsiveClick(
