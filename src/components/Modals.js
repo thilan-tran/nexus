@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import Img from 'gatsby-image';
 
+import ResponsiveLink from './ResponsiveLink';
+
 import { useResponsiveClick } from '../utils/hooks';
 
 const AboutModal = ({ image }) => {
@@ -28,23 +30,13 @@ const AboutModal = ({ image }) => {
             customization.
             <br />
             Check out my{' '}
-            <a
-              className="highlight"
-              href="https://github.com/thilan-tran/dotfiles"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <ResponsiveLink url="https://github.com/thilan-tran/dotfiles">
               dot files
-            </a>{' '}
+            </ResponsiveLink>{' '}
             and{' '}
-            <a
-              className="highlight"
-              href="https://github.com/thilan-tran/wiki"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <ResponsiveLink url="https://github.com/thilan-tran/wiki">
               collection of notes
-            </a>
+            </ResponsiveLink>
             .
             <br />
             <br />
@@ -93,14 +85,9 @@ const WmlModal = ({ image }) => (
           source code changes or the use of the existing Redux DevTools. <br />
           <br />
           Towards the end of my internship, I gave a tech talk with these{' '}
-          <a
-            className="highlight"
-            href="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ResponsiveLink url="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing">
             slides
-          </a>{' '}
+          </ResponsiveLink>{' '}
           to demo the plugin and present my development approach.
         </p>
       </div>
@@ -128,26 +115,16 @@ const TwainModal = ({ image }) => (
         </h2>
         <p>
           The{' '}
-          <a
-            className="highlight"
-            href="https://github.com/ucladevx/twain-extension"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ResponsiveLink url="https://github.com/ucladevx/twain-extension">
             Twain project
-          </a>{' '}
+          </ResponsiveLink>{' '}
           is a browser extension for Google calendar that will automatically
           schedule tasks in available calendar slots. Users create and schedule
           tasks, and can reschedule or force-schedule tasks during the UX flow.
           The extension is available on the Chrome{' '}
-          <a
-            className="highlight"
-            href="https://chrome.google.com/webstore/detail/twain/cmljiidokkhmheonmpfciinfdonkimop?hl=en"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ResponsiveLink url="https://chrome.google.com/webstore/detail/twain/cmljiidokkhmheonmpfciinfdonkimop?hl=en">
             store
-          </a>
+          </ResponsiveLink>
           .
           <br />
           <br />
@@ -181,25 +158,15 @@ const TerreformModal = ({ image }) => (
           <b>UCLA CREATIVE LABS</b>TERREFORM
         </h2>
         <p>
-          <a
-            className="highlight"
-            href="https://github.com/angle-zhang/terreform"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ResponsiveLink url="https://github.com/angle-zhang/terreform">
             Terreform
-          </a>{' '}
+          </ResponsiveLink>{' '}
           is a donation website for non-profits fighting climate change that
           features interactive environments rendered using ThreeJS that evolve
           as users donate. See the{' '}
-          <a
-            className="highlight"
-            href="http://terreform.herokuapp.com/home"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ResponsiveLink url="http://terreform.herokuapp.com/home">
             site
-          </a>{' '}
+          </ResponsiveLink>{' '}
           live.
           <br />
           <br />
@@ -231,27 +198,17 @@ const RestockModal = ({ image }) => (
         <h2>RESTOCK</h2>
         <p>
           As a fullstack side project, I built the{' '}
-          <a
-            className="highlight"
-            href="https://github.com/thilan-tran/restock"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ResponsiveLink url="https://github.com/thilan-tran/restock">
             Restock
-          </a>{' '}
+          </ResponsiveLink>{' '}
           webapp, a real-time stock trading simulator. Users can can simulate
           transactions, track stocks for real-time updates, and view stock
           history in a dashboard or other user portfolios on a leaderboard. All
           user actions are authenticated, and websockets allow for instant
           updates from the backend to any connected clients. Check out the live{' '}
-          <a
-            className="highlight"
-            href="https://restock-app.herokuapp.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ResponsiveLink url="https://restock-app.herokuapp.com/">
             website
-          </a>
+          </ResponsiveLink>
           .
           <br />
           <br />
@@ -285,14 +242,9 @@ const WeatherModal = ({ image }) => (
           <br />
           <br />
           Thus,{' '}
-          <a
-            className="highlight"
-            href="https://github.com/thilan-tran/simple-weather"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ResponsiveLink url="https://github.com/thilan-tran/simple-weather">
             Simple Weather
-          </a>{' '}
+          </ResponsiveLink>{' '}
           was born, the same simple but clean weather forecast UI recreated
           using multiple frameworks including native JavaScript, jQuery, and
           React.

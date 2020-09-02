@@ -25,6 +25,9 @@ export const useResponsiveClick = (
     };
     return { onTouchMove, onTouchStart, onTouchEnd };
   } else {
-    return { onClick: (evt) => customClickCheck(evt) && onClick(evt) };
+    return {
+      onClick: (evt) =>
+        console.log('click') || (customClickCheck(evt) && onClick(evt))
+    };
   }
 };

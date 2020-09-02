@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import Projects from './Projects';
 import Modals from './Modals';
+import ResponsiveLink from './ResponsiveLink';
 
 import DeviceSpecificContext from '../context/deviceSpecificContext';
 import { useResponsiveClick } from '../utils/hooks';
@@ -9,9 +10,6 @@ import { useResponsiveClick } from '../utils/hooks';
 const About = ({ openModal, isTouchDevice }) => {
   const aboutContentRef = useRef(null);
   const socialsRef = useRef(null);
-  const githubRef = useRef(null);
-  const linkedRef = useRef(null);
-  const mailRef = useRef(null);
 
   const getContentTop = () =>
     aboutContentRef.current &&
@@ -38,19 +36,6 @@ const About = ({ openModal, isTouchDevice }) => {
     (evt) => socialsRef.current && !socialsRef.current.contains(evt.target)
   );
 
-  const gitClickEvents = useResponsiveClick(
-    () => githubRef.current && githubRef.current.click(),
-    isTouchDevice
-  );
-  const linkedClickEvents = useResponsiveClick(
-    () => linkedRef.current && linkedRef.current.click(),
-    isTouchDevice
-  );
-  const mailClickEvents = useResponsiveClick(
-    () => mailRef.current && mailRef.current.click(),
-    isTouchDevice
-  );
-
   return (
     <div
       id="about"
@@ -65,13 +50,7 @@ const About = ({ openModal, isTouchDevice }) => {
         className={`socials ${pastContent ? 'stick-top' : ''}`}
         ref={socialsRef}
       >
-        <a
-          href="https://github.com/thilan-tran"
-          target="_blank"
-          rel="noreferrer"
-          ref={githubRef}
-          {...gitClickEvents}
-        >
+        <ResponsiveLink url="https://github.com/thilan-tran" highlight={false}>
           <svg
             className="github"
             xmlns="http://www.w3.org/2000/svg"
@@ -86,13 +65,10 @@ const About = ({ openModal, isTouchDevice }) => {
           >
             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
           </svg>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/thilan-tran/"
-          target="_blank"
-          rel="noreferrer"
-          ref={linkedRef}
-          {...linkedClickEvents}
+        </ResponsiveLink>
+        <ResponsiveLink
+          url="https://www.linkedin.com/in/thilan-tran/"
+          highlight={false}
         >
           <svg
             className="linkedin"
@@ -110,8 +86,8 @@ const About = ({ openModal, isTouchDevice }) => {
             <rect x="2" y="9" width="4" height="12"></rect>
             <circle cx="4" cy="4" r="2"></circle>
           </svg>
-        </a>
-        <a href="mailto:thilantran@ucla.edu" ref={mailRef} {...mailClickEvents}>
+        </ResponsiveLink>
+        <ResponsiveLink url="mailto:thilantran@ucla.edu" highlight={false}>
           <svg
             className="mail"
             xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +105,7 @@ const About = ({ openModal, isTouchDevice }) => {
             <line x1="309.33" y1="295" x2="445.33" y2="192" />
             <line x1="61.33" y1="192" x2="200.33" y2="297" />
           </svg>
-        </a>
+        </ResponsiveLink>
       </div>
       <p ref={aboutContentRef}>
         I'm Thilan, a software engineer studying Computer Science and
@@ -137,33 +113,18 @@ const About = ({ openModal, isTouchDevice }) => {
         <br />
         <br />
         I've built{' '}
-        <a
-          className="highlight"
-          href="https://github.com/thilan-tran/restock"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <ResponsiveLink url="https://github.com/thilan-tran/restock">
           Restock
-        </a>{' '}
+        </ResponsiveLink>{' '}
         , a fullstack, real-time stock trading simulator, was the frontend lead
         for a smart-scheduling Google calendar extension on the UCLA DevX{' '}
-        <a
-          className="highlight"
-          href="https://github.com/ucladevx/twain-extension"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <ResponsiveLink url="https://github.com/ucladevx/twain-extension">
           Twain
-        </a>{' '}
+        </ResponsiveLink>{' '}
         project, and recently created a developer{' '}
-        <a
-          className="highlight"
-          href="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <ResponsiveLink url="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing">
           plugin
-        </a>{' '}
+        </ResponsiveLink>{' '}
         for debugging React and Redux apps on the platform team at Walmart Labs.
       </p>
     </div>
