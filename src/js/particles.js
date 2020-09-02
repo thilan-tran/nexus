@@ -40,12 +40,10 @@ const getGradientColor = (bias) => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-const canvas = document.querySelector('#particles');
-const WIDTH = window.innerWidth - 50;
-const HEIGHT = window.innerHeight - 50;
-canvas.width = WIDTH;
-canvas.height = HEIGHT;
-const ctx = canvas.getContext('2d');
+let canvas = null;
+let ctx = null;
+let WIDTH = 0;
+let HEIGHT = 0;
 
 let BOX = [];
 
@@ -121,46 +119,22 @@ const moveParticles = () => {
 };
 
 const spawn = (evt) => {
-  addParticle(evt.clientX, evt.clientY, 5);
+  if (evt) {
+    addParticle(evt.clientX, evt.clientY, 5);
+  } else {
+    addParticle(X, Y, 5);
+  }
 };
 
-document.querySelector('.action-button').addEventListener('click', (evt) => {
-  addParticle(evt.clientX, evt.clientY, 5);
-  evt.target.blur();
-});
-
-document.addEventListener('mousedown', (evt) => {
-  if (
-    evt.pageY <= HEIGHT &&
-    (!OPTIONS_ELEM || !OPTIONS_ELEM.contains(evt.target))
-  ) {
-    MOUSE_DOWN = true;
-  }
-});
-document.addEventListener('mouseup', () => (MOUSE_DOWN = false));
-document.addEventListener('mousemove', (evt) => {
-  X = evt.clientX;
-  Y = evt.clientY;
-});
+// document.querySelector(".action-button").addEventListener("click", evt => {
+//   addParticle(evt.clientX, evt.clientY, 5)
+//   evt.target.blur()
+// })
 
 const options = {
   greyscale: 0,
-  gravity: 1
-};
-
-const initOptionListeners = ({ greyId, colorId, gravityId }) => {
-  const greySelector = document.querySelector(greyId);
-  greySelector.addEventListener('click', () =>
-    setOption(options.greyscale, greySelector.checked)
-  );
-  const colorSelector = document.querySelector(colorId);
-  colorSelector.addEventListener('click', () =>
-    setOption(options.greyscale, greySelector.checked)
-  );
-  const gravSelector = document.querySelector(gravityId);
-  gravSelector.addEventListener('click', () =>
-    setOption(options.gravity, gravSelector.checked)
-  );
+  gravity: 1,
+  color: 2
 };
 
 const setOption = (type, value) => {
@@ -168,9 +142,14 @@ const setOption = (type, value) => {
     case options.greyscale:
       COLOR_RANGE = value ? GREYSCALE_RANGE : COLORFUL_RANGE;
       break;
+    case options.colorful:
+      COLOR_RANGE = !value ? GREYSCALE_RANGE : COLORFUL_RANGE;
+      break;
     case options.gravity:
       GRAV = value;
       break;
+    default:
+      console.log('Unknown type', type);
   }
 };
 
@@ -183,13 +162,14 @@ const reset = () => {
 };
 
 let timestamp = new Date();
+let reqFrame = null;
 const draw = () => {
   const now = new Date();
   if (
     canvas.classList.contains('showcase-disable') ||
     now - timestamp < DELAY
   ) {
-    window.requestAnimationFrame(draw);
+    reqFrame = window.requestAnimationFrame(draw);
     return;
   }
   timestamp = now;
@@ -197,17 +177,98 @@ const draw = () => {
     addParticle(X, Y, 1);
   }
   moveParticles();
-  window.requestAnimationFrame(draw);
+  reqFrame = window.requestAnimationFrame(draw);
 };
 
-const init = (elem) => (OPTIONS_ELEM = elem);
+let listeners = [];
+const init = (canvasElem, optionsElem) => {
+  console.log('Initializing particles');
+  canvas = canvasElem;
+  ctx = canvas.getContext('2d');
+  WIDTH = window.innerWidth;
+  HEIGHT = window.innerHeight;
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  OPTIONS_ELEM = optionsElem;
+
+  const handleDown = (evt) => {
+    if (
+      evt.pageY <= HEIGHT &&
+      (!OPTIONS_ELEM || !OPTIONS_ELEM.contains(evt.target))
+    ) {
+      MOUSE_DOWN = true;
+    }
+  };
+  const handleUp = () => (MOUSE_DOWN = false);
+  const handleMove = (evt) => {
+    X = evt.clientX;
+    Y = evt.clientY;
+  };
+
+  document.addEventListener('mousedown', handleDown);
+  document.addEventListener('mouseup', handleUp);
+  document.addEventListener('mousemove', handleMove);
+  listeners = [
+    ['mousedown', handleDown],
+    ['mouseup', handleUp],
+    ['mousemove', handleMove]
+  ];
+};
+
+const clearDraw = () => {
+  console.log('Clearing particles');
+  listeners.forEach(([evt, listener]) =>
+    document.removeEventListener(evt, listener)
+  );
+  reqFrame && window.cancelAnimationFrame(reqFrame);
+};
+
+const optionInputAttributes = [
+  {
+    desc: 'Greyscale',
+    attr: {
+      type: 'radio',
+      name: 'particle-color',
+      id: 'particle-greyscale'
+    },
+    option: options.greyscale,
+    init: false
+  },
+  {
+    desc: 'Colorful',
+    attr: {
+      type: 'radio',
+      name: 'particle-color',
+      id: 'particle-colorful'
+    },
+    option: options.colorful,
+    init: true
+  },
+  {
+    desc: 'Gravity',
+    attr: {
+      type: 'checkbox',
+      name: 'gravity'
+    },
+    option: options.gravity,
+    init: false
+  }
+];
+
+const spawnPrompt = 'SPAWN SOME PARTICLES.';
+
+const getActive = () => BOX.length;
 
 export default {
   init,
-  initOptionListeners,
   draw,
+  clearDraw,
   reset,
   spawn,
+  spawnPrompt,
   options,
-  setOption
+  optionInputAttributes,
+  optionInputWidth: '120px',
+  setOption,
+  getActive
 };
