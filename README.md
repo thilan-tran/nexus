@@ -15,14 +15,14 @@ Nexus is no ordinary, bland portfolio website.
 The landing page of Nexus features a carousel of unique, eye-catching web development showcases that
 users can switch between and customize with options.
 
-Currently, these showcase are:
+Currently, these showcases are:
 
 1. Conway's Game of Life coded in JS using `canvas` methods and `window.requestAnimationFrame` to draw performant animations.
-  - Includes options to change colors, trace cell path and change trace lengths, as well as feeding in a 1D cellular automata as input into the 2D Game of Life automata.
-2. A animation of a random 1D cellular automata from one of the 256 [Wolfram codes](https://plato.stanford.edu/entries/cellular-automata/supplement.html), also coded in JS using `canvas`.
-  - Includes options to change colors or switch between all rules and only pretty rules.
+    - Includes options to change colors, trace cell path and change trace lengths, as well as feeding in a 1D cellular automata as input into the 2D automata.
+2. An animation of a random 1D cellular automata from one of the 256 [Wolfram codes](https://plato.stanford.edu/entries/cellular-automata/supplement.html), also coded in JS using `canvas`.
+    - Includes options to change colors and switch between all rules or only pretty rules.
 3. A simulation of particles and collisions again using JS and `canvas`.
-  - Includes color and gravity options.
+    - Includes color and gravity options.
 
 I plan to add more showcases as I go along,
 and Nexus is designed to be modular enough so that additional showcases can be loaded in with ease.
@@ -64,7 +64,7 @@ const optionInputAttributes = [
       name: 'color',
       id: 'greyscale'
     },
-    option: options.greyscale, // the specific option to set (enum or constant)
+    option: options.greyscale, // the specific option to set with setOption (enum or constant)
     init: false // the initial value ('checked' for radio / checkboxes, or 'value' otherwise)
   },
   ... // rest of options
@@ -76,6 +76,7 @@ Originally Nexus was written entirely in native JS, without any libraries,
 but I decided to port it to React / Gatsby in order to make future development less of a hassle,
 and to take advantage of bundlers like Webpack to make the distribution more compressed
 (eg. using webpack image compression plugins at first, and `gatsby-image` later on).
+
 I also took the opportunity to try out Gatsby and use it as a framework.
 
 The original native JS implementation can still be accessed under `pure-js/`.
@@ -90,7 +91,7 @@ which did *not* have this double click issue.
 I ended up writing a custom hook to use the `touchstart`, `touchend`, and `touchmove` events
 to *simulate* a click event on mobile (if touch is supported), which avoids the double click issue.
 
-`useResponsiveClick` hook:
+`useResponsiveClick` hook and usage:
 ```js
 // abridged hook implementation:
 const useResponsiveClick = ( onClick, delay = 300) => {
