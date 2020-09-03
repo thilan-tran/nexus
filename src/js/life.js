@@ -187,7 +187,7 @@ let makeRule = (num) => (a, b, c) => {
 let curRule = () => {};
 
 const startOnedimInput = (customStart = false) => {
-  const randJ = customStart ? parseInt(customStart * COLS) : randRange(COLS);
+  const randJ = customStart ? customStart : randRange(COLS);
   createCell(ONEDIM_SPAWN, randJ, true);
 };
 
@@ -404,7 +404,7 @@ const spawn = () => {
     let customStart = false;
     if (RESTRICT_RULES) {
       ruleNo = randRange(2) ? 30 : 110;
-      customStart = ruleNo === 110 && 0.95;
+      customStart = ruleNo === 110 && COLS - 1;
     } else {
       ruleNo = randRange(255) + 1;
     }
