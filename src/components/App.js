@@ -45,8 +45,10 @@ const App = ({ images }) => {
   const contentRef = React.createRef();
 
   const contentAbove = () =>
-    contentRef.current &&
-    contentRef.current.getBoundingClientRect().top < vertBreakpoints[1];
+    !!(
+      contentRef.current &&
+      contentRef.current.getBoundingClientRect().top < vertBreakpoints[1]
+    );
 
   const [caretUp, setCaretUp] = useState(contentAbove());
   const [caretVis, setCaretVis] = useState(true);

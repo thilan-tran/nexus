@@ -1,99 +1,125 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+# Nexus
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+![Capture](https://user-images.githubusercontent.com/44995807/92079786-5ddde080-ed75-11ea-8575-8227312adf80.PNG)
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+This is **Nexus**, my personal website, live at [thilantran.com](thilantran.com).
 
-## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+Nexus is built with React, and uses Gatsby as a static site generator for easy hosting on Netlify.
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
+To build:
+```bash
+$ yarn install
+$ gatsby develop # or gatsby build to serve from public/ folder
+```
+## Showcases
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+Nexus is no ordinary, bland portfolio website.
+The landing page of Nexus features a carousel of unique, eye-catching web development showcases that
+users can switch between and customize with options.
 
-1.  **Start developing.**
+Currently, these showcases are:
 
-    Navigate into your new site’s directory and start it up.
+1. Conway's Game of Life coded in JS using `canvas` methods and `window.requestAnimationFrame` to draw performant animations.
+    - Includes options to change colors, trace cell path and change trace lengths, as well as feeding in a 1D cellular automata as input into the 2D automata.
+2. An animation of a random 1D cellular automata from one of the 256 [Wolfram codes](https://plato.stanford.edu/entries/cellular-automata/supplement.html), also coded in JS using `canvas`.
+    - Includes options to change colors and switch between all rules or only pretty rules.
+3. A simulation of particles and collisions again using JS and `canvas`.
+    - Includes color and gravity options.
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
+I plan to add more showcases as I go along,
+and Nexus is designed to be modular enough so that additional showcases can be loaded in with ease.
 
-1.  **Open the source code and start editing!**
+A JS showcase module has the following interface:
+```js
+import {
+  init,
+  draw,
+  clearDraw,
+  spawn,
+  spawnPrompt
+  reset,
+  options,
+  setOption,
+  optionsInputAttributes
+} from 'showcase.js';
+```
+To load a new showcase module, import it in `src/components/App.js`, and add it to the `showcases` array along with
+any initial options for the `init` function in `showcaseInitOptions`.
 
-    Your site is now running at `http://localhost:8000`!
+Nexus will call the module's functions as follows:
+- `init` is called to initialize the showcase, and configured options from `showcaseInitOptions` are passed in.
+- `draw` is called whenever the showcase is focused in the carousel, and `clearDraw` is called whenever the showcase becomes inactive.
+- `spawn` is called when the main action button on the landing page is clicked.
+  - `spawnPrompt` is the action text on the button.
+- `reset` is called when a user clicks on the reset button in options.
+- `options` is an array of constants or enums representing the possible shwowcase options.
+- `setOption(option, val)` will be called by Nexus to set `val` for one option from `options`.
+- `optionsInputAttributes` is an array that is used to initialize the options menu for the showcase.
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
+Example `optionsInputAttributes`:
+```js
+const optionInputAttributes = [
+  {
+    desc: 'Greyscale', // user-friendly description for option
+    attr: { // attributes that are spread onto the option's input element
+      type: 'radio',
+      name: 'color',
+      id: 'greyscale'
+    },
+    option: options.greyscale, // the specific option to set with setOption (enum or constant)
+    init: false // the initial value ('checked' for radio / checkboxes, or 'value' otherwise)
+  },
+  ... // rest of options
+]
+```
+## Implementation Background
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+Originally Nexus was written entirely in native JS, without any libraries,
+but I decided to port it to React / Gatsby in order to make future development less of a hassle,
+and to take advantage of bundlers like Webpack to make the distribution more compressed
+(eg. using webpack image compression plugins at first, and `gatsby-image` later on).
 
-## 🧐 What's inside?
+I also took the opportunity to try out Gatsby and use it as a framework.
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+The original native JS implementation can still be accessed under `pure-js/`.
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+### Simulating Click Events on Mobile
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+When I transitioned from my native JS to my React implementation,
+I ran into issues where buttons or elements with `onClick` events would require *two* presses on mobile to activate.
+Note that my React code was essentially a direct port of my native JS implementation,
+which did *not* have this double click issue.
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+I ended up writing a custom hook to use the `touchstart`, `touchend`, and `touchmove` events
+to *simulate* a click event on mobile (if touch is supported), which avoids the double click issue.
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+`useResponsiveClick` hook and usage:
+```js
+// abridged hook implementation:
+const useResponsiveClick = ( onClick, delay = 300) => {
+  const [touchDown, setTouchDown] = useState(null);
+  const onTouchMove = () => setTouchDown(null);
+  const onTouchStart = () => setTouchDown(new Date());
+  const onTouchEnd = (evt) => {
+    if (touchDown && new Date() - touchDown < delay) {
+      onClick(evt);
+      setTouchDown(null);
+      evt.preventDefault(); // don't trigger redundant click event that can occcur
+    }
+  };
+  return { onTouchMove, onTouchStart, onTouchEnd };
+};
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+// hook usage:
+import { useResponsiveClick } from './hooks';
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
-
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/gatsby-config/) for more detail).
-
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-
-9.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
-
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
-
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-12. **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+const responsiveButton = (props) => {
+  const buttonEvents = useResponsiveClick(props.onClick):
+  return (
+    <div className="button" {...buttonEvents}>
+      {props.buttonText}
+    </div>
+  );
+};
+```
