@@ -522,7 +522,7 @@ const optionInputAttributes = [
     init: 50
   },
   {
-    desc: 'Feed 1D cell. automaton as input',
+    desc: 'Feed 1D automaton as input',
     attr: {
       type: 'checkbox',
       name: 'onedim-input'
@@ -531,7 +531,7 @@ const optionInputAttributes = [
     init: false
   },
   {
-    desc: 'Use Rule 30 and 110 as 1D input only',
+    desc: 'Use only Rule 30 and 110 for 1D automaton',
     attr: {
       type: 'checkbox',
       name: 'restrict-rules'
