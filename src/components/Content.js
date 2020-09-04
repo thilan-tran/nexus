@@ -7,6 +7,8 @@ import ResponsiveLink from './ResponsiveLink';
 import DeviceSpecificContext from '../context/deviceSpecificContext';
 import { useResponsiveClick } from '../utils/hooks';
 
+import resumeFile from '../static/resume.pdf';
+
 const About = ({ openModal, isTouchDevice }) => {
   const aboutContentRef = useRef(null);
   const socialsRef = useRef(null);
@@ -40,7 +42,7 @@ const About = ({ openModal, isTouchDevice }) => {
     <div
       id="about"
       className="card"
-      style={{ pointer: 'cursor' }}
+      style={{ cursor: 'pointer' }}
       {...modalClickEvents}
     >
       <div className="header">
@@ -131,7 +133,22 @@ const About = ({ openModal, isTouchDevice }) => {
   );
 };
 
-const Content = React.forwardRef(({ wrapperRef, images }, ref) => {
+const Resume = ({ file }) => (
+  <div className="card">
+    <div className="header">
+      <h2>RESUME</h2>
+      <p>
+        Download my{' '}
+        <ResponsiveLink url={file} download="thilan-tran-resume.pdf">
+          resume
+        </ResponsiveLink>
+        .
+      </p>
+    </div>
+  </div>
+);
+
+const Content = ({ wrapperRef, images }) => {
   const { scrollBarWidth, isTouchDevice, customModalHeight } = useContext(
     DeviceSpecificContext
   );
@@ -155,7 +172,7 @@ const Content = React.forwardRef(({ wrapperRef, images }, ref) => {
   }, [openModal]);
 
   return (
-    <div className="content" ref={ref}>
+    <div className="content">
       <About openModal={setOpenModal} isTouchDevice={isTouchDevice} />
       <Projects
         images={images}
@@ -169,8 +186,9 @@ const Content = React.forwardRef(({ wrapperRef, images }, ref) => {
         isTouchDevice={isTouchDevice}
         customModalHeight={customModalHeight}
       />
+      <Resume file={resumeFile} />
     </div>
   );
-});
+};
 
 export default Content;

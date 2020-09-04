@@ -11,7 +11,6 @@
 .card {
   padding: 0 30px;
   margin: 60px 50px;
-  cursor: pointer;
   transition: 0.3s box-shadow ease;
 
   &:hover {
@@ -58,6 +57,7 @@
   position: relative;
   color: #000;
   text-decoration: none;
+  outline: none;
 
   &::after {
     content: '';

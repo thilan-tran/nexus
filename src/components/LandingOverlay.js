@@ -42,7 +42,7 @@ const ActionButton = ({ onClick, getPrompt }) => (
 );
 
 const Caret = ({ onClick, caretOpts, isTouchDevice }) => {
-  console.log(caretOpts);
+  // console.log(caretOpts);
   const clickEvents = useResponsiveClick(onClick, isTouchDevice);
   return (
     <div
