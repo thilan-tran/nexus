@@ -18,7 +18,7 @@ import {
   getTouchSupported
 } from '../utils/utils';
 
-const App = ({ images }) => {
+const App = ({ data }) => {
   const [vertBreakpoints, setVertBreakpoints] = useState([0, 0]);
   const [scrollBarWidth, setScrollBarWidth] = useState(17);
   const [isIos, setIos] = useState(false);
@@ -41,15 +41,14 @@ const App = ({ images }) => {
   const showcaseInitOptions = [isMobileView ? 8 : 10, null, null];
 
   const wrapperRef = useRef(null);
+  const contentRef = useRef(null);
   const showcaseRef = React.createRef();
-  const contentRef = React.createRef();
 
   const contentAbove = () =>
     !!(
       contentRef.current &&
       contentRef.current.getBoundingClientRect().top < vertBreakpoints[1]
     );
-
   const [caretUp, setCaretUp] = useState(contentAbove());
   const [caretVis, setCaretVis] = useState(true);
 
@@ -70,7 +69,8 @@ const App = ({ images }) => {
   useEffect(() => {
     if (contentRef.current) {
       const handleScroll = () => {
-        if (contentAbove()) {
+        const res = contentAbove();
+        if (res) {
           setCaretUp(true);
         } else {
           setCaretUp(false);
@@ -79,7 +79,7 @@ const App = ({ images }) => {
       document.addEventListener('scroll', handleScroll);
       return () => document.removeEventListener('scroll', handleScroll);
     }
-  }, [contentRef]);
+  }, [contentRef, vertBreakpoints]);
 
   const scrollOpts = {
     block: 'start',
@@ -119,7 +119,9 @@ const App = ({ images }) => {
             clickCaret={handleClick}
             caretOpts={{ up: caretUp, visible: caretVis }}
           />
-          <Content ref={contentRef} wrapperRef={wrapperRef} images={images} />
+          <div ref={contentRef}>
+            <Content wrapperRef={wrapperRef} images={data} />
+          </div>
         </div>
       </DeviceSpecificContext.Provider>
     </ShowcaseContext.Provider>

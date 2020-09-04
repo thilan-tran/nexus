@@ -4,7 +4,12 @@ import DeviceSpecificContext from '../context/deviceSpecificContext';
 
 import { useResponsiveClick } from '../utils/hooks';
 
-const ResponsiveLink = ({ url, children, highlight = true }) => {
+const ResponsiveLink = ({
+  url,
+  children,
+  highlight = true,
+  download = null
+}) => {
   const { isTouchDevice } = useContext(DeviceSpecificContext);
   const ref = useRef(null);
 
@@ -17,6 +22,7 @@ const ResponsiveLink = ({ url, children, highlight = true }) => {
     <a
       className={highlight ? 'highlight' : ''}
       href={url}
+      download={download}
       target="_blank"
       rel="noreferrer"
       ref={ref}

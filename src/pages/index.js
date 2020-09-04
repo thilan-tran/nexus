@@ -48,7 +48,7 @@ const IndexPage = ({ data }) => (
         }
       ]}
     />
-    <App images={data} />
+    <App data={data} />
   </>
 );
 
