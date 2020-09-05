@@ -1,9 +1,8 @@
-# Nexus
+![Homepage Capture](https://user-images.githubusercontent.com/44995807/92079786-5ddde080-ed75-11ea-8575-8227312adf80.PNG)
 
-![Capture](https://user-images.githubusercontent.com/44995807/92079786-5ddde080-ed75-11ea-8575-8227312adf80.PNG)
+<h1 align="center">Nexus</h1>
 
 This is **Nexus**, my personal website, live at [thilantran.com](thilantran.com).
-
 
 Nexus is built with React, and uses Gatsby as a static site generator for easy hosting on Netlify.
 
