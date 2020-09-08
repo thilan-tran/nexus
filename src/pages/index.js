@@ -7,6 +7,8 @@ import App from '../components/App';
 const author = 'Thilan Tran';
 const title = 'Thilan Tran | Home and Portfolio';
 const descr = 'The home and portfolio of software engineer Thilan Tran.';
+const imgLink =
+  'https://user-images.githubusercontent.com/44995807/92079786-5ddde080-ed75-11ea-8575-8227312adf80.PNG';
 
 const IndexPage = ({ data }) => (
   <>
@@ -21,6 +23,10 @@ const IndexPage = ({ data }) => (
         {
           property: 'og:title',
           content: title
+        },
+        {
+          property: 'og:image',
+          content: imgLink
         },
         {
           property: 'og:description',
@@ -45,6 +51,10 @@ const IndexPage = ({ data }) => (
         {
           name: 'twitter:description',
           content: descr
+        },
+        {
+          name: 'twitter:image',
+          content: imgLink
         }
       ]}
     />
