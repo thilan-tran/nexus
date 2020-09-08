@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useLocation } from '@reach/router';
+import queryString from 'query-string';
 
 import '../styles/main.scss';
 import Showcase from './Showcase';
@@ -24,6 +26,9 @@ const App = ({ data }) => {
   const [isIos, setIos] = useState(false);
   const [isTouchDevice, setTouchDevice] = useState(false);
   const [isMobileView, setMobileView] = useState(false);
+
+  const location = useLocation();
+  const params = queryString.parse(location.search);
 
   useEffect(() => {
     setMobileView(getMobileView());
@@ -120,7 +125,11 @@ const App = ({ data }) => {
             caretOpts={{ up: caretUp, visible: caretVis }}
           />
           <div ref={contentRef}>
-            <Content wrapperRef={wrapperRef} images={data} />
+            <Content
+              wrapperRef={wrapperRef}
+              images={data}
+              currModal={(params && params.page) || ''}
+            />
           </div>
         </div>
       </DeviceSpecificContext.Provider>

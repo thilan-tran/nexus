@@ -69,20 +69,31 @@ const WmlModal = ({ image }) => (
           <b>WALMART LABS</b>DEV ASSISTANT
         </h2>
         <p>
-          While interning at Walmart Labs, I created a plugin to address
-          development hurdles and increase engineering productivity by handling
-          environment specific settings, intercepting and displaying analytics,
-          recording Redux store state and dispatched actions in a{' '}
-          <em>replayable</em> log, as well as allowing for spoofing of actions
-          and force setting of Redux state.
+          While interning at Walmart Labs, I created a plugin to increase
+          engineering productivity by addressing common Walmart Labs development
+          hurdles and facilitating the debugging of React and Redux apps. The
+          plugin handles environment specific settings, intercepts and displays
+          analytics, and records Redux store state and dispatched actions in an
+          informative, <em>replayable</em> log. In addition, the extension can
+          spoof Redux actions and force set Redux state, without using Redux
+          DevTools or requiring source code changes. I made distribution a
+          priority, and allowed for easy installation and auto-updating by using
+          Bash scripts and Cron jobs.
           <br />
           <br />
           The UI is built in React, and I used browser extension architecture
           such as content and background scripts extensively in my
-          implementation. I also utilized React internals such as React Fiber
+          implementation, for example to achieve per-tab environment
+          configuration. I also utilized React internals such as React Fiber
           nodes to <em>"hack"</em> into the Redux store externally and
-          dynamically dispatch custom actions or overwrite Redux state without
-          source code changes or the use of the existing Redux DevTools. <br />
+          dynamically dispatch custom actions or overwrite Redux state.
+          <br />
+          <br />
+          Other smaller projects I worked on included revamping an analytics app
+          using D3.js in order to organize Splunk logs into an interactive
+          timeline that shows nested events, and working on open-sourcing a
+          Walmart library used for dynamic prefetching.
+          <br />
           <br />
           Towards the end of my internship, I gave a tech talk with these{' '}
           <ResponsiveLink url="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing">
@@ -128,11 +139,12 @@ const TwainModal = ({ image }) => (
           .
           <br />
           <br />
-          As the frontend lead, I created the backbone structure of the client
-          facing app and implemented reusable, complex UI components such as
-          time and date pickers in React entirely <em>without</em> using UI
-          libraries. I also worked on the backtracking algorithm used in the
-          Node.js backend to place optimal tasks in free calendar slots.
+          As the frontend lead, I created and organized the overall structure of
+          the frontend application in React as a sidebar in an iframe, and
+          open-sourced reusable, complex UI components such as time and date
+          pickers that were implemented <em>without</em> using UI libraries. I
+          also worked on refining the backtracking algorithm used in the Node.js
+          backend to place optimal tasks in free calendar slots.
         </p>
       </div>
     </div>
@@ -161,18 +173,18 @@ const TerreformModal = ({ image }) => (
           <ResponsiveLink url="https://github.com/angle-zhang/terreform">
             Terreform
           </ResponsiveLink>{' '}
-          is a donation website for non-profits fighting climate change that
-          features interactive environments rendered using ThreeJS that evolve
-          as users donate. See the{' '}
+          is a donation website for non-profits fighting climate change
+          featuring interactive 3D environments rendered using three.js that
+          evolve as users donate. See the{' '}
           <ResponsiveLink url="http://terreform.herokuapp.com/home">
             site
           </ResponsiveLink>{' '}
           live.
           <br />
           <br />
-          My responsibility as a frontend developer was to integrate together
-          frontend client events, dynamic React component rendering, and the
-          ThreeJS container into dynamic, animated biomes where each donation
+          My responsibility as the frontend developer was to integrate together
+          browser events, dynamic React component rendering, and the three.js
+          container into dynamic, animated biomes where each donation
           corresponds with an interactive object in the environment.
         </p>
       </div>
@@ -213,7 +225,7 @@ const RestockModal = ({ image }) => (
           <br />
           <br />
           The backend was implemented with Flask, SQLAlchemy, and websockets and
-          the frontend utilizes React as well as ReCharts as a graphing utility.
+          the frontend utilizes React as well as Recharts as a graphing utility.
         </p>
       </div>
     </div>
