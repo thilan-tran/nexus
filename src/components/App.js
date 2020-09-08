@@ -26,7 +26,10 @@ const App = ({ data }) => {
   const [isIos, setIos] = useState(false);
   const [isTouchDevice, setTouchDevice] = useState(false);
   const [isMobileView, setMobileView] = useState(false);
+
   const location = useLocation();
+  const params = queryString.parse(location.search);
+  console.log(params);
 
   useEffect(() => {
     setMobileView(getMobileView());
@@ -126,7 +129,7 @@ const App = ({ data }) => {
             <Content
               wrapperRef={wrapperRef}
               images={data}
-              currModal={queryString.parse(location.search).page || ''}
+              currModal={(params && params.page) || ''}
             />
           </div>
         </div>
