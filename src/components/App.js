@@ -29,7 +29,6 @@ const App = ({ data }) => {
 
   const location = useLocation();
   const params = queryString.parse(location.search);
-  console.log(params);
 
   useEffect(() => {
     setMobileView(getMobileView());

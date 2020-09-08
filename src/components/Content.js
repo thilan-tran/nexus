@@ -153,6 +153,7 @@ const Content = ({ wrapperRef, images, currModal }) => {
     DeviceSpecificContext
   );
   const [openModal, setOpenModal] = useState(currModal);
+  console.log(openModal, currModal);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
