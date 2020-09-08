@@ -1,0 +1,30 @@
+[
+  {
+    "id": "about",
+    "image": "coverPhoto",
+    "imagePreview": "https://user-images.githubusercontent.com/44995807/92079786-5ddde080-ed75-11ea-8575-8227312adf80.PNG"
+  },
+  {
+    "id": "wml",
+    "image": "wmlModal",
+    "imagePreview": "https://user-images.githubusercontent.com/44995807/92538483-9eb17b80-f1f3-11ea-9a5f-0d64523d78cb.jpg"
+  },
+  {
+    "id": "twain",
+    "image": "twainModal",
+    "imagePreview": "https://user-images.githubusercontent.com/44995807/92538712-3dd67300-f1f4-11ea-85fa-ff9c2de1a012.jpg"
+  },
+  {
+    "id": "terreform",
+    "image": "terreformModal",
+    "imagePreview": "https://user-images.githubusercontent.com/44995807/92538731-4d55bc00-f1f4-11ea-97aa-6e298a9a9717.jpeg"
+  },
+  {
+    "id": "restock",
+    "image": "restockModal"
+  },
+  {
+    "id": "weather",
+    "image": "weatherModal"
+  }
+]

@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import Img from 'gatsby-image';
 
+import projectData from '../data/projects.json';
 import ResponsiveLink from './ResponsiveLink';
-
 import { useResponsiveClick } from '../utils/hooks';
 
 const AboutModal = ({ image }) => {
@@ -266,6 +266,15 @@ const WeatherModal = ({ image }) => (
   </>
 );
 
+const modalComponents = {
+  about: AboutModal,
+  wml: WmlModal,
+  twain: TwainModal,
+  terreform: TerreformModal,
+  restock: RestockModal,
+  weather: WeatherModal
+};
+
 const Modals = ({
   showModalId,
   resetModal,
@@ -273,34 +282,13 @@ const Modals = ({
   customModalHeight,
   images
 }) => {
-  const modalArr = [
-    {
-      id: 'about',
-      body: <AboutModal image={images.coverPhoto.childImageSharp.fluid} />
-    },
-    {
-      id: 'wml',
-      body: <WmlModal image={images.wmlModal.childImageSharp.fluid} />
-    },
-    {
-      id: 'twain',
-      body: <TwainModal image={images.twainModal.childImageSharp.fluid} />
-    },
-    {
-      id: 'terreform',
-      body: (
-        <TerreformModal image={images.terreformModal.childImageSharp.fluid} />
-      )
-    },
-    {
-      id: 'restock',
-      body: <RestockModal image={images.restockModal.childImageSharp.fluid} />
-    },
-    {
-      id: 'weather',
-      body: <WeatherModal image={images.weatherModal.childImageSharp.fluid} />
-    }
-  ];
+  const modalArr = projectData.map((proj) => {
+    const ModalComp = modalComponents[proj.id];
+    return {
+      ...proj,
+      body: <ModalComp image={images[proj.image].childImageSharp.fluid} />
+    };
+  });
 
   const ref = useRef(null);
 

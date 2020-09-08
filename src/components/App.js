@@ -1,6 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useLocation } from '@reach/router';
-import queryString from 'query-string';
 
 import '../styles/main.scss';
 import Showcase from './Showcase';
@@ -20,15 +18,12 @@ import {
   getTouchSupported
 } from '../utils/utils';
 
-const App = ({ data }) => {
+const App = ({ data, project }) => {
   const [vertBreakpoints, setVertBreakpoints] = useState([0, 0]);
   const [scrollBarWidth, setScrollBarWidth] = useState(17);
   const [isIos, setIos] = useState(false);
   const [isTouchDevice, setTouchDevice] = useState(false);
   const [isMobileView, setMobileView] = useState(false);
-
-  const location = useLocation();
-  const params = queryString.parse(location.search);
 
   useEffect(() => {
     setMobileView(getMobileView());
@@ -128,7 +123,7 @@ const App = ({ data }) => {
             <Content
               wrapperRef={wrapperRef}
               images={data}
-              currModal={(params && params.page) || ''}
+              currModal={project || ''}
             />
           </div>
         </div>
