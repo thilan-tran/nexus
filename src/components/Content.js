@@ -152,8 +152,7 @@ const Content = ({ wrapperRef, images, currModal }) => {
   const { scrollBarWidth, isTouchDevice, customModalHeight } = useContext(
     DeviceSpecificContext
   );
-  const [openModal, setOpenModal] = useState(currModal);
-  console.log(openModal, currModal);
+  const [openModal, setOpenModal] = useState('');
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
