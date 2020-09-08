@@ -148,11 +148,11 @@ const Resume = ({ file }) => (
   </div>
 );
 
-const Content = ({ wrapperRef, images }) => {
+const Content = ({ wrapperRef, images, currModal }) => {
   const { scrollBarWidth, isTouchDevice, customModalHeight } = useContext(
     DeviceSpecificContext
   );
-  const [openModal, setOpenModal] = useState('');
+  const [openModal, setOpenModal] = useState(currModal);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
