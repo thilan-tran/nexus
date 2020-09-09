@@ -3,64 +3,71 @@ import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
 
 import App from '../components/App';
+import projectData from '../data/projects.json';
 
 const author = 'Thilan Tran';
 const title = 'Thilan Tran | Home and Portfolio';
 const descr = 'The home and portfolio of software engineer Thilan Tran.';
-const imgLink =
+const defaultImg =
   'https://user-images.githubusercontent.com/44995807/92079786-5ddde080-ed75-11ea-8575-8227312adf80.PNG';
 
-const IndexPage = ({ data }) => (
-  <>
-    <Helmet
-      htmlAttributes={{ lang: 'en' }}
-      title={title}
-      meta={[
-        {
-          name: 'description',
-          content: descr
-        },
-        {
-          property: 'og:title',
-          content: title
-        },
-        {
-          property: 'og:image',
-          content: imgLink
-        },
-        {
-          property: 'og:description',
-          content: descr
-        },
-        {
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary'
-        },
-        {
-          name: 'twitter:creator',
-          content: author
-        },
-        {
-          name: 'twitter:title',
-          content: title
-        },
-        {
-          name: 'twitter:description',
-          content: descr
-        },
-        {
-          name: 'twitter:image',
-          content: imgLink
-        }
-      ]}
-    />
-    <App data={data} />
-  </>
-);
+const IndexPage = ({ pageContext, data }) => {
+  const imgLink = pageContext.project
+    ? projectData.find((proj) => proj.id === pageContext.project)
+        .imagePreview || defaultImg
+    : defaultImg;
+  return (
+    <>
+      <Helmet
+        htmlAttributes={{ lang: 'en' }}
+        title={title}
+        meta={[
+          {
+            name: 'description',
+            content: descr
+          },
+          {
+            property: 'og:title',
+            content: title
+          },
+          {
+            property: 'og:image',
+            content: imgLink
+          },
+          {
+            property: 'og:description',
+            content: descr
+          },
+          {
+            property: 'og:type',
+            content: 'website'
+          },
+          {
+            name: 'twitter:card',
+            content: 'summary'
+          },
+          {
+            name: 'twitter:creator',
+            content: author
+          },
+          {
+            name: 'twitter:title',
+            content: title
+          },
+          {
+            name: 'twitter:description',
+            content: descr
+          },
+          {
+            name: 'twitter:image',
+            content: imgLink
+          }
+        ]}
+      />
+      <App data={data} project={pageContext.project} />
+    </>
+  );
+};
 
 export const imageQuery = graphql`
   query {
