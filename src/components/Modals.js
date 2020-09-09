@@ -76,23 +76,25 @@ const WmlModal = ({ image }) => (
           analytics, and records Redux store state and dispatched actions in an
           informative, <em>replayable</em> log. In addition, the extension can
           spoof Redux actions and force set Redux state, without using Redux
-          DevTools or requiring source code changes. I made distribution a
-          priority, and allowed for easy installation and auto-updating by using
+          DevTools or requiring source code changes. I also made distribution a
+          priority, and allowed for easy installation and auto-updating using
           Bash scripts and Cron jobs.
           <br />
           <br />
           The UI is built in React, and I used browser extension architecture
-          such as content and background scripts extensively in my
-          implementation, for example to achieve per-tab environment
-          configuration. I also utilized React internals such as React Fiber
-          nodes to <em>"hack"</em> into the Redux store externally and
-          dynamically dispatch custom actions or overwrite Redux state.
+          like content and background scripts extensively in my implementation,
+          for example to achieve per-tab environment configurations. I utilized
+          React internals such as React Fiber nodes in order to <em>
+            "hack"
+          </em>{' '}
+          into the Redux store externally to dynamically dispatch custom actions
+          and overwrite Redux state.
           <br />
           <br />
-          Other smaller projects I worked on included revamping an analytics app
-          using D3.js in order to organize Splunk logs into an interactive
-          timeline that shows nested events, and working on open-sourcing a
-          Walmart library used for dynamic prefetching.
+          Other projects I worked on included revamping an analytics app using
+          D3.js in order to organize Splunk logs into an interactive timeline
+          that shows nested events, and working on open-sourcing a Walmart
+          library used for dynamic asset prefetching.
           <br />
           <br />
           Towards the end of my internship, I gave a tech talk with these{' '}
@@ -140,11 +142,16 @@ const TwainModal = ({ image }) => (
           <br />
           <br />
           As the frontend lead, I created and organized the overall structure of
-          the frontend application in React as a sidebar in an iframe, and
-          open-sourced reusable, complex UI components such as time and date
-          pickers that were implemented <em>without</em> using UI libraries. I
-          also worked on refining the backtracking algorithm used in the Node.js
-          backend to place optimal tasks in free calendar slots.
+          the frontend application in React, and implemented a UX-driven design
+          for seamless switching between creating, scheduling, and making
+          changes to tasks in the middle of scheduling. I also{' '}
+          <ResponsiveLink url="https://github.com/thilan-tran/quicksilver">
+            open-sourced
+          </ResponsiveLink>{' '}
+          the reusable, complex UI components such as time and date pickers that
+          I had implemented <em>without</em> using UI libraries. On the backend
+          side, I worked on refining the backtracking algorithm used in the
+          Node.js backend to place optimal tasks in free calendar slots.
         </p>
       </div>
     </div>
@@ -223,9 +230,12 @@ const RestockModal = ({ image }) => (
           </ResponsiveLink>
           .
           <br />
-          <br />
-          The backend was implemented with Flask, SQLAlchemy, and websockets and
-          the frontend utilizes React as well as Recharts as a graphing utility.
+          <br />I designed and implemented the UI to showcase graphical
+          analytics of stocks and user portfolios, and also optimized server
+          performance using a hierarchical schema that reduced database loads
+          and socket updates. The backend was implemented with Flask,
+          SQLAlchemy, and websockets and the frontend utilizes React as well as
+          Recharts as a graphing utility.
         </p>
       </div>
     </div>
