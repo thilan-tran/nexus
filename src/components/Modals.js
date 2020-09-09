@@ -144,9 +144,12 @@ const TwainModal = ({ image }) => (
           As the frontend lead, I created and organized the overall structure of
           the frontend application in React, and implemented a UX-driven design
           for seamless switching between creating, scheduling, and making
-          changes to tasks in the middle of scheduling. I also open-sourced the
-          reusable, complex UI components such as time and date pickers that I
-          had implemented <em>without</em> using UI libraries. On the backend
+          changes to tasks in the middle of scheduling. I also{' '}
+          <ResponsiveLink url="https://github.com/thilan-tran/quicksilver">
+            open-sourced
+          </ResponsiveLink>{' '}
+          the reusable, complex UI components such as time and date pickers that
+          I had implemented <em>without</em> using UI libraries. On the backend
           side, I worked on refining the backtracking algorithm used in the
           Node.js backend to place optimal tasks in free calendar slots.
         </p>
