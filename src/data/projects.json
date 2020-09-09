@@ -21,10 +21,12 @@
   },
   {
     "id": "restock",
-    "image": "restockModal"
+    "image": "restockModal",
+    "imagePreview": "https://user-images.githubusercontent.com/44995807/92538978-06b49180-f1f5-11ea-9680-ad13354da3cd.jpeg"
   },
   {
     "id": "weather",
-    "image": "weatherModal"
+    "image": "weatherModal",
+    "imagePreview": "https://user-images.githubusercontent.com/44995807/92538999-1633da80-f1f5-11ea-96d7-60acb7fd987f.jpeg"
   }
 ]
