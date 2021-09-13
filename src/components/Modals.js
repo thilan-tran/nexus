@@ -27,9 +27,7 @@ const AboutModal = ({ image }) => {
             <br />
             I am an avid user of Vim for everything from coding to note-taking
             and scratch, and am fascinated with shell and text editor
-            customization.
-            <br />
-            Check out my{' '}
+            customization. Check out my{' '}
             <ResponsiveLink url="https://github.com/thilan-tran/dotfiles">
               dot files
             </ResponsiveLink>{' '}
@@ -40,15 +38,74 @@ const AboutModal = ({ image }) => {
             .
             <br />
             <br />
-            In my free time I enjoy playing online MOBAs with friends and
-            listening to different music ranging from classic rock to
-            contemporary jazz.
+            In my free time I enjoy playing online MOBAs with friends,
+            grinding indie roguelikes or metroidvanias, and
+            listening to different music genres running the gamut from classic rock
+            and indie pop to rap and contemporary jazz.
           </p>
         </div>
       </div>
     </>
   );
 };
+
+const FbModal = ({ image }) => (
+  <>
+    <div className="modal-top">
+      <Img
+        fluid={image}
+        style={{
+          height: '90%',
+          width: '95%'
+        }}
+        imgStyle={{ objectFit: 'contain' }}
+        alt="ML diagram"
+      />
+    </div>
+    <div className="modal-description">
+      <div>
+        <h2>
+            <b>FACEBOOK</b>AI/ML DEVX
+        </h2>
+        <p>
+            At Facebook, I interned as a frontend engineering intern on the
+            AI and ML Developer Experience team, specifically as a part of the
+            concurrent model development pod. Overall, I received a
+            Greatly Exceeds (GE) expectations performance rating for my work
+            during that summer.
+            <br />
+            <br />
+            My first project was to build a dashboard in React for ML model
+            change proposers to use during the development funneling process.
+            This tool acted as a centralized landing page where the ML engineers
+            could easily navigate and explore the status of proposals.
+            I wrote GraphQL queries, implemented GraphQL fields, and connected
+            database schemas with an internal searching framework.
+            <br />
+            <br />
+            Then, I had the opportunity to collaborate with engineers across
+            multiple teams in order to define an entirely new notion of the proposal
+            lifecycle and the stages of that lifecycle.
+            This effort required dedicated brainstorming and full comprehension
+            of the intricate issues behind concurerent model development, especially
+            in comparison to traditional software CI/CD. I then built a visualizer
+            for this proposal lifecycle in React that illustrated these complexities
+            to users, complete with expressive hover cards that surfaced
+            stage-relevant information and statistics.
+            <br />
+            <br />
+            I also had the opportunity to promote better engineering by writing several
+            React utilities to reduce code duplication accross the broader ML DevX team.
+            One of these was a shared table component written in Flow (TypeScript)
+            that utilized type parameterization where each column was defined
+            in terms of its data dependencies in a GraphQL fragment.
+            This approach allowed for flexible and extensible columns, while
+            avoiding unecessary queries through dynamic data fetching.
+        </p>
+      </div>
+    </div>
+  </>
+);
 
 const WmlModal = ({ image }) => (
   <>
@@ -60,7 +117,7 @@ const WmlModal = ({ image }) => (
           width: '95%'
         }}
         imgStyle={{ objectFit: 'contain' }}
-        alt="Terreform forest environment"
+        alt="Dev Assistant timeline UI"
       />
     </div>
     <div className="modal-description">
@@ -118,7 +175,7 @@ const TwainModal = ({ image }) => (
           width: '95%'
         }}
         imgStyle={{ objectFit: 'contain' }}
-        alt="Terreform forest environment"
+        alt="Twain scheduling UI"
       />
     </div>
     <div className="modal-description">
@@ -278,6 +335,7 @@ const WeatherModal = ({ image }) => (
 
 const modalComponents = {
   about: AboutModal,
+  fb: FbModal,
   wml: WmlModal,
   twain: TwainModal,
   terreform: TerreformModal,

@@ -4,6 +4,10 @@ import Img from 'gatsby-image';
 import { useResponsiveClick } from '../utils/hooks';
 
 const Projects = ({ images, openModal, isTouchDevice }) => {
+  const fbClickEvents = useResponsiveClick(
+    () => openModal('fb'),
+    isTouchDevice
+  );
   const wmlClickEvents = useResponsiveClick(
     () => openModal('wml'),
     isTouchDevice
@@ -29,6 +33,26 @@ const Projects = ({ images, openModal, isTouchDevice }) => {
     <div className="card" style={{ cursor: 'default' }}>
       <h2 id="projects">PROJECTS</h2>
       <div className="grid">
+        <div
+          className="grid-item"
+          data-project="fb"
+          {...fbClickEvents}
+        >
+          <div className="title">
+              FACEBOOK
+            <br />
+            <b>AI/ML DEVX</b>
+          </div>
+          <Img
+            fluid={images.fbCover.childImageSharp.fluid}
+            style={{
+              height: '75%',
+              width: '75%'
+            }}
+            imgStyle={{ objectFit: 'contain' }}
+            alt="Facebook AI Logo"
+          />
+        </div>
         <div
           className="grid-item"
           data-project="wml-dev-assistant"

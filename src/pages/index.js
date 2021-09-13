@@ -71,6 +71,13 @@ const IndexPage = ({ pageContext, data }) => {
 
 export const imageQuery = graphql`
   query {
+    fbCover: file(relativePath: { eq: "facebook-ai-cover.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 1200) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     wmlCover: file(relativePath: { eq: "wml-timeline.jpeg" }) {
       childImageSharp {
         fluid(maxWidth: 700) {
@@ -109,6 +116,13 @@ export const imageQuery = graphql`
     coverPhoto: file(relativePath: { eq: "percussion-photo.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1500) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    fbModal: file(relativePath: { eq: "facebook-ai-diagram.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1400) {
           ...GatsbyImageSharpFluid
         }
       }

@@ -9,7 +9,7 @@ import { useResponsiveClick } from '../utils/hooks';
 
 import resumeFile from '../static/resume.pdf';
 
-const About = ({ openModal, isTouchDevice }) => {
+const About = ({ openModal, isTouchDevice, resumeFile }) => {
   const aboutContentRef = useRef(null);
   const socialsRef = useRef(null);
 
@@ -114,39 +114,41 @@ const About = ({ openModal, isTouchDevice }) => {
         Engineering at UCLA.
         <br />
         <br />
-        I've built{' '}
+        Most recently, during my internship at Facebook, I created a new dashboard for ML
+        engineers to monitor and navigate their model proposals during the concurrent model
+        development process, collaborated with engineers to define the lifecycle for these
+        model proposals, and created an intuitive and feature-rich visualization for that
+        lifecycle.
+        I received a Greatly Exceeds (GE) expectations performance rating for my work during the
+        internship.
+        <br />
+        <br />
+        I've also created a developer{' '}
+        <ResponsiveLink url="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing">
+          plugin
+        </ResponsiveLink>{' '}
+        for debugging React and Redux apps while interning on the platform team at
+        Walmart Labs, built{' '}
         <ResponsiveLink url="https://github.com/thilan-tran/restock">
           Restock
         </ResponsiveLink>{' '}
-        , a fullstack, real-time stock trading simulator, was the frontend lead
+        , a fullstack, real-time stock trading simulator, and was the frontend lead
         for a smart-scheduling Google calendar extension on the UCLA DevX{' '}
         <ResponsiveLink url="https://github.com/ucladevx/twain-extension">
           Twain
         </ResponsiveLink>{' '}
-        project, and recently created a developer{' '}
-        <ResponsiveLink url="https://docs.google.com/presentation/d/1jXIn_upIi2kl6EFydXprCx9NIxDBq5iUjUILssS6lx8/edit?usp=sharing">
-          plugin
-        </ResponsiveLink>{' '}
-        for debugging React and Redux apps on the platform team at Walmart Labs.
-      </p>
-    </div>
-  );
-};
-
-const Resume = ({ file }) => (
-  <div className="card">
-    <div className="header">
-      <h2>RESUME</h2>
-      <p>
+        project.
+        <br />
+        <br />
         Download my{' '}
-        <ResponsiveLink url={file} download="thilan-tran-resume.pdf">
+        <ResponsiveLink url={resumeFile} download="thilan-tran-resume.pdf">
           resume
         </ResponsiveLink>
         .
       </p>
     </div>
-  </div>
-);
+  );
+};
 
 const Content = ({ wrapperRef, images, currModal }) => {
   const { scrollBarWidth, isTouchDevice, customModalHeight } = useContext(
@@ -173,7 +175,7 @@ const Content = ({ wrapperRef, images, currModal }) => {
 
   return (
     <div className="content">
-      <About openModal={setOpenModal} isTouchDevice={isTouchDevice} />
+      <About openModal={setOpenModal} isTouchDevice={isTouchDevice} resumeFile={resumeFile}/>
       <Projects
         images={images}
         openModal={setOpenModal}
@@ -186,7 +188,6 @@ const Content = ({ wrapperRef, images, currModal }) => {
         isTouchDevice={isTouchDevice}
         customModalHeight={customModalHeight}
       />
-      <Resume file={resumeFile} />
     </div>
   );
 };

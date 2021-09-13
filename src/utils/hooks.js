@@ -13,11 +13,9 @@ export const useResponsiveClick = (
   if (isMobile) {
     const onTouchMove = () => setTouchDown(null);
     const onTouchStart = (evt) =>
-      // console.log('touchstart') ||
       customClickCheck(evt) && setTouchDown(new Date());
     const onTouchEnd = (evt) => {
       if (touchDown && new Date() - touchDown < delay) {
-        // console.log('touchend');
         onClick(evt);
         setTouchDown(null);
         evt.preventDefault();
@@ -27,7 +25,6 @@ export const useResponsiveClick = (
   } else {
     return {
       onClick: (evt) =>
-        // console.log('click') ||
         customClickCheck(evt) && onClick(evt)
     };
   }
