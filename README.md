@@ -2,7 +2,7 @@
 
 <h1 align="center">Nexus</h1>
 
-This is **Nexus**, my personal website, live at [thilantran.com](thilantran.com).
+This is **Nexus**, my personal website, live at [thilantran.com](https://thilantran.com).
 
 Nexus is built with React, and uses Gatsby as a static site generator for easy hosting on Netlify.
 
